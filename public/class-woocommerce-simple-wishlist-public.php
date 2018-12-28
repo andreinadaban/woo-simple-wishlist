@@ -203,7 +203,7 @@ class WooCommerce_Simple_Wishlist_Public {
 		 */
 		if ( ! file_exists( $custom_template ) ) {
 
-			require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/templates/wishlist.php';
+			require_once WCSW_DIR . '/templates/wishlist.php';
 
 		}
 

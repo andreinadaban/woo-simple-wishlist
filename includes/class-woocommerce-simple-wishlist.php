@@ -60,8 +60,8 @@ class WooCommerce_Simple_Wishlist {
 	 */
 	public function __construct() {
 
-		if ( defined( 'WOOCOMMERCE_SIMPLE_WISHLIST_VERSION' ) ) {
-			$this->version = WOOCOMMERCE_SIMPLE_WISHLIST_VERSION;
+		if ( defined( 'WCSW_VERSION' ) ) {
+			$this->version = WCSW_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -95,27 +95,27 @@ class WooCommerce_Simple_Wishlist {
 		/**
 		 * The class responsible for orchestrating the actions and filters of the core plugin.
 		 */
-		require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist-loader.php';
+		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality of the plugin.
 		 */
-		require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist-i18n.php';
+		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-i18n.php';
 
 		/**
 		 * Helper class.
 		 */
-		require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist-helpers.php';
+		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-helpers.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/admin/class-woocommerce-simple-wishlist-admin.php';
+		require_once WCSW_DIR . '/admin/class-woocommerce-simple-wishlist-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing side of the site.
 		 */
-		require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/public/class-woocommerce-simple-wishlist-public.php';
+		require_once WCSW_DIR . '/public/class-woocommerce-simple-wishlist-public.php';
 
 		$this->loader = new WooCommerce_Simple_Wishlist_Loader();
 

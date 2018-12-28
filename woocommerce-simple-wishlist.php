@@ -23,19 +23,19 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'WOOCOMMERCE_SIMPLE_WISHLIST_VERSION', '1.0.0' );
+define( 'WCSW_VERSION', '1.0.0' );
 
 /**
  * Plugin directory.
  */
-define( 'WOOCOMMERCE_SIMPLE_WISHLIST_DIR', plugin_dir_path( __FILE__ ) );
+define( 'WCSW_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-woocommerce-simple-wishlist-activator.php.
  */
 function activate_woocommerce_simple_wishlist() {
-	require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist-activator.php';
+	require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-activator.php';
 	WooCommerce_Simple_Wishlist_Activator::activate();
 }
 
@@ -44,7 +44,7 @@ function activate_woocommerce_simple_wishlist() {
  * This action is documented in includes/class-woocommerce-simple-wishlist-deactivator.php.
  */
 function deactivate_woocommerce_simple_wishlist() {
-	require_once WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist-deactivator.php';
+	require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-deactivator.php';
 	WooCommerce_Simple_Wishlist_Deactivator::deactivate();
 }
 
@@ -54,7 +54,7 @@ register_deactivation_hook( __FILE__, 'deactivate_woocommerce_simple_wishlist' )
 /**
  * The core plugin class that is used to define internationalization, admin-specific hooks, and public-facing site hooks.
  */
-require WOOCOMMERCE_SIMPLE_WISHLIST_DIR . '/includes/class-woocommerce-simple-wishlist.php';
+require WCSW_DIR . '/includes/class-woocommerce-simple-wishlist.php';
 
 /**
  * Begins execution of the plugin.
