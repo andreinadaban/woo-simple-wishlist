@@ -1,13 +1,9 @@
 <?php
 
 /**
- * Fired during plugin deactivation
+ * Fired during plugin deactivation.
  *
- * @link       http://andreinadaban.ro
- * @since      1.0.0
- *
- * @package    WooCommerce_Simple_Wishlist
- * @subpackage WooCommerce_Simple_Wishlist/includes
+ * @since    1.0.0
  */
 
 /**
@@ -15,21 +11,25 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
- * @package    WooCommerce_Simple_Wishlist
- * @subpackage WooCommerce_Simple_Wishlist/includes
- * @author     Andrei Nadaban <contact@http://andreinadaban.ro>
+ * @since     1.0.0
+ * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
 class WooCommerce_Simple_Wishlist_Deactivator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Fired during plugin deactivation.
 	 *
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
+
+		if ( get_transient( 'wcsw_flush' ) ) {
+
+			delete_transient( 'wcsw_flush' );
+
+		}
+
+		flush_rewrite_rules();
 
 	}
 

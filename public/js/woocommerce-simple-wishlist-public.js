@@ -1,32 +1,57 @@
 (function( $ ) {
+
 	'use strict';
 
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+	$('.wcsw-button-ajax').click(function(e) {
+
+		e.preventDefault();
+
+		var thisBtn = $(this);
+		var id;
+		var parameter;
+		var fn;
+
+		if ( thisBtn.hasClass('wcsw-button-add') ) {
+
+			parameter = 'wcsw-add';
+			fn = add;
+
+		}
+
+		if ( thisBtn.hasClass('wcsw-button-remove') ) {
+
+			parameter = 'wcsw-remove';
+			fn = remove;
+
+		}
+
+		id = parseInt(thisBtn.attr('href').replace('?' + parameter + '=', ''));
+
+		$.ajax({
+			url: ajaxURL,
+			data: 'action=wcsw_ajax&' + parameter + '=' + id + '&wcsw-ajax=1',
+			success: function(result) {
+
+				fn(thisBtn, result);
+
+			}
+		});
+
+	});
+
+	function add(btn, result) {
+
+		$('.single_add_to_cart_button').after(goToWishlistButton);
+		btn.remove();
+
+	}
+
+	function remove(btn, result) {
+
+		var row = btn.parents('tr');
+
+		row.remove();
+
+	}
 
 })( jQuery );
