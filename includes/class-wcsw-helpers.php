@@ -11,7 +11,7 @@
  *
  * @author     Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_Helpers {
+class WCSW_Helpers {
 
 	/*
 	 * Checks if the product is already in the wishlist.

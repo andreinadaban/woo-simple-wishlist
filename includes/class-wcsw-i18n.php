@@ -16,7 +16,7 @@
  * @since     1.0.0
  * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_i18n {
+class WCSW_i18n {
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -25,7 +25,7 @@ class WooCommerce_Simple_Wishlist_i18n {
 	 */
 	public function load_plugin_textdomain() {
 
-		load_plugin_textdomain( 'woocommerce-simple-wishlist', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
+		load_plugin_textdomain( 'wcsw', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
 
 	}
 

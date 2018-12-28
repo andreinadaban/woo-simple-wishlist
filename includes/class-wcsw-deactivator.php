@@ -14,7 +14,7 @@
  * @since     1.0.0
  * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_Deactivator {
+class WCSW_Deactivator {
 
 	/**
 	 * Fired during plugin deactivation.

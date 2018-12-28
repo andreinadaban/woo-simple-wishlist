@@ -17,7 +17,7 @@ wc_print_notices();
 
 ?>
 
-<?php if ( $data = WooCommerce_Simple_Wishlist_Helpers::get_data_array() ) { ?>
+<?php if ( $data = WCSW_Helpers::get_data_array() ) { ?>
 
 	<?php do_action( 'wcsw_before_table' ); ?>
 

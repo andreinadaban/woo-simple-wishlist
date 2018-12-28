@@ -14,7 +14,7 @@
  *
  * @author     Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_Admin {
+class WCSW_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -59,10 +59,10 @@ class WooCommerce_Simple_Wishlist_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WooCommerce_Simple_Wishlist_Loader as all of the hooks are defined
+		 * defined in WCSW_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WooCommerce_Simple_Wishlist_Loader will then create the relationship
+		 * The WCSW_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -82,10 +82,10 @@ class WooCommerce_Simple_Wishlist_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WooCommerce_Simple_Wishlist_Loader as all of the hooks are defined
+		 * defined in WCSW_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WooCommerce_Simple_Wishlist_Loader will then create the relationship
+		 * The WCSW_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */

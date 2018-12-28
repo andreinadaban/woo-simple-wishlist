@@ -2,14 +2,14 @@
 
 /**
  * Plugin Name:    WooCommerce Simple Wishlist
- * Plugin URI:
- * Description:    This plugin allows you to add products to a wishlist.
+ * Plugin URI:     http://andreinadaban.ro
+ * Description:    A simple WooCommerce extension that allows you to add products to a wishlist.
  * Version:        1.0.0
  * Author:         Andrei Nadaban
  * Author URI:     http://andreinadaban.ro
  * License:        GPL-2.0+
  * License URI:    http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:    woocommerce-simple-wishlist
+ * Text Domain:    wcsw
  * Domain Path:    /languages
  */
 
@@ -32,40 +32,40 @@ define( 'WCSW_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-woocommerce-simple-wishlist-activator.php.
+ * This action is documented in includes/class-wcsw-activator.php.
  */
-function activate_woocommerce_simple_wishlist() {
-	require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-activator.php';
-	WooCommerce_Simple_Wishlist_Activator::activate();
+function activate_wcsw() {
+	require_once WCSW_DIR . '/includes/class-wcsw-activator.php';
+	WCSW_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-woocommerce-simple-wishlist-deactivator.php.
+ * This action is documented in includes/class-wcsw-deactivator.php.
  */
-function deactivate_woocommerce_simple_wishlist() {
-	require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-deactivator.php';
-	WooCommerce_Simple_Wishlist_Deactivator::deactivate();
+function deactivate_wcsw() {
+	require_once WCSW_DIR . '/includes/class-wcsw-deactivator.php';
+	WCSW_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_woocommerce_simple_wishlist' );
-register_deactivation_hook( __FILE__, 'deactivate_woocommerce_simple_wishlist' );
+register_activation_hook( __FILE__, 'activate_wcsw' );
+register_deactivation_hook( __FILE__, 'deactivate_wcsw' );
 
 /**
  * The core plugin class that is used to define internationalization, admin-specific hooks, and public-facing site hooks.
  */
-require WCSW_DIR . '/includes/class-woocommerce-simple-wishlist.php';
+require WCSW_DIR . '/includes/class-wcsw.php';
 
 /**
  * Begins execution of the plugin.
  *
  * @since  1.0.0
  */
-function run_woocommerce_simple_wishlist() {
+function run_wcsw() {
 
-	$plugin = new WooCommerce_Simple_Wishlist();
+	$plugin = new WCSW();
 	$plugin->run();
 
 }
 
-run_woocommerce_simple_wishlist();
+run_wcsw();

@@ -14,7 +14,7 @@
  *
  * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_Loader {
+class WCSW_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

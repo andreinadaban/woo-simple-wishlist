@@ -14,7 +14,7 @@
  *
  * @author     Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist_Public {
+class WCSW_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -59,10 +59,10 @@ class WooCommerce_Simple_Wishlist_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WooCommerce_Simple_Wishlist_Loader as all of the hooks are defined
+		 * defined in WCSW_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WooCommerce_Simple_Wishlist_Loader will then create the relationship
+		 * The WCSW_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -82,10 +82,10 @@ class WooCommerce_Simple_Wishlist_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WooCommerce_Simple_Wishlist_Loader as all of the hooks are defined
+		 * defined in WCSW_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WooCommerce_Simple_Wishlist_Loader will then create the relationship
+		 * The WCSW_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -110,7 +110,7 @@ class WooCommerce_Simple_Wishlist_Public {
 		/*
 		 * If the current product is already in the wishlist.
 		 */
-		if ( WooCommerce_Simple_Wishlist_Helpers::is_in_wishlist( $product_id ) ) {
+		if ( WCSW_Helpers::is_in_wishlist( $product_id ) ) {
 
 			echo $this->go_to_wishlist_button();
 
@@ -119,7 +119,7 @@ class WooCommerce_Simple_Wishlist_Public {
 		/*
 		 * If the current product is not in the wishlist.
 		 */
-		if ( ! WooCommerce_Simple_Wishlist_Helpers::is_in_wishlist( $product_id ) ) {
+		if ( ! WCSW_Helpers::is_in_wishlist( $product_id ) ) {
 
 			printf( '<a href="?wcsw-add=' . $product_id . '" class="%s">%s</a>', 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
 
@@ -214,20 +214,20 @@ class WooCommerce_Simple_Wishlist_Public {
 	 */
 	public function add() {
 
-		if ( ! WooCommerce_Simple_Wishlist_Helpers::is_get( 'wcsw-add' ) || WooCommerce_Simple_Wishlist_Helpers::is_in_wishlist( get_the_ID() ) ) {
+		if ( ! WCSW_Helpers::is_get( 'wcsw-add' ) || WCSW_Helpers::is_in_wishlist( get_the_ID() ) ) {
 
 			return;
 
 		}
 
-		if ( $data = $this->add_product( WooCommerce_Simple_Wishlist_Helpers::get_data_array() ) ) {
+		if ( $data = $this->add_product( WCSW_Helpers::get_data_array() ) ) {
 
 			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
 			/*
 			 * Add success notice only if the request was NOT made with AJAX.
 			 */
-			if ( ! WooCommerce_Simple_Wishlist_Helpers::is_get( 'wcsw-ajax' ) ) {
+			if ( ! WCSW_Helpers::is_get( 'wcsw-ajax' ) ) {
 
 				wc_add_notice( __( 'The product was successfully added to your wishlist.', 'wcsw' ), 'success' );
 
@@ -248,7 +248,7 @@ class WooCommerce_Simple_Wishlist_Public {
 
 		$id = $_GET['wcsw-add'];
 
-		if ( ! WooCommerce_Simple_Wishlist_Helpers::is_valid( $id ) ) {
+		if ( ! WCSW_Helpers::is_valid( $id ) ) {
 
 			return false;
 
@@ -271,7 +271,7 @@ class WooCommerce_Simple_Wishlist_Public {
 		/*
 		 * If there is no request to remove a product do nothing.
 		 */
-		if ( ! WooCommerce_Simple_Wishlist_Helpers::is_get( 'wcsw-remove' ) ) {
+		if ( ! WCSW_Helpers::is_get( 'wcsw-remove' ) ) {
 
 			return;
 
@@ -280,14 +280,14 @@ class WooCommerce_Simple_Wishlist_Public {
 		/*
 		 * The "$data" variable contains the new products array after the product removal.
 		 */
-		if ( $data = $this->remove_product( WooCommerce_Simple_Wishlist_Helpers::get_data_array() ) ) {
+		if ( $data = $this->remove_product( WCSW_Helpers::get_data_array() ) ) {
 
 			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
 			/*
 			 * Add success notice only if the request was NOT made with AJAX.
 			 */
-			if ( ! WooCommerce_Simple_Wishlist_Helpers::is_get( 'wcsw-ajax' ) ) {
+			if ( ! WCSW_Helpers::is_get( 'wcsw-ajax' ) ) {
 
 				wc_add_notice( __( 'The product was successfully removed from your wishlist.', 'wcsw' ), 'success' );
 
@@ -319,7 +319,7 @@ class WooCommerce_Simple_Wishlist_Public {
 		/*
 		 * If the GET variable is not a valid ID then do nothing.
 		 */
-		if ( ! WooCommerce_Simple_Wishlist_Helpers::is_valid( $id ) ) {
+		if ( ! WCSW_Helpers::is_valid( $id ) ) {
 
 			return false;
 

@@ -19,7 +19,7 @@
  * @since     1.0.0
  * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
-class WooCommerce_Simple_Wishlist {
+class WCSW {
 
 	/**
 	 * The loader that's responsible for maintaining and registering
@@ -27,7 +27,7 @@ class WooCommerce_Simple_Wishlist {
 	 *
 	 * @since     1.0.0
 	 * @access    protected
-	 * @var       WooCommerce_Simple_Wishlist_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var       WCSW_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -80,10 +80,10 @@ class WooCommerce_Simple_Wishlist {
 	 *
 	 * Include the following classes that make up the plugin:
 	 *
-	 * - WooCommerce_Simple_Wishlist_Loader. Orchestrates the hooks of the plugin.
-	 * - WooCommerce_Simple_Wishlist_i18n. Defines internationalization functionality.
-	 * - WooCommerce_Simple_Wishlist_Admin. Defines all hooks for the admin area.
-	 * - WooCommerce_Simple_Wishlist_Public. Defines all hooks for the public side of the site.
+	 * - WCSW_Loader. Orchestrates the hooks of the plugin.
+	 * - WCSW_i18n. Defines internationalization functionality.
+	 * - WCSW_Admin. Defines all hooks for the admin area.
+	 * - WCSW_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks with WordPress.
 	 *
@@ -95,36 +95,36 @@ class WooCommerce_Simple_Wishlist {
 		/**
 		 * The class responsible for orchestrating the actions and filters of the core plugin.
 		 */
-		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-loader.php';
+		require_once WCSW_DIR . '/includes/class-wcsw-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality of the plugin.
 		 */
-		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-i18n.php';
+		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
 		/**
 		 * Helper class.
 		 */
-		require_once WCSW_DIR . '/includes/class-woocommerce-simple-wishlist-helpers.php';
+		require_once WCSW_DIR . '/includes/class-wcsw-helpers.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once WCSW_DIR . '/admin/class-woocommerce-simple-wishlist-admin.php';
+		require_once WCSW_DIR . '/admin/class-wcsw-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing side of the site.
 		 */
-		require_once WCSW_DIR . '/public/class-woocommerce-simple-wishlist-public.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public.php';
 
-		$this->loader = new WooCommerce_Simple_Wishlist_Loader();
+		$this->loader = new WCSW_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the WooCommerce_Simple_Wishlist_i18n class in order to set the domain
+	 * Uses the WCSW_i18n class in order to set the domain
 	 * and to register the hook with WordPress.
 	 *
 	 * @since     1.0.0
@@ -132,7 +132,7 @@ class WooCommerce_Simple_Wishlist {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WooCommerce_Simple_Wishlist_i18n();
+		$plugin_i18n = new WCSW_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -146,7 +146,7 @@ class WooCommerce_Simple_Wishlist {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new WooCommerce_Simple_Wishlist_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new WCSW_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -161,7 +161,7 @@ class WooCommerce_Simple_Wishlist {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WooCommerce_Simple_Wishlist_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new WCSW_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -202,7 +202,7 @@ class WooCommerce_Simple_Wishlist {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    WooCommerce_Simple_Wishlist_Loader    Orchestrates the hooks of the plugin.
+	 * @return    WCSW_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
