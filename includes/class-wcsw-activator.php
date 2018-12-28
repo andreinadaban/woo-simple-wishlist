@@ -7,6 +7,13 @@
  */
 
 /**
+ * If this file is called directly, exit.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
@@ -23,9 +30,9 @@ class WCSW_Activator {
 	 */
 	public static function activate() {
 
-		if ( ! get_transient( 'woocommerce_simple_wishlist_flush' ) ) {
+		if ( ! get_transient( 'wcsw_flush' ) ) {
 
-			set_transient( 'woocommerce_simple_wishlist_flush', '1', 0 );
+			set_transient( 'wcsw_flush', '1', 0 );
 
 		}
 

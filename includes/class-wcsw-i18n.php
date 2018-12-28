@@ -9,6 +9,13 @@
  */
 
 /**
+ * If this file is called directly, exit.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
  * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin so that it is ready for translation.

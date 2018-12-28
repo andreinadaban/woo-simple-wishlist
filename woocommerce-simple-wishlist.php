@@ -17,7 +17,7 @@
  * If this file is called directly, exit.
  */
 if ( ! defined( 'WPINC' ) ) {
-	die;
+	exit;
 }
 
 /**
@@ -52,7 +52,7 @@ register_activation_hook( __FILE__, 'activate_wcsw' );
 register_deactivation_hook( __FILE__, 'deactivate_wcsw' );
 
 /**
- * The core plugin class that is used to define internationalization, admin-specific hooks, and public-facing site hooks.
+ * The core plugin class that is used to define internationalization, admin and public hooks.
  */
 require WCSW_DIR . '/includes/class-wcsw.php';
 

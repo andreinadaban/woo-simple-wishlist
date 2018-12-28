@@ -7,6 +7,13 @@
  */
 
 /**
+ * If this file is called directly, exit.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
  * Register all actions and filters for the plugin.
  *
  * Maintains a list of all hooks that are registered throughout the plugin, and register them with the WordPress API.

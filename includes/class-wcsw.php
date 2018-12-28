@@ -3,18 +3,22 @@
 /**
  * The file that defines the core plugin class.
  *
- * A class definition that includes properties and methods used across both
- * the public-facing side of the site and the admin area.
+ * A class definition that includes properties and methods used across
+ * both the public and admin side of the website.
  */
+
+/**
+ * If this file is called directly, exit.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin specific hooks,
- * and public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
+ * This class is used to define internationalization, admin and public hooks.
+ * It also maintains the unique identifier of this plugin as well as the current version of the plugin.
  *
  * @since     1.0.0
  * @author    Andrei Nadaban <contact@andreinadaban.ro>
@@ -23,11 +27,11 @@ class WCSW {
 
 	/**
 	 * The loader that's responsible for maintaining and registering
-	 * all hooks that power the plugin.
+	 * all the hooks that power the plugin.
 	 *
 	 * @since     1.0.0
 	 * @access    protected
-	 * @var       WCSW_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var       WCSW_Loader    $loader    Maintains and registers all the hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -50,11 +54,10 @@ class WCSW {
 	protected $version;
 
 	/**
-	 * Define the core functionality of the plugin.
+	 * Defines the core functionality of the plugin.
 	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area
-	 * and the public-facing side of the site.
+	 * Sets the plugin name and version that can be used throughout the plugin.
+	 * Loads the dependencies, defines the locale, and sets the public and admin hooks.
 	 *
 	 * @since    1.0.0
 	 */
@@ -70,22 +73,14 @@ class WCSW {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
 	}
 
 	/**
-	 * Load the required dependencies for this plugin.
+	 * Loads the required dependencies for this plugin.
 	 *
-	 * Include the following classes that make up the plugin:
-	 *
-	 * - WCSW_Loader. Orchestrates the hooks of the plugin.
-	 * - WCSW_i18n. Defines internationalization functionality.
-	 * - WCSW_Admin. Defines all hooks for the admin area.
-	 * - WCSW_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks with WordPress.
+	 * Creates an instance of the loader which will be used to register the hooks with WordPress.
 	 *
 	 * @since     1.0.0
 	 * @access    private
@@ -103,26 +98,25 @@ class WCSW {
 		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
 		/**
-		 * Helper class.
-		 */
-		require_once WCSW_DIR . '/includes/class-wcsw-helpers.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once WCSW_DIR . '/admin/class-wcsw-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing side of the site.
+		 * The classes responsible for defining all actions that occur in the public side of the site.
 		 */
 		require_once WCSW_DIR . '/public/class-wcsw-public.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-ui.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-functions.php';
+
+		/**
+		 * Other functions.
+		 */
+		require_once WCSW_DIR . '/includes/wcsw-conditionals.php';
+		require_once WCSW_DIR . '/includes/wcsw-data.php';
 
 		$this->loader = new WCSW_Loader();
 
 	}
 
 	/**
-	 * Define the locale for this plugin for internationalization.
+	 * Defines the locale for this plugin for internationalization.
 	 *
 	 * Uses the WCSW_i18n class in order to set the domain
 	 * and to register the hook with WordPress.
@@ -132,54 +126,40 @@ class WCSW {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WCSW_i18n();
+		$wcsw_i18n = new WCSW_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the admin area functionality of the plugin.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 */
-	private function define_admin_hooks() {
-
-		$plugin_admin = new WCSW_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'plugins_loaded', $wcsw_i18n, 'load_plugin_textdomain' );
 
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing functionality of the plugin.
+	 * Registers all of the hooks related to the public-facing functionality of the plugin.
 	 *
 	 * @since     1.0.0
 	 * @access    private
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WCSW_Public( $this->get_plugin_name(), $this->get_version() );
+		$wcsw_public_assets    = new WCSW_Assets( $this->get_plugin_name(), $this->get_version() );
+		$wcsw_public_ui        = new WCSW_UI();
+		$wcsw_public_functions = new WCSW_Functions();
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $plugin_public, 'button' );
-		$this->loader->add_action( 'init', $plugin_public, 'endpoint', 10 );
-		$this->loader->add_action( 'init', $plugin_public, 'flush', 20 );
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $plugin_public, 'template' );
-		$this->loader->add_action( 'init', $plugin_public, 'add', 10 );
-		$this->loader->add_action( 'init', $plugin_public, 'remove', 10 );
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'js_variables' );
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $plugin_public, 'ajax_processing' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $wcsw_public_assets, 'enqueue_scripts' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $wcsw_public_ui, 'button' );
+		$this->loader->add_action( 'init', $wcsw_public_functions, 'endpoint', 10 );
+		$this->loader->add_action( 'init', $wcsw_public_functions, 'flush', 20 );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $wcsw_public_ui, 'template' );
+		$this->loader->add_action( 'init', $wcsw_public_functions, 'add', 10 );
+		$this->loader->add_action( 'init', $wcsw_public_functions, 'remove', 10 );
+		$this->loader->add_action( 'wp_footer', $wcsw_public_assets, 'js_variables' );
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $wcsw_public_functions, 'ajax_processing' );
 
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $plugin_public, 'menu', 10, 1 );
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $wcsw_public_ui, 'menu', 10, 1 );
 
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
+	 * Runs the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since    1.0.0
 	 */
@@ -209,7 +189,7 @@ class WCSW {
 	}
 
 	/**
-	 * Retrieve the version number of the plugin.
+	 * Retrieves the version number of the plugin.
 	 *
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
