@@ -7,7 +7,7 @@ namespace WCSW;
  */
 function is_in_wishlist( $product_id ) {
 
-	$user_data   = get_data();
+	$user_data   = get_raw_data();
 	$product_ids = [];
 
 	if ( $user_data ) {

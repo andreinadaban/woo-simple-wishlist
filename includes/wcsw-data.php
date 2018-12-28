@@ -5,7 +5,7 @@ namespace WCSW;
 /*
  * Gets existing user data from the database as JSON.
  */
-function get_data() {
+function get_raw_data() {
 
 	return get_user_meta( get_current_user_id(), 'wcsw_data', true );
 
@@ -16,6 +16,6 @@ function get_data() {
  */
 function get_data_array() {
 
-	return json_decode( get_data(), true );
+	return json_decode( get_raw_data(), true );
 
 }
