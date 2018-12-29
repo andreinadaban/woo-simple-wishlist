@@ -67,7 +67,7 @@ class WCSW_Functions {
 
 			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			$success_message = __( 'The product was successfully added to your wishlist.', 'wcsw' );
+			$success_message = __( 'The product was successfully added to your wishlist.', 'wcsw' ) . '<a href="' . wc_get_account_endpoint_url( 'wishlist' ) . '" class="button wc-forward">' . __( 'View wishlist', 'wcsw' ) . '</a>';
 			$error_message = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
 
 			// Adds success notice only if the request was NOT made with AJAX.
