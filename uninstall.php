@@ -18,8 +18,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  *
  * @since  1.0.0
  */
-if ( get_option( 'woocommerce_simple_wishlist_version' ) ) {
+if ( get_option( 'wcsw_version' ) ) {
 
-	delete_option( 'woocommerce_simple_wishlist_version' );
+	delete_option( 'wcsw_version' );
 
 }

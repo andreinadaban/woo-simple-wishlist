@@ -68,9 +68,23 @@ class WCSW {
 
 		$this->plugin_name = 'woocommerce-simple-wishlist';
 
+		$this->set_version();
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
+
+	}
+
+	/**
+	 * Sets the plugin version in the database.
+	 */
+	private function set_version() {
+
+		if ( ! get_option( 'wcsw_version' ) ) {
+
+			add_option( 'wcsw_version', $this->get_version() );
+
+		}
 
 	}
 
