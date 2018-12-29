@@ -149,7 +149,14 @@ class WCSW_Functions {
 		// The "$data" variable contains the new products array after the product removal.
 		if ( $data = $this->remove_product( WCSW\get_data_array() ) ) {
 
-			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
+			$current_user_id = get_current_user_id();
+
+			// Deletes the database record if the last product was removed.
+			if ( empty( json_decode($data) ) ) {
+				$result = delete_user_meta( $current_user_id, 'wcsw_data' );
+			} else {
+				$result = update_user_meta( $current_user_id, 'wcsw_data', $data );
+			}
 
 			$success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
 			$error_message = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
@@ -202,15 +209,15 @@ class WCSW_Functions {
 		// The ID of the product meant to be removed.
 		$id = $_GET['wcsw-remove'];
 
-		// The new products array that will exclude the removed product.
-		$new = array();
-
 		// If the GET variable is not a valid ID then do nothing.
 		if ( ! WCSW\is_valid( $id ) ) {
 
 			return false;
 
 		}
+
+		// The new products array that will exclude the removed product.
+		$new = array();
 
 		// Loop through the added products.
 		foreach ( $data as $data_key => $data_value ) {
