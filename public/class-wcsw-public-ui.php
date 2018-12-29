@@ -35,10 +35,10 @@ class WCSW_UI {
 
 		$product_id = get_the_ID();
 
-		// If the current product is already in the wishlist, adds the "Go to wishlist" button.
+		// If the current product is already in the wishlist, adds the "View wishlist" button.
 		if ( WCSW\is_in_wishlist( $product_id ) ) {
 
-			echo $this->go_to_wishlist_button();
+			echo $this->view_wishlist_button();
 
 		}
 
@@ -52,13 +52,13 @@ class WCSW_UI {
 	}
 
 	/**
-	 * Go to wishlist button.
+	 * View wishlist button.
 	 *
 	 * @since    1.0.0
 	 */
-	public function go_to_wishlist_button() {
+	public function view_wishlist_button() {
 
-		return sprintf( ' <a href="' . wc_get_account_endpoint_url( 'wishlist' ) . '" class="%s">%s</a>', 'wcsw-button wcsw-button-wishlist button', __( 'Go to wishlist', 'wcsw' ) );
+		return sprintf( ' <a href="' . wc_get_account_endpoint_url( 'wishlist' ) . '" class="%s">%s</a>', 'wcsw-button wcsw-button-wishlist button', __( 'View wishlist', 'wcsw' ) );
 
 	}
 
