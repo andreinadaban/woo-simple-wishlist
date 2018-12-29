@@ -70,13 +70,6 @@
 		// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
 		$('#content .col-full > .woocommerce').html(result);
 
-		if ( $('.wcsw-table tr').length === 1 ) {
-
-			// Reload to show the notice.
-			location.reload();
-
-		}
-
 	}
 
 })( jQuery );
