@@ -123,16 +123,26 @@ class WCSW_Functions {
 		// The "$data" variable contains the new products array after the product removal.
 		if ( $data = $this->remove_product( WCSW\get_data_array() ) ) {
 
-			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
+			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			// Add success notice only if the request was NOT made with AJAX.
+			// Adds success notice only if the request was NOT made with AJAX.
 			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
 
 				wc_add_notice( __( 'The product was successfully removed from your wishlist.', 'wcsw' ), 'success' );
 
 			} else {
 
-				echo __( 'The product was successfully removed from your wishlist.', 'wcsw' );
+				if ( $result ) {
+
+					echo '<div class="woocommerce-message">' . __( 'The product was successfully removed from your wishlist.', 'wcsw' ) . '</div>';
+
+				} else {
+
+					echo '<div class="woocommerce-error">' . __( 'Error.', 'wcsw' ) . '</div>';
+
+				}
+
+				exit;
 
 			}
 

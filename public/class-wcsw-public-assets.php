@@ -42,7 +42,6 @@ class WCSW_Assets extends WCSW_Public {
 
 			$ui = new WCSW_UI();
 
-			// The "Go to wishlist" button HTML.
 			$go_to_wishlist_button = $ui->go_to_wishlist_button();
 			$ajax_url = get_admin_url() . '/admin-ajax.php';
 

@@ -52,6 +52,8 @@
 
 		row.remove();
 
+		$('#content .col-full > .woocommerce').html(result);
+
 	}
 
 })( jQuery );
