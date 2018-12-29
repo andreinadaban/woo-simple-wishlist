@@ -125,23 +125,39 @@ class WCSW_Functions {
 
 			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
+			$success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
+			$error_message = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
+
 			// Adds success notice only if the request was NOT made with AJAX.
 			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
 
-				wc_add_notice( __( 'The product was successfully removed from your wishlist.', 'wcsw' ), 'success' );
-
-			} else {
-
+				// Success.
 				if ( $result ) {
 
-					echo '<div class="woocommerce-message">' . __( 'The product was successfully removed from your wishlist.', 'wcsw' ) . '</div>';
+					wc_add_notice( $success_message, 'success' );
 
+				// Failure.
 				} else {
 
-					echo '<div class="woocommerce-error">' . __( 'Error.', 'wcsw' ) . '</div>';
+					wc_add_notice( $error_message, 'error' );
 
 				}
 
+			} else {
+
+				// Success.
+				if ( $result ) {
+
+					echo '<div class="woocommerce-message">' . $success_message . '</div>';
+
+				// Failure.
+				} else {
+
+					echo '<div class="woocommerce-error">' . $error_message . '</div>';
+
+				}
+
+				// Prevents other output.
 				exit;
 
 			}
