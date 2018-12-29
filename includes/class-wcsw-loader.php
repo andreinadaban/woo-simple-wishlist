@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register all actions and filters for the plugin.
+ * Registers all actions and filters for the plugin.
  *
  * @since    1.0.0
  */
@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register all actions and filters for the plugin.
+ * Registers all actions and filters for the plugin.
  *
  * Maintains a list of all hooks that are registered throughout the plugin, and register them with the WordPress API.
  * Call the run function to execute the list of actions and filters.
  *
- * @author    Andrei Nadaban <contact@andreinadaban.ro>
+ * @since    1.0.0
  */
 class WCSW_Loader {
 
@@ -42,7 +42,7 @@ class WCSW_Loader {
 	protected $filters;
 
 	/**
-	 * Initialize the collections used to maintain the actions and filters.
+	 * Initializes the collections used to maintain the actions and filters.
 	 *
 	 * @since    1.0.0
 	 */
@@ -54,7 +54,7 @@ class WCSW_Loader {
 	}
 
 	/**
-	 * Add a new action to the collection to be registered with WordPress.
+	 * Adds a new action to the collection to be registered with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @param    string    $hook             The name of the WordPress action that is being registered.
@@ -68,7 +68,7 @@ class WCSW_Loader {
 	}
 
 	/**
-	 * Add a new filter to the collection to be registered with WordPress.
+	 * Adds a new filter to the collection to be registered with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @param    string    $hook             The name of the WordPress filter that is being registered.

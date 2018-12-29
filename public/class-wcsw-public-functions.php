@@ -16,12 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * The functions class.
  *
- * @author     Andrei Nadaban <contact@andreinadaban.ro>
+ * @since    1.0.0
  */
 class WCSW_Functions {
 
-	/*
+	/**
 	 * Creates the new endpoint.
+	 *
+	 * @since    1.0.0
 	 */
 	public function endpoint() {
 
@@ -29,8 +31,12 @@ class WCSW_Functions {
 
 	}
 
-	/*
+	/**
 	 * Flushes the rewrite rules based on a transient.
+	 *
+	 * This function usually runs on plugin activation.
+	 *
+	 * @since    1.0.0
 	 */
 	public function flush() {
 
@@ -44,8 +50,10 @@ class WCSW_Functions {
 
 	}
 
-	/*
-	 * Adds the product to the wishlist.
+	/**
+	 * Adds the product to the wishlist when the "Add to wishlist" button is clicked.
+	 *
+	 * @since    1.0.0
 	 */
 	public function add() {
 
@@ -59,9 +67,7 @@ class WCSW_Functions {
 
 			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			/*
-			 * Add success notice only if the request was NOT made with AJAX.
-			 */
+			// Add success notice only if the request was NOT made with AJAX.
 			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
 
 				wc_add_notice( __( 'The product was successfully added to your wishlist.', 'wcsw' ), 'success' );
@@ -76,8 +82,10 @@ class WCSW_Functions {
 
 	}
 
-	/*
-	 * Validates the $_GET variable and adds the id to the data array.
+	/**
+	 * Validates the $_GET variable and adds the ID to the data array.
+	 *
+	 * @since    1.0.0
 	 */
 	public function add_product( $data = array() ) {
 
@@ -98,30 +106,26 @@ class WCSW_Functions {
 
 	}
 
-	/*
+	/**
 	 * Removes the product from the wishlist.
+	 *
+	 * @since    1.0.0
 	 */
 	public function remove() {
 
-		/*
-		 * If there is no request to remove a product do nothing.
-		 */
+		// If there is no request to remove a product do nothing.
 		if ( ! WCSW\is_get( 'wcsw-remove' ) ) {
 
 			return;
 
 		}
 
-		/*
-		 * The "$data" variable contains the new products array after the product removal.
-		 */
+		// The "$data" variable contains the new products array after the product removal.
 		if ( $data = $this->remove_product( WCSW\get_data_array() ) ) {
 
 			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			/*
-			 * Add success notice only if the request was NOT made with AJAX.
-			 */
+			// Add success notice only if the request was NOT made with AJAX.
 			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
 
 				wc_add_notice( __( 'The product was successfully removed from your wishlist.', 'wcsw' ), 'success' );
@@ -136,71 +140,59 @@ class WCSW_Functions {
 
 	}
 
-	/*
+	/**
 	 * Validates the $_GET variable and removes the ID from the data array.
+	 *
+	 * @since    1.0.0
 	 */
 	public function remove_product( $data = array() ) {
 
-		/*
-		 * The ID of the product meant to be removed.
-		 */
+		// The ID of the product meant to be removed.
 		$id  = $_GET['wcsw-remove'];
 
-		/*
-		 * The new products array that will exclude the removed product.
-		 */
+		// The new products array that will exclude the removed product.
 		$new = array();
 
-		/*
-		 * If the GET variable is not a valid ID then do nothing.
-		 */
+		// If the GET variable is not a valid ID then do nothing.
 		if ( ! WCSW\is_valid( $id ) ) {
 
 			return false;
 
 		}
 
-		/*
-		 * Loop through the added products.
-		 */
+		// Loop through the added products.
 		foreach ( $data as $data_key => $data_value ) {
 
 			foreach ( $data_value as $key => $value ) {
 
-				/*
-				 * If the ID from the GET variable is equal to the current ID then skip the following code.
-				 */
+				// If the ID from the GET variable is equal to the current ID then skip the following code.
 				if ( $id == $key ) {
 
 					continue;
 
 				}
 
-				/*
-				 * Add each product to the new products array.
-				 * The "$value" variable contains the product data(eg. product title).
-				 */
+				// Add each product to the new products array.
+				// The "$value" variable contains the product data(eg. product title).
 				$new['products'][$key] = $value;
 
 			}
 
 		}
 
-		/*
-		 * Returns the new data after product removal.
-		 */
+		// Returns the new data after product removal.
 		return json_encode( $new );
 
 	}
 
-	/*
+	/**
 	 * AJAX processing function.
+	 *
+	 * @since    1.0.0
 	 */
 	public function ajax_processing() {
 
-		/*
-		 * No need for any further processing, however this is necessary for the "wp_ajax_" hook.
-		 */
+		// No need for any further processing, however this is necessary for the "wp_ajax_" hook.
 
 	}
 

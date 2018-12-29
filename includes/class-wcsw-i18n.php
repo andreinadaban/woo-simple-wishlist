@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Define the internationalization functionality.
+ * Defines the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin so that it is ready for translation.
  *
@@ -16,12 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Define the internationalization functionality.
+ * Defines the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin so that it is ready for translation.
  *
  * @since     1.0.0
- * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
 class WCSW_i18n {
 

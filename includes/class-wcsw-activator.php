@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since     1.0.0
- * @author    Andrei Nadaban <contact@andreinadaban.ro>
  */
 class WCSW_Activator {
 

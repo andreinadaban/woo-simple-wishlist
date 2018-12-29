@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * This file contains conditional functions.
+ *
+ * @since    1.0.0
+ */
+
 namespace WCSW;
 
-/*
+/**
  * Checks if the product is already in the wishlist.
+ *
+ * @since    1.0.0
  */
 function is_in_wishlist( $product_id ) {
 
@@ -36,8 +44,10 @@ function is_in_wishlist( $product_id ) {
 
 }
 
-/*
+/**
  * Checks if there is a GET request.
+ *
+ * @since    1.0.0
  */
 function is_get( $param ) {
 
@@ -51,8 +61,10 @@ function is_get( $param ) {
 
 }
 
-/*
+/**
  * Checks if the $_GET variable is a valid product ID.
+ *
+ * @since    1.0.0
  */
 function is_valid( $id ) {
 

@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * This file contains functions used to interact with the database records.
+ *
+ * @since    1.0.0
+ */
+
 namespace WCSW;
 
-/*
+/**
  * Gets existing user data from the database as JSON.
+ *
+ * @since    1.0.0
  */
 function get_raw_data() {
 
@@ -11,8 +19,10 @@ function get_raw_data() {
 
 }
 
-/*
+/**
  * Gets existing user data from the database as JSON and converts it to a PHP array before returning it.
+ *
+ * @since    1.0.0
  */
 function get_data_array() {
 
