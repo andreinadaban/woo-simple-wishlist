@@ -65,16 +65,42 @@ class WCSW_Functions {
 
 		if ( $data = $this->add_product( WCSW\get_data_array() ) ) {
 
-			update_user_meta( get_current_user_id(), 'wcsw_data', $data );
+			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			// Add success notice only if the request was NOT made with AJAX.
+			$success_message = __( 'The product was successfully added to your wishlist.', 'wcsw' );
+			$error_message = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
+
+			// Adds success notice only if the request was NOT made with AJAX.
 			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
 
-				wc_add_notice( __( 'The product was successfully added to your wishlist.', 'wcsw' ), 'success' );
+				// Success.
+				if ( $result ) {
+
+					wc_add_notice( $success_message, 'success' );
+
+				// Failure.
+				} else {
+
+					wc_add_notice( $error_message, 'error' );
+
+				}
 
 			} else {
 
-				echo __( 'The product was successfully added to your wishlist.', 'wcsw' );
+				// Success.
+				if ( $result ) {
+
+					echo '<div class="woocommerce-message">' . $success_message . '</div>';
+
+				// Failure.
+				} else {
+
+					echo '<div class="woocommerce-error">' . $error_message . '</div>';
+
+				}
+
+				// Prevents other output.
+				exit;
 
 			}
 
@@ -174,7 +200,7 @@ class WCSW_Functions {
 	public function remove_product( $data = array() ) {
 
 		// The ID of the product meant to be removed.
-		$id  = $_GET['wcsw-remove'];
+		$id = $_GET['wcsw-remove'];
 
 		// The new products array that will exclude the removed product.
 		$new = array();

@@ -44,6 +44,8 @@
 		$('.single_add_to_cart_button').after(goToWishlistButton);
 		btn.remove();
 
+		$('#content .col-full > .woocommerce').html(result);
+
 	}
 
 	function remove(btn, result) {
