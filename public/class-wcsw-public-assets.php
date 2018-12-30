@@ -27,7 +27,7 @@ class WCSW_Assets extends WCSW_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/woocommerce-simple-wishlist-public.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wcsw-public.js', array( 'jquery' ), $this->version, true );
 
 	}
 
