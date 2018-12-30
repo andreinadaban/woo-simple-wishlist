@@ -105,7 +105,6 @@ class WCSW {
 		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
-		require_once WCSW_DIR . '/public/class-wcsw-public.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-ui.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-functions.php';
@@ -142,7 +141,7 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$assets    = new WCSW_Assets( $this->get_plugin_name(), $this->get_version() );
+		$assets    = new WCSW_Assets();
 		$ui        = new WCSW_UI();
 		$functions = new WCSW_Functions();
 

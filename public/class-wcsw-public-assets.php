@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Assets extends WCSW_Public {
+class WCSW_Assets {
 
 	/**
 	 * Registers the JavaScript files for the public side of the website.
@@ -27,7 +27,7 @@ class WCSW_Assets extends WCSW_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wcsw-public.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'wcsw-public-js', plugin_dir_url( __FILE__ ) . 'js/wcsw-public.js', array( 'jquery' ), filemtime( WCSW_DIR . '/public/js/wcsw-public.js' ), true );
 
 	}
 
