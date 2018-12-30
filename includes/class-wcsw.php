@@ -66,7 +66,7 @@ class WCSW {
 			$this->version = '1.0.0';
 		}
 
-		$this->plugin_name = 'woocommerce-simple-wishlist';
+		$this->plugin_name = 'wcsw';
 
 		$this->set_version();
 		$this->load_dependencies();
