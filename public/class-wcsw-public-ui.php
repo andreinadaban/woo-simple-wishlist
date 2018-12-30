@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_UI {
+class WCSW_Public_UI {
 
 	/**
 	 * Creates the add to wishlist button.

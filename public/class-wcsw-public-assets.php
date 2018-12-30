@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Assets {
+class WCSW_Public_Assets {
 
 	/**
 	 * Registers the JavaScript files for the public side of the website.
@@ -40,7 +40,7 @@ class WCSW_Assets {
 
 		if ( is_account_page() || is_singular( 'product' ) ) {
 
-			$ui = new WCSW_UI();
+			$ui = new WCSW_Public_UI();
 
 			$view_wishlist_button = $ui->view_wishlist_button();
 			$ajax_url = get_admin_url() . '/admin-ajax.php';

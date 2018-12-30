@@ -141,9 +141,9 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$assets    = new WCSW_Assets();
-		$ui        = new WCSW_UI();
-		$functions = new WCSW_Functions();
+		$assets    = new WCSW_Public_Assets();
+		$ui        = new WCSW_Public_UI();
+		$functions = new WCSW_Public_Functions();
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer', $assets, 'js_variables' );

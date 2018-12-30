@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Functions {
+class WCSW_Public_Functions {
 
 	/**
 	 * Creates the new endpoint.
