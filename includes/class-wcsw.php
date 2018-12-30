@@ -82,7 +82,7 @@ class WCSW {
 
 		if ( ! get_option( 'wcsw_version' ) ) {
 
-			add_option( 'wcsw_version', $this->get_version() );
+			add_option( 'wcsw_version', $this->version );
 
 		}
 
