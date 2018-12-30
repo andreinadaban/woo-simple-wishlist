@@ -27,28 +27,28 @@ class WCSW {
 	 * The loader that's responsible for maintaining and registering all the hooks that power the plugin.
 	 *
 	 * @since     1.0.0
-	 * @access    protected
+	 * @access    private
 	 * @var       WCSW_Loader    $loader    Maintains and registers all the hooks for the plugin.
 	 */
-	protected $loader;
+	private $loader;
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since     1.0.0
-	 * @access    protected
+	 * @access    private
 	 * @var       string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
-	protected $plugin_name;
+	private $plugin_name;
 
 	/**
 	 * The current version of the plugin.
 	 *
 	 * @since     1.0.0
-	 * @access    protected
+	 * @access    private
 	 * @var       string    $version    The current version of the plugin.
 	 */
-	protected $version;
+	private $version;
 
 	/**
 	 * Defines the core functionality of the plugin.
@@ -151,13 +151,13 @@ class WCSW {
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $ui, 'button' );
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $ui, 'template' );
 
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'menu', 10, 1 );
+
 		$this->loader->add_action( 'init', $functions, 'endpoint', 10 );
 		$this->loader->add_action( 'init', $functions, 'flush', 20 );
 		$this->loader->add_action( 'init', $functions, 'add', 10 );
 		$this->loader->add_action( 'init', $functions, 'remove', 10 );
 		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $functions, 'ajax_processing' );
-
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'menu', 10, 1 );
 
 	}
 
