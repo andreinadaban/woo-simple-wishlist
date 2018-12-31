@@ -52,7 +52,7 @@
 	// The code to run when the "Add to wishlist" button is clicked.
 	function add(btn, result) {
 
-		$('.single_add_to_cart_button').after(goToWishlistButton);
+		$('.single_add_to_cart_button').after(viewWishlistButton);
 		btn.remove();
 
 		// Display a notice. See the "add()" function in the "class-wcsw-public-functions.php" file.

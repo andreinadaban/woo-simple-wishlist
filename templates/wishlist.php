@@ -13,94 +13,74 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-wc_print_notices();
-
 ?>
 
-<?php if ( $data = WCSW\get_data_array() ) { ?>
+<?php do_action( 'wcsw_before_table' ); ?>
 
-	<?php do_action( 'wcsw_before_table' ); ?>
+<table class="wcsw-table woocommerce-table">
 
-    <table class="wcsw-table woocommerce-table">
+    <thead>
 
-        <thead>
+    <tr>
+
+        <?php do_action( 'wcsw_before_th_title' ); ?>
+
+        <th><?php _e( 'Product', 'wcsw' ); ?></th>
+
+        <?php do_action( 'wcsw_after_th_title' ); ?>
+
+        <th></th>
+
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <?php foreach ( $products as $product_id => $product_data ) { ?>
 
         <tr>
 
-			<?php do_action( 'wcsw_before_th_title' ); ?>
+            <?php do_action( 'wcsw_before_td_title' ); ?>
 
-            <th><?php _e( 'Product', 'wcsw' ); ?></th>
+            <td class="wcsw-title">
 
-			<?php do_action( 'wcsw_after_th_title' ); ?>
+                <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
-            <th></th>
+                    <a href="<?php echo get_the_permalink( $product_id ); ?>">
 
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-		<?php foreach ( $data['products'] as $product_id => $product_data ) { ?>
-
-            <tr>
-
-				<?php do_action( 'wcsw_before_td_title' ); ?>
-
-                <td class="wcsw-title">
-
-					<?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
-
-                        <a href="<?php echo get_the_permalink( $product_id ); ?>">
-
-							<?php echo get_the_title( $product_id ); ?>
-
-                        </a>
-
-					<?php } else { ?>
-
-						<?php echo $product_data['title'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?>
-
-					<?php } ?>
-
-                </td>
-
-				<?php do_action( 'wcsw_after_td_title' ); ?>
-
-                <td class="wcsw-remove">
-
-                    <a href="?wcsw-remove=<?php echo $product_id; ?>" class="wcsw-button wcsw-button-ajax wcsw-button-remove">
-
-                        <span class="wcsw-remove-label"><?php _e( 'Remove from wishlist', 'wcsw' ); ?></span>
-
-                        <span class="wcsw-remove-icon"><?php do_action( 'wcsw_remove_icon' ); ?></span>
+                        <?php echo get_the_title( $product_id ); ?>
 
                     </a>
 
-                </td>
+                <?php } else { ?>
 
-            </tr>
+                    <?php echo $product_data['title'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?>
 
-		<?php } ?>
+                <?php } ?>
 
-        </tbody>
+            </td>
 
-    </table>
+            <?php do_action( 'wcsw_after_td_title' ); ?>
 
-	<?php do_action( 'wcsw_after_table' ); ?>
+            <td class="wcsw-remove">
 
-<?php } else { ?>
+                <a href="?wcsw-remove=<?php echo $product_id; ?>" class="wcsw-button wcsw-button-ajax wcsw-button-remove">
 
-    <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
+                    <span class="wcsw-remove-label"><?php _e( 'Remove from wishlist', 'wcsw' ); ?></span>
 
-        <a class="woocommerce-Button button" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+                    <span class="wcsw-remove-icon"><?php do_action( 'wcsw_remove_icon' ); ?></span>
 
-			<?php _e( 'Go shop', 'wcsw' ) ?>
+                </a>
 
-        </a>
+            </td>
 
-		<?php _e( 'There are no products in the wishlist yet.', 'wcsw' ); ?>
+        </tr>
 
-    </div>
+    <?php } ?>
 
-<?php } ?>
+    </tbody>
+
+</table>
+
+<?php do_action( 'wcsw_after_table' ); ?>

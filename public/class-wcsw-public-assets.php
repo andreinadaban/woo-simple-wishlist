@@ -31,33 +31,4 @@ class WCSW_Public_Assets {
 
 	}
 
-	/**
-	 * Adds some JavaScript variables.
-	 *
-	 * @since    1.0.0
-	 */
-	public function js_variables() {
-
-		if ( is_account_page() || is_singular( 'product' ) ) {
-
-			$ui = new WCSW_Public_UI();
-
-			$view_wishlist_button = $ui->view_wishlist_button();
-			$ajax_url = get_admin_url() . '/admin-ajax.php';
-
-			echo <<<EOT
-			
-				<script>
-				
-					var goToWishlistButton = '{$view_wishlist_button}';
-					var ajaxURL = '{$ajax_url}';
-				
-				</script>
-
-EOT;
-
-		}
-
-	}
-
 }

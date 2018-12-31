@@ -93,10 +93,14 @@ class WCSW {
 		// The class responsible for defining internationalization functionality.
 		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
+		// The class responsible for getting data from the database.
+		require_once WCSW_DIR . '/includes/class-wcsw-data.php';
+
 		// The classes responsible for defining all actions that occur in the public side of the site.
 		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-ui.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-functions.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-ui.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-js-variables.php';
 
 		// Other functions.
 		require_once WCSW_DIR . '/includes/wcsw-conditionals.php';
@@ -130,12 +134,14 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$assets    = new WCSW_Public_Assets();
-		$ui        = new WCSW_Public_UI();
-		$functions = new WCSW_Public_Functions();
+		$assets       = new WCSW_Public_Assets();
+		$functions    = new WCSW_Public_Functions();
+		$data         = new WCSW_Data();
+		$ui           = new WCSW_Public_UI( $data );
+		$js_variables = new WCSW_Public_JS_Variables( $ui );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_footer', $assets, 'js_variables' );
+		$this->loader->add_action( 'wp_footer', $js_variables, 'add_js_variables' );
 
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $ui, 'button' );
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $ui, 'template' );
