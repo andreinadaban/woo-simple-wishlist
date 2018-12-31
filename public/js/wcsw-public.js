@@ -70,6 +70,17 @@
 		// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
 		$('#content .col-full > .woocommerce').html(result);
 
+		// If the last product was removed.
+		if ( $('.wcsw-table tbody tr').length < 1 ) {
+
+			// Shows notice.
+			$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
+
+			// Removes table.
+			$('.wcsw-table').remove();
+
+		}
+
 	}
 
 })( jQuery );
