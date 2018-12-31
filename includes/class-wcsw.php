@@ -33,15 +33,6 @@ class WCSW {
 	private $loader;
 
 	/**
-	 * The unique identifier of this plugin.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 * @var       string    $plugin_name    The string used to uniquely identify this plugin.
-	 */
-	private $plugin_name;
-
-	/**
 	 * The current version of the plugin.
 	 *
 	 * @since     1.0.0
@@ -65,8 +56,6 @@ class WCSW {
 		} else {
 			$this->version = '1.0.0';
 		}
-
-		$this->plugin_name = 'wcsw';
 
 		$this->set_version();
 		$this->load_dependencies();
@@ -168,37 +157,6 @@ class WCSW {
 	 */
 	public function run() {
 		$this->loader->run();
-	}
-
-	/**
-	 * The name of the plugin used to uniquely identify it within the context of WordPress
-	 * and to define internationalization functionality.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The name of the plugin.
-	 */
-	public function get_plugin_name() {
-		return $this->plugin_name;
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks.
-	 *
-	 * @since     1.0.0
-	 * @return    WCSW_Loader    Orchestrates the hooks of the plugin.
-	 */
-	public function get_loader() {
-		return $this->loader;
-	}
-
-	/**
-	 * Retrieves the version number of the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_version() {
-		return $this->version;
 	}
 
 }
