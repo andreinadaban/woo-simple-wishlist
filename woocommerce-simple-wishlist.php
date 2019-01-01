@@ -34,7 +34,7 @@ define( 'WCSW_DIR', plugin_dir_path( __FILE__ ) );
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wcsw-activator.php.
  */
-function activate_wcsw() {
+function wcsw_activate() {
 	require_once WCSW_DIR . '/includes/class-wcsw-activator.php';
 	WCSW_Activator::activate();
 }
@@ -43,13 +43,13 @@ function activate_wcsw() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wcsw-deactivator.php.
  */
-function deactivate_wcsw() {
+function wcsw_deactivate() {
 	require_once WCSW_DIR . '/includes/class-wcsw-deactivator.php';
 	WCSW_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wcsw' );
-register_deactivation_hook( __FILE__, 'deactivate_wcsw' );
+register_activation_hook( __FILE__, 'wcsw_activate' );
+register_deactivation_hook( __FILE__, 'wcsw_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization, admin and public hooks.
@@ -61,11 +61,11 @@ require WCSW_DIR . '/includes/class-wcsw.php';
  *
  * @since  1.0.0
  */
-function run_wcsw() {
+function wcsw_run() {
 
 	$plugin = new WCSW();
 	$plugin->run();
 
 }
 
-run_wcsw();
+wcsw_run();

@@ -6,14 +6,12 @@
  * @since    1.0.0
  */
 
-namespace WCSW;
-
 /**
  * Gets existing user data from the database as JSON.
  *
  * @since    1.0.0
  */
-function get_raw_data() {
+function wcsw_get_raw_data() {
 
 	return get_user_meta( get_current_user_id(), 'wcsw_data', true );
 
@@ -24,8 +22,8 @@ function get_raw_data() {
  *
  * @since    1.0.0
  */
-function get_data_array() {
+function wcsw_get_data_array() {
 
-	return json_decode( get_raw_data(), true );
+	return json_decode( wcsw_get_raw_data(), true );
 
 }

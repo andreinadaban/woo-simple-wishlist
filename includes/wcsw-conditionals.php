@@ -6,16 +6,14 @@
  * @since    1.0.0
  */
 
-namespace WCSW;
-
 /**
  * Checks if the product is already in the wishlist.
  *
  * @since    1.0.0
  */
-function is_in_wishlist( $product_id ) {
+function wcsw_is_in_wishlist( $product_id ) {
 
-	$user_data   = get_raw_data();
+	$user_data   = wcsw_get_raw_data();
 	$product_ids = [];
 
 	if ( $user_data ) {
@@ -49,7 +47,7 @@ function is_in_wishlist( $product_id ) {
  *
  * @since    1.0.0
  */
-function is_get( $param ) {
+function wcsw_is_get( $param ) {
 
 	if ( isset( $_GET[$param] ) && ! empty( $_GET[$param] ) ) {
 
@@ -66,7 +64,7 @@ function is_get( $param ) {
  *
  * @since    1.0.0
  */
-function is_valid( $id ) {
+function wcsw_is_valid( $id ) {
 
 	if ( ! is_numeric( $id ) || $id <= 0 || $id != round( $id, 0 ) ) {
 

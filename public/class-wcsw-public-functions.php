@@ -57,13 +57,13 @@ class WCSW_Public_Functions {
 	 */
 	public function add() {
 
-		if ( ! WCSW\is_get( 'wcsw-add' ) || WCSW\is_in_wishlist( get_the_ID() ) ) {
+		if ( ! wcsw_is_get( 'wcsw-add' ) || wcsw_is_in_wishlist( get_the_ID() ) ) {
 
 			return;
 
 		}
 
-		if ( $data = $this->add_product( WCSW\get_data_array() ) ) {
+		if ( $data = $this->add_product( wcsw_get_data_array() ) ) {
 
 			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
@@ -71,7 +71,7 @@ class WCSW_Public_Functions {
 			$error_message = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
 
 			// Adds success notice only if the request was NOT made with AJAX.
-			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
+			if ( ! wcsw_is_get( 'wcsw-ajax' ) ) {
 
 				// Success.
 				if ( $result ) {
@@ -117,7 +117,7 @@ class WCSW_Public_Functions {
 
 		$id = $_GET['wcsw-add'];
 
-		if ( ! WCSW\is_valid( $id ) ) {
+		if ( ! wcsw_is_valid( $id ) ) {
 
 			return false;
 
@@ -140,14 +140,14 @@ class WCSW_Public_Functions {
 	public function remove() {
 
 		// If there is no request to remove a product do nothing.
-		if ( ! WCSW\is_get( 'wcsw-remove' ) ) {
+		if ( ! wcsw_is_get( 'wcsw-remove' ) ) {
 
 			return;
 
 		}
 
 		// The "$data" variable contains the new products array after the product removal.
-		if ( $data = $this->remove_product( WCSW\get_data_array() ) ) {
+		if ( $data = $this->remove_product( wcsw_get_data_array() ) ) {
 
 			$current_user_id = get_current_user_id();
 
@@ -162,7 +162,7 @@ class WCSW_Public_Functions {
 			$error_message = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
 
 			// Adds success notice only if the request was NOT made with AJAX.
-			if ( ! WCSW\is_get( 'wcsw-ajax' ) ) {
+			if ( ! wcsw_is_get( 'wcsw-ajax' ) ) {
 
 				// Success.
 				if ( $result ) {
@@ -210,7 +210,7 @@ class WCSW_Public_Functions {
 		$id = $_GET['wcsw-remove'];
 
 		// If the GET variable is not a valid ID then do nothing.
-		if ( ! WCSW\is_valid( $id ) ) {
+		if ( ! wcsw_is_valid( $id ) ) {
 
 			return false;
 
