@@ -65,7 +65,7 @@ class WCSW_Public_UI {
 		// If the current product is not in the wishlist, adds the "Add to wishlist" button.
 		if ( ! wcsw_is_in_wishlist( $product_id, $this->data ) ) {
 
-			printf( '<a href="?wcsw-add=' . $product_id . '" class="%s">%s</a>', 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
+			printf( '<a href="?wcsw-add=%s" class="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
 
 		}
 
@@ -78,7 +78,7 @@ class WCSW_Public_UI {
 	 */
 	public function get_view_wishlist_button() {
 
-		return sprintf( ' <a href="' . wc_get_account_endpoint_url( 'wishlist' ) . '" class="%s">%s</a>', 'wcsw-button wcsw-button-wishlist button', __( 'View wishlist', 'wcsw' ) );
+		return sprintf( ' <a href="%s" class="%s">%s</a>', wc_get_account_endpoint_url( 'wishlist' ), 'wcsw-button wcsw-button-wishlist button', __( 'View wishlist', 'wcsw' ) );
 
 	}
 

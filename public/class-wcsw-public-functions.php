@@ -87,7 +87,7 @@ class WCSW_Public_Functions {
 
 			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
 
-			$success_message = '<a href="' . wc_get_account_endpoint_url( 'wishlist' ) . '" class="button wc-forward">' . __( 'View wishlist', 'wcsw' ) . '</a>' . __( 'The product was successfully added to your wishlist.', 'wcsw' );
+			$success_message = sprintf( '<a href="%s" class="button wc-forward">%s</a>%s', wc_get_account_endpoint_url( 'wishlist' ), __( 'View wishlist', 'wcsw' ), __( 'The product was successfully added to your wishlist.', 'wcsw' ) );
 			$error_message = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
 
 			// Adds success notice only if the request was NOT made with AJAX.
@@ -110,12 +110,12 @@ class WCSW_Public_Functions {
 				// Success.
 				if ( $result ) {
 
-					echo '<div class="woocommerce-message">' . $success_message . '</div>';
+					printf( '<div class="woocommerce-message">%s</div>', $success_message );
 
 				// Failure.
 				} else {
 
-					echo '<div class="woocommerce-error">' . $error_message . '</div>';
+					printf( '<div class="woocommerce-error">%s</div>', $error_message );
 
 				}
 
@@ -201,12 +201,12 @@ class WCSW_Public_Functions {
 				// Success.
 				if ( $result ) {
 
-					echo '<div class="woocommerce-message">' . $success_message . '</div>';
+					printf( '<div class="woocommerce-message">%s</div>', $success_message );
 
 				// Failure.
 				} else {
 
-					echo '<div class="woocommerce-error">' . $error_message . '</div>';
+					printf( '<div class="woocommerce-error">%s</div>', $error_message );
 
 				}
 
