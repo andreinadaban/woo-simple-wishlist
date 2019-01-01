@@ -133,7 +133,7 @@ class WCSW_Public_Functions {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_product( $data = array() ) {
+	private function add_product( $data = array() ) {
 
 		$id = $_GET['wcsw-add'];
 
@@ -224,7 +224,7 @@ class WCSW_Public_Functions {
 	 *
 	 * @since    1.0.0
 	 */
-	public function remove_product( $data = array() ) {
+	private function remove_product( $data = array() ) {
 
 		// The ID of the product meant to be removed.
 		$id = $_GET['wcsw-remove'];
