@@ -148,11 +148,11 @@ class WCSW {
 
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'menu', 10, 1 );
 
-		$this->loader->add_action( 'init', $functions, 'endpoint', 10 );
+		$this->loader->add_action( 'init', $functions, 'add_endpoint', 10 );
 		$this->loader->add_action( 'init', $functions, 'flush', 20 );
 		$this->loader->add_action( 'init', $functions, 'add', 10 );
 		$this->loader->add_action( 'init', $functions, 'remove', 10 );
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $functions, 'ajax_processing' );
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $functions, 'process_ajax_request' );
 
 	}
 

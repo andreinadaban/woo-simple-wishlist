@@ -25,7 +25,7 @@ class WCSW_Public_Functions {
 	 *
 	 * @since    1.0.0
 	 */
-	public function endpoint() {
+	public function add_endpoint() {
 
 		add_rewrite_endpoint( 'wishlist', EP_PAGES );
 
@@ -249,7 +249,7 @@ class WCSW_Public_Functions {
 	 *
 	 * @since    1.0.0
 	 */
-	public function ajax_processing() {
+	public function process_ajax_request() {
 
 		// No need for any further processing, however this is necessary for the "wp_ajax_" hook.
 
