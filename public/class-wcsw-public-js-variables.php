@@ -53,7 +53,6 @@ class WCSW_Public_JS_Variables {
 			$view_wishlist_button = $this->ui->get_view_wishlist_button();
 			$empty_wishlist_notice = $this->ui->get_empty_wishlist_notice();
 
-
 			echo <<<EOT
 			
 				<script>
