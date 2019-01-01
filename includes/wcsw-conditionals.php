@@ -13,7 +13,7 @@
  */
 function wcsw_is_in_wishlist( $product_id, $data ) {
 
-	$user_data   = $data->wcsw_get_raw_data();
+	$user_data   = $data->get_raw_data();
 	$product_ids = [];
 
 	if ( $user_data ) {
