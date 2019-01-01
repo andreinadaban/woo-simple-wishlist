@@ -125,6 +125,7 @@ class WCSW_Public_UI {
 
 		}
 
+		// This variable is used inside the template.
 		$products = $data['products'];
 
 		// Loads the custom template if one exists.
