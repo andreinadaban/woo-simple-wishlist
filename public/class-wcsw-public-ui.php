@@ -21,26 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_UI {
 
 	/**
-	 * The WCSW_Data class instance.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 * @var       WCSW_Data    $data
-	 */
-	private $data;
-
-	/**
-	 * WCSW_Public_UI constructor.
-	 *
-	 * @param    WCSW_Data    $data    The WCSW_Data class instance.
-	 */
-	public function __construct( WCSW_Data $data ) {
-
-		$this->data = $data;
-
-	}
-
-	/**
 	 * Creates the add to wishlist button.
 	 *
 	 * @since    1.0.0
@@ -53,17 +33,19 @@ class WCSW_Public_UI {
 
 		}
 
+		$data = new WCSW_Data();
+
 		$product_id = get_the_ID();
 
 		// If the current product is already in the wishlist, adds the "View wishlist" button.
-		if ( wcsw_is_in_wishlist( $product_id, $this->data ) ) {
+		if ( wcsw_is_in_wishlist( $product_id, $data ) ) {
 
 			echo $this->get_view_wishlist_button();
 
 		}
 
 		// If the current product is not in the wishlist, adds the "Add to wishlist" button.
-		if ( ! wcsw_is_in_wishlist( $product_id, $this->data ) ) {
+		if ( ! wcsw_is_in_wishlist( $product_id, $data ) ) {
 
 			printf( '<a href="?wcsw-add=%s" class="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
 
@@ -113,10 +95,11 @@ class WCSW_Public_UI {
 
 		$custom_template = get_template_directory() . '/woocommerce-simple-wishlist/wishlist.php';
 
-		$data = $this->data->get_data_array();
+		$data = new WCSW_Data();
+		$wishlist_data = $data->get_data_array();
 
 		// Shows the notice if there are no products in the wishlist...
-		if ( ! $data || empty( $data ) ) {
+		if ( ! $wishlist_data || empty( $wishlist_data ) ) {
 
 			$this->the_empty_wishlist_notice();
 
@@ -126,7 +109,7 @@ class WCSW_Public_UI {
 		}
 
 		// This variable is used inside the template.
-		$products = $data['products'];
+		$products = $wishlist_data['products'];
 
 		// Loads the custom template if one exists.
 		if ( file_exists( $custom_template ) ) {

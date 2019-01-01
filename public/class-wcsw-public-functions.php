@@ -21,26 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_Functions {
 
 	/**
-	 * The WCSW_Data class instance.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 * @var       WCSW_Data    $data
-	 */
-	private $data;
-
-	/**
-	 * WCSW_Public_UI constructor.
-	 *
-	 * @param    WCSW_Data    $data    The WCSW_Data class instance.
-	 */
-	public function __construct( WCSW_Data $data ) {
-
-		$this->data = $data;
-
-	}
-
-	/**
 	 * Creates the new endpoint.
 	 *
 	 * @since    1.0.0
@@ -77,15 +57,24 @@ class WCSW_Public_Functions {
 	 */
 	public function add() {
 
-		if ( ! wcsw_is_get_request( 'wcsw-add' ) || wcsw_is_in_wishlist( get_the_ID(), $this->data ) ) {
+		if ( ! wcsw_is_get_request( 'wcsw-add' ) ) {
 
 			return;
 
 		}
 
-		if ( $data = $this->add_product( $this->data->get_data_array() ) ) {
+		// Only initialize this class if there is a request.
+		$data = new WCSW_Data();
 
-			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $data );
+		if ( wcsw_is_in_wishlist( get_the_ID(), $data ) ) {
+
+			return;
+
+		}
+
+		if ( $wishlist_data = $this->add_product( $data->get_data_array() ) ) {
+
+			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $wishlist_data );
 
 			$this->display_notice( 'add', $result );
 
@@ -131,16 +120,18 @@ class WCSW_Public_Functions {
 
 		}
 
+		$data = new WCSW_Data();
+
 		// The "$data" variable contains the new products array after the product removal.
-		if ( $data = $this->remove_product( $this->data->get_data_array() ) ) {
+		if ( $wishlist_data = $this->remove_product( $data->get_data_array() ) ) {
 
 			$current_user_id = get_current_user_id();
 
 			// Deletes the database record if the last product was removed.
-			if ( empty( json_decode($data) ) ) {
+			if ( empty( json_decode($wishlist_data) ) ) {
 				$result = delete_user_meta( $current_user_id, 'wcsw_data' );
 			} else {
-				$result = update_user_meta( $current_user_id, 'wcsw_data', $data );
+				$result = update_user_meta( $current_user_id, 'wcsw_data', $wishlist_data );
 			}
 
 			$this->display_notice( 'remove', $result );

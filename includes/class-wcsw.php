@@ -134,10 +134,9 @@ class WCSW {
 	private function define_public_hooks() {
 
 		$assets       = new WCSW_Public_Assets();
-		$data         = new WCSW_Data();
-		$functions    = new WCSW_Public_Functions( $data );
-		$ui           = new WCSW_Public_UI( $data );
-		$js_variables = new WCSW_Public_JS_Variables( $ui );
+		$functions    = new WCSW_Public_Functions();
+		$ui           = new WCSW_Public_UI();
+		$js_variables = new WCSW_Public_JS_Variables( $ui ); // Inject the WCSW_Public_UI instance as a dependency.
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer', $js_variables, 'add_js_variables' );
