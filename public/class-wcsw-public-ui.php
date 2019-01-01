@@ -45,7 +45,7 @@ class WCSW_Public_UI {
 	 *
 	 * @since    1.0.0
 	 */
-	public function button() {
+	public function add_button() {
 
 		if ( ! is_user_logged_in() ) {
 
@@ -87,7 +87,7 @@ class WCSW_Public_UI {
 	 *
 	 * @since    1.0.0
 	 */
-	public function menu( $items ) {
+	public function add_menu( $items ) {
 
 		// The menu item position.
 		// Default: between Orders and Downloads(2).
@@ -109,7 +109,7 @@ class WCSW_Public_UI {
 	 *
 	 * @since    1.0.0
 	 */
-	public function template() {
+	public function load_template() {
 
 		$custom_template = get_template_directory() . '/woocommerce-simple-wishlist/wishlist.php';
 

@@ -142,10 +142,10 @@ class WCSW {
 		$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer', $js_variables, 'add_js_variables' );
 
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $ui, 'button' );
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $ui, 'template' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $ui, 'add_button' );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $ui, 'load_template' );
 
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'menu', 10, 1 );
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'add_menu', 10, 1 );
 
 		$this->loader->add_action( 'init', $functions, 'add_endpoint', 10 );
 		$this->loader->add_action( 'init', $functions, 'flush', 20 );
