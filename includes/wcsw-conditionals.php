@@ -11,9 +11,9 @@
  *
  * @since    1.0.0
  */
-function wcsw_is_in_wishlist( $product_id ) {
+function wcsw_is_in_wishlist( $product_id, $data ) {
 
-	$user_data   = wcsw_get_raw_data();
+	$user_data   = $data->wcsw_get_raw_data();
 	$product_ids = [];
 
 	if ( $user_data ) {
@@ -47,7 +47,7 @@ function wcsw_is_in_wishlist( $product_id ) {
  *
  * @since    1.0.0
  */
-function wcsw_is_get( $param ) {
+function wcsw_is_get_request( $param ) {
 
 	if ( isset( $_GET[$param] ) && ! empty( $_GET[$param] ) ) {
 
@@ -64,7 +64,7 @@ function wcsw_is_get( $param ) {
  *
  * @since    1.0.0
  */
-function wcsw_is_valid( $id ) {
+function wcsw_is_valid_id( $id ) {
 
 	if ( ! is_numeric( $id ) || $id <= 0 || $id != round( $id, 0 ) ) {
 

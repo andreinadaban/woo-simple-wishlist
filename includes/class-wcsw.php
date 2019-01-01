@@ -104,7 +104,6 @@ class WCSW {
 
 		// Other functions.
 		require_once WCSW_DIR . '/includes/wcsw-conditionals.php';
-		require_once WCSW_DIR . '/includes/wcsw-data.php';
 
 		$this->loader = new WCSW_Loader();
 
@@ -135,8 +134,8 @@ class WCSW {
 	private function define_public_hooks() {
 
 		$assets       = new WCSW_Public_Assets();
-		$functions    = new WCSW_Public_Functions();
 		$data         = new WCSW_Data();
+		$functions    = new WCSW_Public_Functions( $data );
 		$ui           = new WCSW_Public_UI( $data );
 		$js_variables = new WCSW_Public_JS_Variables( $ui );
 

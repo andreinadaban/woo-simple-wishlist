@@ -25,7 +25,7 @@ class WCSW_Public_UI {
 	 *
 	 * @since     1.0.0
 	 * @access    private
-	 * @var       WCSW_Data    $ui
+	 * @var       WCSW_Data    $data
 	 */
 	private $data;
 
@@ -56,14 +56,14 @@ class WCSW_Public_UI {
 		$product_id = get_the_ID();
 
 		// If the current product is already in the wishlist, adds the "View wishlist" button.
-		if ( wcsw_is_in_wishlist( $product_id ) ) {
+		if ( wcsw_is_in_wishlist( $product_id, $this->data ) ) {
 
 			echo $this->get_view_wishlist_button();
 
 		}
 
 		// If the current product is not in the wishlist, adds the "Add to wishlist" button.
-		if ( ! wcsw_is_in_wishlist( $product_id ) ) {
+		if ( ! wcsw_is_in_wishlist( $product_id, $this->data ) ) {
 
 			printf( '<a href="?wcsw-add=' . $product_id . '" class="%s">%s</a>', 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
 
