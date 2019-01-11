@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <span class="wcsw-remove-label"><?php _e( 'Remove from wishlist', 'wcsw' ); ?></span>
 
-                    <span class="wcsw-remove-icon"><?php do_action( 'wcsw_remove_icon' ); ?></span>
+                    <?php do_action( 'wcsw_after_remove_label' ); ?>
 
                 </a>
 
