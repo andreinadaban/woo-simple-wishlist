@@ -93,17 +93,14 @@ class WCSW {
 		// The class responsible for defining internationalization functionality.
 		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
-		// The class responsible for getting data from the database.
-		require_once WCSW_DIR . '/includes/class-wcsw-data.php';
+		// The wishlist base class.
+		require_once WCSW_DIR . '/includes/class-wcsw-wishlist.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
-		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-functions.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-ui.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-js-variables.php';
-
-		// Other functions.
-		require_once WCSW_DIR . '/includes/wcsw-conditionals.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-assets.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-ui.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-controller.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-js.php';
 
 		$this->loader = new WCSW_Loader();
 
@@ -126,6 +123,36 @@ class WCSW {
 	}
 
 	/**
+	 * Creates the new endpoint.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_endpoint() {
+
+		add_rewrite_endpoint( 'wishlist', EP_PAGES );
+
+	}
+
+	/**
+	 * Flushes the rewrite rules based on a transient.
+	 *
+	 * This function usually runs on plugin activation.
+	 *
+	 * @since    1.0.0
+	 */
+	public function flush() {
+
+		if ( get_transient( 'wcsw_flush' ) ) {
+
+			flush_rewrite_rules();
+
+			delete_transient( 'wcsw_flush' );
+
+		}
+
+	}
+
+	/**
 	 * Registers all of the hooks related to the public-facing functionality of the plugin.
 	 *
 	 * @since     1.0.0
@@ -133,24 +160,27 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$assets       = new WCSW_Public_Assets();
-		$functions    = new WCSW_Public_Functions();
-		$ui           = new WCSW_Public_UI();
-		$js_variables = new WCSW_Public_JS_Variables( $ui ); // Inject the WCSW_Public_UI instance as a dependency.
+		$public_wishlist_assets     = new WCSW_Public_Wishlist_Assets();
+		$public_wishlist_ui         = new WCSW_Public_Wishlist_UI();
+		$public_wishlist_controller = new WCSW_Public_Wishlist_Controller( $public_wishlist_ui );
+		$public_wishlist_js         = new WCSW_Public_Wishlist_JS( $public_wishlist_ui );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $assets, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_footer', $js_variables, 'add_js_variables' );
+		$this->loader->add_action( 'init', $this, 'add_endpoint', 10 );
+		$this->loader->add_action( 'init', $this, 'flush', 20 );
 
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $ui, 'add_button' );
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $ui, 'load_template' );
+		$this->loader->add_action( 'init', $public_wishlist_controller, 'add', 10 );
+		$this->loader->add_action( 'init', $public_wishlist_controller, 'remove', 10 );
 
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $ui, 'add_menu', 10, 1 );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'init', $functions, 'add_endpoint', 10 );
-		$this->loader->add_action( 'init', $functions, 'flush', 20 );
-		$this->loader->add_action( 'init', $functions, 'add', 10 );
-		$this->loader->add_action( 'init', $functions, 'remove', 10 );
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $functions, 'process_ajax_request' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist_ui, 'add_button' );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist_ui, 'load_template' );
+
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist_ui, 'add_menu', 10, 1 );
+
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist_controller, 'process_ajax_request' );
+
+		$this->loader->add_action( 'wp_footer', $public_wishlist_js, 'add_js_variables' );
 
 	}
 

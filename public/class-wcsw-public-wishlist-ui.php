@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The UI class.
+ * The public wishlist ui class.
  *
  * @since    1.0.0
  */
@@ -14,11 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The UI class.
+ * The public wishlist ui class.
  *
  * @since    1.0.0
  */
-class WCSW_Public_UI {
+class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 	/**
 	 * Creates the add to wishlist button.
@@ -33,19 +33,15 @@ class WCSW_Public_UI {
 
 		}
 
-		$data = new WCSW_Data();
-
 		$product_id = get_the_ID();
 
 		// If the current product is already in the wishlist, adds the "View wishlist" button.
-		if ( wcsw_is_in_wishlist( $product_id, $data ) ) {
+		if ( $this->is_in_wishlist( $product_id ) ) {
 
 			echo $this->get_view_wishlist_button();
 
-		}
-
 		// If the current product is not in the wishlist, adds the "Add to wishlist" button.
-		if ( ! wcsw_is_in_wishlist( $product_id, $data ) ) {
+		} else {
 
 			printf( '<a href="?wcsw-add=%s" class="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
 
@@ -95,8 +91,7 @@ class WCSW_Public_UI {
 
 		$custom_template = get_template_directory() . '/woocommerce-simple-wishlist/wishlist.php';
 
-		$data = new WCSW_Data();
-		$wishlist_data = $data->get_data_array();
+		$wishlist_data = $this->get_data_array();
 
 		// Shows the notice if there are no products in the wishlist...
 		if ( ! $wishlist_data || empty( $wishlist_data ) ) {
@@ -150,6 +145,55 @@ class WCSW_Public_UI {
 	public function the_empty_wishlist_notice() {
 
 		echo $this->get_empty_wishlist_notice();
+
+	}
+
+	/**
+	 * Displays the appropriate notice.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_notice( $type, $result ) {
+
+		$add_success_message    = sprintf( '<a href="%s" class="button wc-forward">%s</a>%s', wc_get_account_endpoint_url( 'wishlist' ), __( 'View wishlist', 'wcsw' ), __( 'The product was successfully added to your wishlist.', 'wcsw' ) );
+		$add_error_message      = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
+
+		$remove_success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
+		$remove_error_message   = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
+
+		// Adds success notice only if the request was NOT made with AJAX.
+		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
+
+			// Success.
+			if ( $result ) {
+
+				wc_add_notice( ${$type . '_success_message'}, 'success' );
+
+				// Failure.
+			} else {
+
+				wc_add_notice( ${$type . '_error_message'}, 'error' );
+
+			}
+
+		} else {
+
+			// Success.
+			if ( $result ) {
+
+				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
+
+				// Failure.
+			} else {
+
+				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
+
+			}
+
+			// Prevents other output.
+			exit;
+
+		}
 
 	}
 

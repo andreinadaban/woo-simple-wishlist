@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Public_Assets {
+class WCSW_Public_Wishlist_Assets {
 
 	/**
 	 * Registers the JavaScript files for the public side of the website.

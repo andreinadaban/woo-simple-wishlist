@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The JS variables class.
+ * The JS class.
  *
  * @since    1.0.0
  */
@@ -14,27 +14,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The JS variables class.
+ * The JS class.
  *
  * @since    1.0.0
  */
-class WCSW_Public_JS_Variables {
+class WCSW_Public_Wishlist_JS {
 
 	/**
 	 * The WCSW_Public_UI class instance.
 	 *
 	 * @since     1.0.0
 	 * @access    private
-	 * @var       WCSW_Public_UI    $ui
+	 * @var       WCSW_Public_Wishlist_UI    $ui
 	 */
 	private $ui;
 
 	/**
 	 * WCSW_Public_JS_Variables constructor.
 	 *
-	 * @param    WCSW_Public_UI    $ui    The WCSW_Public_UI class instance.
+	 * @param    WCSW_Public_Wishlist_UI    $ui    The WCSW_Public_UI class instance.
 	 */
-	public function __construct( WCSW_Public_UI $ui ) {
+	public function __construct( WCSW_Public_Wishlist_UI $ui ) {
 
 		$this->ui = $ui;
 
