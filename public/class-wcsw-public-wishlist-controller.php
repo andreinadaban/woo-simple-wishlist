@@ -78,7 +78,6 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 
 		$wishlist_content['products'][$id] = array(
 			'title' => get_the_title( $id ),
-			'date_added' => current_time( 'timestamp' ),
 		);
 
 		return json_encode( $wishlist_content );
