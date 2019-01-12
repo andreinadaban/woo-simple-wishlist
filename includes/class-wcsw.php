@@ -174,6 +174,7 @@ class WCSW {
 		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist_ui, 'add_button' );
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist_ui, 'add_button', 12 );
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist_ui, 'load_template' );
 
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist_ui, 'add_menu', 10, 1 );

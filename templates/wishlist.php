@@ -65,13 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <td class="wcsw-remove">
 
-                <a href="?wcsw-remove=<?php echo $product_id; ?>" class="wcsw-button wcsw-button-ajax wcsw-button-remove">
-
-                    <span class="wcsw-remove-label"><?php _e( 'Remove from wishlist', 'wcsw' ); ?></span>
-
-                    <?php do_action( 'wcsw_after_remove_label' ); ?>
-
-                </a>
+	            <?php echo $this->get_remove_from_wishlist_button( $product_id ); ?>
 
             </td>
 

@@ -47,19 +47,25 @@ class WCSW_Public_Wishlist_JS {
 	 */
 	public function add_js_variables() {
 
-		if ( is_account_page() || is_singular( 'product' ) ) {
+		if ( is_shop() || is_product_category() || is_product_tag() || is_account_page() || is_singular( 'product' ) ) {
 
 			$ajax_url = get_admin_url() . 'admin-ajax.php';
-			$view_wishlist_button = $this->ui->get_view_wishlist_button();
 			$empty_wishlist_notice = $this->ui->get_empty_wishlist_notice();
+
+			$is_account_page = is_account_page() ? 'true' : 'false';
+			$is_product_page = ( is_shop() || is_product_category() || is_product_tag() || is_singular( 'product' ) ) ? 'true' : 'false';
+			$is_single_page  = is_singular( 'product' ) ? 'true' : 'false';
 
 			echo <<<EOT
 			
 				<script>
 				
 					var ajaxURL = '{$ajax_url}';
-					var viewWishlistButton = '{$view_wishlist_button}';
 					var emptyWishlistNotice = '{$empty_wishlist_notice}';
+					
+					var isAccountPage = {$is_account_page};
+					var isProductPage = {$is_product_page};
+					var isSinglePage  = {$is_single_page};
 				
 				</script>
 

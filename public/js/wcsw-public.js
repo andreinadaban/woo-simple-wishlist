@@ -52,32 +52,60 @@
 	// The code to run when the "Add to wishlist" button is clicked.
 	function add(btn, result) {
 
-		$('.single_add_to_cart_button').after(viewWishlistButton);
-		btn.remove();
+		// Replace the "Add to wishlist" button with the "Remove from wishlist" button.
+		btn.siblings($('.wcsw-button-remove')).show();
+		btn.hide();
 
-		// Display a notice. See the "add()" function in the "class-wcsw-public-functions.php" file.
-		$('#content .col-full > .woocommerce').html(result);
+		if ( isSinglePage ) {
+
+			// Display a notice. See the "add()" function in the "class-wcsw-public-functions.php" file.
+			$('#content .col-full > .woocommerce').html(result);
+
+		}
 
 	}
 
 	// The code to run when the "Remove from wishlist" button is clicked.
 	function remove(btn, result) {
 
-		var row = btn.parents('tr');
+		// If on a product page.
+		if ( isProductPage ) {
 
-		row.remove();
+			// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
+			btn.siblings($('.wcsw-button-add')).show();
+			btn.hide();
 
-		// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
-		$('#content .col-full > .woocommerce').html(result);
+			if ( isSinglePage ) {
 
-		// If the last product was removed.
-		if ( $('.wcsw-table tbody tr').length < 1 ) {
+				// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
+				$('#content .col-full > .woocommerce').html(result);
 
-			// Shows notice.
-			$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
+			}
 
-			// Removes table.
-			$('.wcsw-table').remove();
+			return;
+
+		}
+
+		// If on the account page.
+		if ( isAccountPage ) {
+
+			var row = btn.parents('tr');
+
+			row.remove();
+
+			// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
+			$('#content .col-full > .woocommerce').html(result);
+
+			// If the last product was removed.
+			if ( $('.wcsw-table tbody tr').length < 1 ) {
+
+				// Shows notice.
+				$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
+
+				// Removes table.
+				$('.wcsw-table').remove();
+
+			}
 
 		}
 

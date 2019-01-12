@@ -21,42 +21,70 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 	/**
-	 * Creates the add to wishlist button.
+	 * Creates the add to wishlist or remove from wishlist buttons on the product page and on the product archive pages.
 	 *
 	 * @since    1.0.0
 	 */
 	public function add_button() {
 
 		if ( ! is_user_logged_in() ) {
-
 			return;
-
 		}
 
 		$product_id = get_the_ID();
 
-		// If the current product is already in the wishlist, adds the "View wishlist" button.
-		if ( $this->is_in_wishlist( $product_id ) ) {
-
-			echo $this->get_view_wishlist_button();
-
-		// If the current product is not in the wishlist, adds the "Add to wishlist" button.
-		} else {
-
-			printf( '<a href="?wcsw-add=%s" class="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', __( 'Add to wishlist', 'wcsw' ) );
-
-		}
+		echo $this->get_add_to_wishlist_button( $product_id, $this->is_in_wishlist( $product_id ) );
+		echo $this->get_remove_from_wishlist_button( $product_id, $this->is_in_wishlist( $product_id ) );
 
 	}
 
 	/**
-	 * Returns the view wishlist button HTML.
+	 * Returns the add to wishlist button HTML.
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_view_wishlist_button() {
+	public function get_add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
-		return sprintf( ' <a href="%s" class="%s">%s</a>', wc_get_account_endpoint_url( 'wishlist' ), 'wcsw-button wcsw-button-wishlist button', __( 'View wishlist', 'wcsw' ) );
+		$label = '';
+		$style = $is_in_wishlist ? 'display: none;' : '';
+
+		if ( is_singular( 'product' ) ) {
+
+			$label = '&nbsp;&nbsp;&nbsp;' . __( 'Add to wishlist', 'wcsw' );
+
+		}
+
+		return sprintf( ' <a href="?wcsw-add=%s" class="%s" style="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, file_get_contents( WCSW_DIR . '/public/svg/star-stroke.svg' ) . $label );
+
+	}
+
+	/**
+	 * Returns the remove from wishlist button HTML.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
+
+		$label = '';
+		$style = $is_in_wishlist ? '' : 'display: none;';
+
+		if ( is_singular( 'product' ) ) {
+
+			$label = '&nbsp;&nbsp;&nbsp;' . __( 'Remove from wishlist', 'wcsw' );
+
+		}
+
+		if ( is_account_page() ) {
+
+			$icon = file_get_contents( WCSW_DIR . '/public/svg/x.svg' );
+
+		} else {
+
+			$icon = file_get_contents( WCSW_DIR . '/public/svg/star-fill.svg' );
+
+		}
+
+		return sprintf( ' <a href="?wcsw-remove=%s" class="%s" style="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, $icon . $label );
 
 	}
 
