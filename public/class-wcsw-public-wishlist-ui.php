@@ -96,7 +96,7 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 		// Shows the notice if there are no products in the wishlist...
 		if ( ! $wishlist_data || empty( $wishlist_data ) ) {
 
-			$this->the_empty_wishlist_notice();
+			echo $this->get_empty_wishlist_notice();
 
 			// ...and stops here.
 			return;
@@ -134,17 +134,6 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 		$message = __( 'There are no products in the wishlist yet.', 'wcsw' );
 
 		return sprintf( '<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info"><a class="woocommerce-Button button" href="%s">%s</a>%s</div>', $url, $label, $message );
-
-	}
-
-	/**
-	 * Echoes the empty wishlist notice HTML.
-	 *
-	 * @since    1.0.0
-	 */
-	public function the_empty_wishlist_notice() {
-
-		echo $this->get_empty_wishlist_notice();
 
 	}
 
