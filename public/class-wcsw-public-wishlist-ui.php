@@ -134,7 +134,7 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 	 */
 	public function get_empty_wishlist_notice() {
 
-		$url     = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
+		$url     = esc_url( wc_get_page_permalink( 'shop' ) );
 		$label   = __( 'Go shop', 'wcsw' );
 		$message = __( 'There are no products in the wishlist yet.', 'wcsw' );
 
