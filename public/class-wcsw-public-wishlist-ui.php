@@ -155,7 +155,7 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 		$remove_success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
 		$remove_error_message   = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
 
-		// Adds success notice only if the request was NOT made with AJAX.
+		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
 
 			// Success.
