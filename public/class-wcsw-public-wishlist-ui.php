@@ -32,9 +32,10 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 		}
 
 		$product_id = get_the_ID();
+		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
-		echo $this->get_add_to_wishlist_button( $product_id, $this->is_in_wishlist( $product_id ) );
-		echo $this->get_remove_from_wishlist_button( $product_id, $this->is_in_wishlist( $product_id ) );
+		echo $this->get_add_to_wishlist_button( $product_id, $is_in_wishlist );
+		echo $this->get_remove_from_wishlist_button( $product_id, $is_in_wishlist, 'star-fill' );
 
 	}
 
@@ -45,16 +46,9 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 	 */
 	public function get_add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
-		$label = '';
 		$style = $is_in_wishlist ? 'display: none;' : '';
 
-		if ( is_singular( 'product' ) ) {
-
-			$label = '&nbsp;&nbsp;&nbsp;' . __( 'Add to wishlist', 'wcsw' );
-
-		}
-
-		return sprintf( ' <a href="?wcsw-add=%s" class="%s" style="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, file_get_contents( WCSW_DIR . '/public/svg/star-stroke.svg' ) . $label );
+		return sprintf( ' <a href="?wcsw-add=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, __( 'Add to wishlist', 'wcsw' ), file_get_contents( WCSW_DIR . '/public/svg/star-stroke.svg' ) );
 
 	}
 
@@ -63,28 +57,11 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
+	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true, $icon = 'x' ) {
 
-		$label = '';
 		$style = $is_in_wishlist ? '' : 'display: none;';
 
-		if ( is_singular( 'product' ) ) {
-
-			$label = '&nbsp;&nbsp;&nbsp;' . __( 'Remove from wishlist', 'wcsw' );
-
-		}
-
-		if ( is_account_page() ) {
-
-			$icon = file_get_contents( WCSW_DIR . '/public/svg/x.svg' );
-
-		} else {
-
-			$icon = file_get_contents( WCSW_DIR . '/public/svg/star-fill.svg' );
-
-		}
-
-		return sprintf( ' <a href="?wcsw-remove=%s" class="%s" style="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, $icon . $label );
+		return sprintf( ' <a href="?wcsw-remove=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, __( 'Remove from wishlist', 'wcsw' ), file_get_contents( WCSW_DIR . '/public/svg/' . $icon . '.svg' ) );
 
 	}
 
@@ -186,7 +163,7 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 				wc_add_notice( ${$type . '_success_message'}, 'success' );
 
-				// Failure.
+			// Failure.
 			} else {
 
 				wc_add_notice( ${$type . '_error_message'}, 'error' );
@@ -200,7 +177,7 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
 
-				// Failure.
+			// Failure.
 			} else {
 
 				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
