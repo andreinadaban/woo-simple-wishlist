@@ -47,6 +47,10 @@ class WCSW_Public_Wishlist_JS {
 	 */
 	public function add_js_variables() {
 
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
 		if ( is_shop() || is_product_category() || is_product_tag() || is_account_page() || is_singular( 'product' ) ) {
 
 			$ajax_url = get_admin_url() . 'admin-ajax.php';

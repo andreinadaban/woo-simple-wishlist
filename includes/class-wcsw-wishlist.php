@@ -27,6 +27,10 @@ class WCSW_Wishlist {
 	 */
 	public function get_raw_data() {
 
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
 		return get_user_meta( get_current_user_id(), 'wcsw_data', true );
 
 	}
@@ -37,6 +41,10 @@ class WCSW_Wishlist {
 	 * @since    1.0.0
 	 */
 	public function get_data_array() {
+
+		if ( ! $this->get_raw_data() ) {
+			return false;
+		}
 
 		return json_decode( $this->get_raw_data(), true );
 

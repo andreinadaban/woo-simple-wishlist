@@ -70,7 +70,7 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 
 		$id = $_GET['wcsw-add'];
 
-		if ( ! $this->is_valid_id( $id ) ) {
+		if ( ! $this->is_valid_id( $id ) || ! is_user_logged_in() ) {
 
 			return false;
 
@@ -127,7 +127,7 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 		$id = $_GET['wcsw-remove'];
 
 		// If the GET variable is not a valid ID then do nothing.
-		if ( ! $this->is_valid_id( $id ) ) {
+		if ( ! $this->is_valid_id( $id ) || ! is_user_logged_in() ) {
 
 			return false;
 
