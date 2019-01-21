@@ -77,4 +77,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </table>
 
+<?php echo $this->get_clear_wishlist_button(); ?>
+
 <?php do_action( 'wcsw_after_table' ); ?>

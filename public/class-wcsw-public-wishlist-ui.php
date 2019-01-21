@@ -66,6 +66,17 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 	}
 
 	/**
+	 * Returns the clear wishlist button HTML.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_clear_wishlist_button() {
+
+		return sprintf( ' <a href="?wcsw-clear=1" class="%s">%s</a>', 'wcsw-button wcsw-button-ajax wcsw-button-clear button', __( 'Clear wishlist', 'wcsw' ) );
+
+	}
+
+	/**
 	 * Creates the new menu item.
 	 *
 	 * @since    1.0.0
@@ -155,33 +166,28 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 		$remove_success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
 		$remove_error_message   = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
 
+		$clear_success_message = __( 'The wishlist was successfully cleared.', 'wcsw' );
+		$clear_error_message   = __( 'The wishlist was not cleared. Please try again.', 'wcsw' );
+
 		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
 
 			// Success.
 			if ( $result ) {
-
 				wc_add_notice( ${$type . '_success_message'}, 'success' );
-
 			// Failure.
 			} else {
-
 				wc_add_notice( ${$type . '_error_message'}, 'error' );
-
 			}
 
 		} else {
 
 			// Success.
 			if ( $result ) {
-
 				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
-
 			// Failure.
 			} else {
-
 				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
-
 			}
 
 			// Prevents other output.

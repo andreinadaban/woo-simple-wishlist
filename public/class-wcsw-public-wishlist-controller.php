@@ -162,6 +162,27 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	}
 
 	/**
+	 * Clears the wishlist.
+	 *
+	 * @since    1.0.0
+	 */
+	public function clear() {
+
+		// If there is no request to clear the wishlist do nothing.
+		if ( ! $this->is_get_request( 'wcsw-clear' ) ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
+
+		// Deletes the database record.
+		$result = delete_user_meta( $user_id, 'wcsw_data' );
+
+		$this->ui->display_notice( 'clear', $result );
+
+	}
+
+	/**
 	 * AJAX processing function.
 	 *
 	 * @since    1.0.0

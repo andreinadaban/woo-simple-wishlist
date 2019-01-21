@@ -32,6 +32,13 @@
 
 		}
 
+		if ( thisBtn.hasClass('wcsw-button-clear') ) {
+
+			parameter = 'wcsw-clear';
+			fn = clear;
+
+		}
+
 		// The extracted ID of the product.
 		id = parseInt(thisBtn.attr('href').replace('?' + parameter + '=', ''));
 
@@ -108,6 +115,19 @@
 			}
 
 		}
+
+	}
+
+	// The code to run when the "Clear wishlist" button is clicked.
+	function clear(btn, result) {
+
+		$('#content .col-full > .woocommerce').html(result);
+
+		$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
+
+		$('.wcsw-table').remove();
+
+		btn.remove();
 
 	}
 

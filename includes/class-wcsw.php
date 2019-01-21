@@ -170,6 +170,7 @@ class WCSW {
 
 		$this->loader->add_action( 'init', $public_wishlist_controller, 'add', 10 );
 		$this->loader->add_action( 'init', $public_wishlist_controller, 'remove', 10 );
+		$this->loader->add_action( 'init', $public_wishlist_controller, 'clear', 10 );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
 
