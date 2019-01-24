@@ -45,10 +45,8 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	 */
 	public function add() {
 
-		if ( ! $this->is_get_request( 'wcsw-add' ) || $this->is_in_wishlist( get_the_ID() ) ) {
-
+		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-add' ) || $this->is_in_wishlist( get_the_ID() ) ) {
 			return;
-
 		}
 
 		if ( $new_wishlist_data = $this->add_product( $this->get_data_array() ) ) {
@@ -70,10 +68,8 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 
 		$id = $_GET['wcsw-add'];
 
-		if ( ! $this->is_valid_id( $id ) || ! is_user_logged_in() ) {
-
+		if ( ! $this->is_valid_id( $id ) ) {
 			return false;
-
 		}
 
 		$wishlist_content['products'][$id] = array(
@@ -92,10 +88,8 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	public function remove() {
 
 		// If there is no request to remove a product do nothing.
-		if ( ! $this->is_get_request( 'wcsw-remove' ) ) {
-
+		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-remove' ) ) {
 			return;
-
 		}
 
 		// The "$data" variable contains the new products array after the product removal.
@@ -127,10 +121,8 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 		$id = $_GET['wcsw-remove'];
 
 		// If the GET variable is not a valid ID then do nothing.
-		if ( ! $this->is_valid_id( $id ) || ! is_user_logged_in() ) {
-
+		if ( ! $this->is_valid_id( $id ) ) {
 			return false;
-
 		}
 
 		// The new products array that will exclude the removed product.
@@ -169,7 +161,7 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	public function clear() {
 
 		// If there is no request to clear the wishlist do nothing.
-		if ( ! $this->is_get_request( 'wcsw-clear' ) ) {
+		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-clear' ) ) {
 			return;
 		}
 
