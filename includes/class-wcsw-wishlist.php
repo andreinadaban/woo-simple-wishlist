@@ -92,12 +92,27 @@ class WCSW_Wishlist {
 	public function is_get_request( $param ) {
 
 		if ( isset( $_GET[$param] ) && ! empty( $_GET[$param] ) ) {
-
 			return true;
-
 		}
 
 		return false;
+
+	}
+
+	/**
+	 * Validates nonce.
+	 *
+	 * @since    1.0.0
+	 */
+	public function is_valid_nonce( $action ) {
+
+		if ( ! isset( $_GET['nonce-token'] ) ) {
+			return false;
+		}
+
+		$nonce_token = $_GET['nonce-token'];
+
+		return wp_verify_nonce( $nonce_token, $action );
 
 	}
 
@@ -109,9 +124,7 @@ class WCSW_Wishlist {
 	public function is_valid_id( $id ) {
 
 		if ( ! is_numeric( $id ) || $id <= 0 || $id != round( $id, 0 ) ) {
-
 			return false;
-
 		}
 
 		return true;

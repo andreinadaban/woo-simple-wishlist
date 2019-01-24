@@ -45,8 +45,13 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	 */
 	public function add() {
 
-		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-add' ) || $this->is_in_wishlist( get_the_ID() ) ) {
+		if ( ! is_user_logged_in() ||
+		     ! $this->is_get_request( 'wcsw-add' ) ||
+		     ! $this->is_valid_nonce( 'wcsw_add_to_wishlist_' . $_GET['wcsw-add'] ) ||
+		       $this->is_in_wishlist( $_GET['wcsw-add'] ) ) {
+
 			return;
+
 		}
 
 		if ( $new_wishlist_data = $this->add_product( $this->get_data_array() ) ) {
@@ -87,9 +92,13 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	 */
 	public function remove() {
 
-		// If there is no request to remove a product do nothing.
-		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-remove' ) ) {
+		if ( ! is_user_logged_in() ||
+		     ! $this->is_get_request( 'wcsw-remove' ) ||
+		     ! $this->is_valid_nonce( 'wcsw_remove_from_wishlist_' . $_GET['wcsw-remove'] ) ||
+		     ! $this->is_in_wishlist( $_GET['wcsw-remove'] ) ) {
+
 			return;
+
 		}
 
 		// The "$data" variable contains the new products array after the product removal.
@@ -160,9 +169,12 @@ class WCSW_Public_Wishlist_Controller extends WCSW_Wishlist {
 	 */
 	public function clear() {
 
-		// If there is no request to clear the wishlist do nothing.
-		if ( ! is_user_logged_in() || ! $this->is_get_request( 'wcsw-clear' ) ) {
+		if ( ! is_user_logged_in() ||
+		     ! $this->is_get_request( 'wcsw-clear' ) ||
+		     ! $this->is_valid_nonce( 'wcsw_clear_wishlist' ) ) {
+
 			return;
+
 		}
 
 		$user_id = get_current_user_id();
