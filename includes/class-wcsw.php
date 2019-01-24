@@ -172,7 +172,7 @@ class WCSW {
 		$this->loader->add_action( 'init', $public_wishlist_controller, 'remove', 10 );
 		$this->loader->add_action( 'init', $public_wishlist_controller, 'clear', 10 );
 
-//		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist_ui, 'add_button' );
 		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist_ui, 'add_button', 12 );
@@ -180,9 +180,9 @@ class WCSW {
 
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist_ui, 'add_menu', 10, 1 );
 
-//		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist_controller, 'process_ajax_request' );
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist_controller, 'process_ajax_request' );
 
-//		$this->loader->add_action( 'wp_footer', $public_wishlist_js, 'add_js_variables' );
+		$this->loader->add_action( 'wp_footer', $public_wishlist_js, 'add_js_variables' );
 
 	}
 
