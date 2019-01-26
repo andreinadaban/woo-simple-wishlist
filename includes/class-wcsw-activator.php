@@ -35,6 +35,16 @@ class WCSW_Activator {
 
 		}
 
+		if ( ! get_option( 'wcsw_settings' ) ) {
+
+			add_option( 'wcsw_settings', array(
+				'wcsw_select_field_0'   => 1,
+				'wcsw_checkbox_field_1' => 1,
+				'wcsw_checkbox_field_2' => 1,
+			) );
+
+		}
+
 	}
 
 }
