@@ -21,5 +21,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 if ( get_option( 'wcsw_version' ) ) {
 
 	delete_option( 'wcsw_version' );
+	delete_option( 'wcsw_settings' );
 
 }
