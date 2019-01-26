@@ -61,6 +61,7 @@ class WCSW {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
+		$this->define_admin_hooks();
 
 	}
 
@@ -101,6 +102,9 @@ class WCSW {
 		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-ui.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-controller.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-js.php';
+
+		// The classes responsible for defining all actions that occur in the admin area.
+		require_once WCSW_DIR . '/admin/class-wcsw-admin-settings.php';
 
 		$this->loader = new WCSW_Loader();
 
@@ -175,7 +179,16 @@ class WCSW {
 		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist_ui, 'add_button' );
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist_ui, 'add_button', 12 );
+
+		// Show the "Add to wishlist" button on product archive pages.
+		$settings = get_option( 'wcsw_settings' );
+
+		if ( isset( $settings['wcsw_checkbox_field_1'] ) ) {
+
+			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist_ui, 'add_button', 12 );
+
+		}
+
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist_ui, 'load_template' );
 
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist_ui, 'add_menu', 10, 1 );
@@ -183,6 +196,21 @@ class WCSW {
 		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist_controller, 'process_ajax_request' );
 
 		$this->loader->add_action( 'wp_footer', $public_wishlist_js, 'add_js_variables' );
+
+	}
+
+	/**
+	 * Registers all of the hooks related to the admin functionality of the plugin.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private function define_admin_hooks() {
+
+		$admin_settings = new WCSW_Admin_Settings();
+
+		$this->loader->add_action( 'admin_menu', $admin_settings, 'add_admin_menu' );
+		$this->loader->add_action( 'admin_init', $admin_settings, 'settings_init' );
 
 	}
 

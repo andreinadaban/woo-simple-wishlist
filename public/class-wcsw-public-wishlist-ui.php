@@ -50,7 +50,21 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 
-		return sprintf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, __( 'Add to wishlist', 'wcsw' ), file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-stroke.svg' ) );
+		$settings = get_option( 'wcsw_settings' );
+
+		switch ( $settings['wcsw_select_field_0'] ) {
+			case '1':
+				$label = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-stroke.svg' );
+				break;
+			case '2':
+				$label = __( 'Add to wishlist', 'wcsw' );
+				break;
+			case '3':
+				$label = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-stroke.svg' ) . __( 'Add to wishlist', 'wcsw' );
+				break;
+		}
+
+		return sprintf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, __( 'Add to wishlist', 'wcsw' ), $label );
 
 	}
 
@@ -65,7 +79,21 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 
-		return sprintf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, __( 'Remove from wishlist', 'wcsw' ), file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . $icon . '.svg' ) );
+		$settings = get_option( 'wcsw_settings' );
+
+		switch ( $settings['wcsw_select_field_0'] ) {
+			case '1':
+				$label = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-fill.svg' );
+				break;
+			case '2':
+				$label = __( 'Remove from wishlist', 'wcsw' );
+				break;
+			case '3':
+				$label = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-fill.svg' ) . __( 'Remove from wishlist', 'wcsw' );
+				break;
+		}
+
+		return sprintf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, __( 'Remove from wishlist', 'wcsw' ), $label );
 
 	}
 
@@ -75,6 +103,13 @@ class WCSW_Public_Wishlist_UI extends WCSW_Wishlist {
 	 * @since    1.0.0
 	 */
 	public function get_clear_wishlist_button() {
+
+		$settings = get_option( 'wcsw_settings' );
+
+		// Show the "Clear wishlist" button.
+		if ( ! isset( $settings['wcsw_checkbox_field_2'] ) ) {
+			return false;
+		}
 
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
 
