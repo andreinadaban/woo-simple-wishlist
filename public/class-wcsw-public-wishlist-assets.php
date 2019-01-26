@@ -27,7 +27,7 @@ class WCSW_Public_Wishlist_Assets {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'wcsw-public-js', plugin_dir_url( __FILE__ ) . 'js/wcsw-public.js', array( 'jquery' ), filemtime( WCSW_DIR . '/public/js/wcsw-public.js' ), true );
+		wp_enqueue_script( 'wcsw-public-js', plugin_dir_url( __FILE__ ) . 'assets/dist/js/wcsw-public.js', array( 'jquery' ), filemtime( WCSW_DIR . '/public/assets/dist/js/wcsw-public.js' ), true );
 
 	}
 
