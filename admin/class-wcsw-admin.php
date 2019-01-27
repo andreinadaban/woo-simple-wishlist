@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The admin settings class.
+ * The admin class.
  *
  * @since    1.0.0
  */
@@ -14,11 +14,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The admin settings class.
+ * The admin class.
  *
  * @since    1.0.0
  */
-class WCSW_Admin_Settings {
+class WCSW_Admin {
+
+	/**
+	 * Checks if WooCommerce is active.
+     *
+     * @since    1.0.0
+	 */
+	public function check_for_dependencies() {
+
+		if ( is_admin() &&
+             current_user_can( 'activate_plugins' ) &&
+             ! is_plugin_active( WCSW_WOO ) ) {
+
+			deactivate_plugins( WCSW_PLUGIN );
+
+			if ( isset( $_GET['activate'] ) ) {
+
+				unset( $_GET['activate'] );
+
+			}
+		}
+
+	}
+
+	/**
+	 * Displays admin notices.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_notices() {
+
+		if ( is_admin() &&
+		     current_user_can( 'activate_plugins' ) &&
+		     ! is_plugin_active( WCSW_WOO ) ) {
+
+			$notice = __( 'The WooCommerce plugin needs to be active.', 'wcsw' );
+
+			echo <<<EOT
+			
+		    <div class="error"><p>{$notice}</p></div>
+
+EOT;
+
+		}
+
+	}
 
 	public function add_admin_menu() {
 

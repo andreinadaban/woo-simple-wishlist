@@ -104,7 +104,7 @@ class WCSW {
 		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-js.php';
 
 		// The classes responsible for defining all actions that occur in the admin area.
-		require_once WCSW_DIR . '/admin/class-wcsw-admin-settings.php';
+		require_once WCSW_DIR . '/admin/class-wcsw-admin.php';
 
 		$this->loader = new WCSW_Loader();
 
@@ -207,10 +207,12 @@ class WCSW {
 	 */
 	private function define_admin_hooks() {
 
-		$admin_settings = new WCSW_Admin_Settings();
+		$admin = new WCSW_Admin();
 
-		$this->loader->add_action( 'admin_menu', $admin_settings, 'add_admin_menu' );
-		$this->loader->add_action( 'admin_init', $admin_settings, 'settings_init' );
+		$this->loader->add_action( 'admin_init', $admin, 'check_for_dependencies' );
+		$this->loader->add_action( 'admin_notices', $admin, 'add_notices' );
+		$this->loader->add_action( 'admin_init', $admin, 'settings_init' );
+		$this->loader->add_action( 'admin_menu', $admin, 'add_admin_menu' );
 
 	}
 

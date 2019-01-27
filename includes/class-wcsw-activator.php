@@ -29,6 +29,10 @@ class WCSW_Activator {
 	 */
 	public static function activate() {
 
+		if ( ! is_plugin_active( WCSW_WOO ) ) {
+			return;
+		}
+
 		if ( ! get_transient( 'wcsw_flush' ) ) {
 
 			set_transient( 'wcsw_flush', '1', 0 );
