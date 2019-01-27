@@ -53,12 +53,10 @@ class WCSW_Admin {
 		     current_user_can( 'activate_plugins' ) &&
 		     ! is_plugin_active( WCSW_WOO ) ) {
 
-			$notice = __( 'The WooCommerce plugin needs to be active.', 'wcsw' );
+			$notice = __( 'Please activate the WooCommerce plugin.', 'wcsw' );
 
 			echo <<<EOT
-			
-		    <div class="error"><p>{$notice}</p></div>
-
+		        <div class="error"><p><strong>WooCommerce Simple Wishlist: </strong>{$notice}</p></div>
 EOT;
 
 		}
@@ -71,6 +69,10 @@ EOT;
 	 * @since    1.0.0
 	 */
 	public function add_admin_menu() {
+
+		if ( ! is_plugin_active( WCSW_WOO ) ) {
+		    return;
+        }
 
 		add_menu_page( 'WooCommerce Simple Wishlist', 'WooCommerce Simple Wishlist', 'manage_options', 'woocommerce_simple_wishlist', array( $this, 'options_page' ), 'dashicons-star-filled' );
 
