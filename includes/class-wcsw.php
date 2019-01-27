@@ -165,11 +165,11 @@ class WCSW {
 		$public_wishlist = new WCSW_Public_Wishlist();
 		$public_assets   = new WCSW_Public_Assets();
 
-		$this->loader->add_action( 'init', $this, 'add_endpoint', 10 );
-		$this->loader->add_action( 'init', $this, 'flush', 20 );
-		$this->loader->add_action( 'init', $public_wishlist, 'add', 10 );
-		$this->loader->add_action( 'init', $public_wishlist, 'remove', 10 );
-		$this->loader->add_action( 'init', $public_wishlist, 'clear', 10 );
+		$this->loader->add_action( 'wp_loaded', $this, 'add_endpoint', 10 );
+		$this->loader->add_action( 'wp_loaded', $this, 'flush', 20 );
+		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'add', 10 );
+		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'remove', 10 );
+		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'clear', 10 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_scripts' );
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
 
