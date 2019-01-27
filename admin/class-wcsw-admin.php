@@ -72,7 +72,7 @@ EOT;
 	 */
 	public function add_admin_menu() {
 
-		add_menu_page( 'WooCommerce Simple Wishlist', 'WooCommerce Simple Wishlist', 'manage_options', 'woocommerce_simple_wishlist', array( $this, 'options_page' ) );
+		add_menu_page( 'WooCommerce Simple Wishlist', 'WooCommerce Simple Wishlist', 'manage_options', 'woocommerce_simple_wishlist', array( $this, 'options_page' ), 'dashicons-star-filled' );
 
 	}
 
