@@ -98,10 +98,8 @@ class WCSW {
 		require_once WCSW_DIR . '/includes/class-wcsw-wishlist.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
-		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-assets.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-ui.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-controller.php';
-		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist-js.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist.php';
+		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
 
 		// The classes responsible for defining all actions that occur in the admin area.
 		require_once WCSW_DIR . '/admin/class-wcsw-admin.php';
@@ -164,38 +162,30 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$public_wishlist_assets     = new WCSW_Public_Wishlist_Assets();
-		$public_wishlist_ui         = new WCSW_Public_Wishlist_UI();
-		$public_wishlist_controller = new WCSW_Public_Wishlist_Controller( $public_wishlist_ui );
-		$public_wishlist_js         = new WCSW_Public_Wishlist_JS( $public_wishlist_ui );
+		$public_wishlist = new WCSW_Public_Wishlist();
+		$public_assets   = new WCSW_Public_Assets();
 
 		$this->loader->add_action( 'init', $this, 'add_endpoint', 10 );
 		$this->loader->add_action( 'init', $this, 'flush', 20 );
-
-		$this->loader->add_action( 'init', $public_wishlist_controller, 'add', 10 );
-		$this->loader->add_action( 'init', $public_wishlist_controller, 'remove', 10 );
-		$this->loader->add_action( 'init', $public_wishlist_controller, 'clear', 10 );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $public_wishlist_assets, 'enqueue_scripts' );
-
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist_ui, 'add_button' );
+		$this->loader->add_action( 'init', $public_wishlist, 'add', 10 );
+		$this->loader->add_action( 'init', $public_wishlist, 'remove', 10 );
+		$this->loader->add_action( 'init', $public_wishlist, 'clear', 10 );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_scripts' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
 
 		// Show the "Add to wishlist" button on product archive pages.
 		$settings = get_option( 'wcsw_settings' );
 
 		if ( isset( $settings['wcsw_checkbox_field_1'] ) ) {
 
-			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist_ui, 'add_button', 12 );
+			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist, 'add_button', 12 );
 
 		}
 
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist_ui, 'load_template' );
-
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist_ui, 'add_menu', 10, 1 );
-
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist_controller, 'process_ajax_request' );
-
-		$this->loader->add_action( 'wp_footer', $public_wishlist_js, 'add_js_variables' );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist, 'load_template' );
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist, 'add_menu', 10, 1 );
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist, 'process_ajax_request' );
+		$this->loader->add_action( 'wp_footer', $public_wishlist, 'add_js_variables' );
 
 	}
 
