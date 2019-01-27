@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_Wishlist {
 
 	/**
-	 * Creates the add to wishlist or remove from wishlist buttons on the product page and on the product archive pages.
+	 * Creates the add to wishlist and remove from wishlist buttons on the product page and on the product archive pages.
 	 *
 	 * @since    1.0.0
 	 */

@@ -14,7 +14,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 /**
- * Deletes the plugin version record from the options table.
+ * Deletes the plugin data from the options table.
  *
  * @since  1.0.0
  */
