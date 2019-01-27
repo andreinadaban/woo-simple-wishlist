@@ -94,9 +94,6 @@ class WCSW {
 		// The class responsible for defining internationalization functionality.
 		require_once WCSW_DIR . '/includes/class-wcsw-i18n.php';
 
-		// The wishlist base class.
-		require_once WCSW_DIR . '/includes/class-wcsw-wishlist.php';
-
 		// The classes responsible for defining all actions that occur in the public side of the site.
 		require_once WCSW_DIR . '/public/class-wcsw-public-wishlist.php';
 		require_once WCSW_DIR . '/public/class-wcsw-public-assets.php';
