@@ -65,12 +65,22 @@ EOT;
 
 	}
 
+	/**
+	 * Adds admin menu.
+	 *
+	 * @since    1.0.0
+	 */
 	public function add_admin_menu() {
 
 		add_menu_page( 'WooCommerce Simple Wishlist', 'WooCommerce Simple Wishlist', 'manage_options', 'woocommerce_simple_wishlist', array( $this, 'options_page' ) );
 
 	}
 
+	/**
+	 * Initializes settings.
+	 *
+	 * @since    1.0.0
+	 */
 	public function settings_init() {
 
 		register_setting( 'pluginPage', 'wcsw_settings' );
@@ -108,6 +118,11 @@ EOT;
 
 	}
 
+	/**
+	 * Select.
+	 *
+	 * @since    1.0.0
+	 */
 	public function select_field_0_render() {
 
 		$options = get_option( 'wcsw_settings' );
@@ -130,6 +145,11 @@ EOT;
 
 	}
 
+	/**
+	 * Checkbox.
+	 *
+	 * @since    1.0.0
+	 */
 	public function checkbox_field_1_render() {
 
 		$options = get_option( 'wcsw_settings' );
@@ -142,6 +162,11 @@ EOT;
 
 	}
 
+	/**
+	 * Checkbox.
+	 *
+	 * @since    1.0.0
+	 */
 	public function checkbox_field_2_render() {
 
 		$options = get_option( 'wcsw_settings' );
@@ -154,12 +179,22 @@ EOT;
 
 	}
 
+	/**
+	 * Description.
+	 *
+	 * @since    1.0.0
+	 */
 	public function settings_section_callback() {
 
 	    echo __( '', 'wcsw' );
 
 	}
 
+	/**
+	 * Settings form.
+	 *
+	 * @since    1.0.0
+	 */
 	public function options_page() {
 
 		?>
