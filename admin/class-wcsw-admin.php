@@ -64,158 +64,86 @@ EOT;
 	}
 
 	/**
-	 * Adds admin menu.
+     * Adds a tab to the WooCommerce settings menu.
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_admin_menu() {
+    public function add_settings_tab( $settings_tabs ) {
 
-		if ( ! is_plugin_active( WCSW_WOO ) ) {
-		    return;
-        }
+	    $settings_tabs['wcsw_tab'] = __( 'Wishlist', 'wcsw' );
 
-		add_menu_page( 'WooCommerce Simple Wishlist', 'WooCommerce Simple Wishlist', 'manage_options', 'woocommerce_simple_wishlist', array( $this, 'options_page' ), 'dashicons-star-filled' );
+	    return $settings_tabs;
 
-	}
+    }
 
 	/**
-	 * Initializes settings.
+	 * Adds the settings fields to the settings tab.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
 	 */
-	public function settings_init() {
+    public function settings_tab() {
 
-		register_setting( 'pluginPage', 'wcsw_settings' );
+	    woocommerce_admin_fields( $this->get_settings() );
 
-		add_settings_section(
-			'wcsw_pluginPage_section',
-			__( '', 'wcsw' ),
-			array( $this, 'settings_section_callback' ),
-			'pluginPage'
-		);
-
-		add_settings_field(
-			'wcsw_select_field_0',
-			__( 'Button style', 'wcsw' ),
-			array( $this, 'select_field_0_render' ),
-			'pluginPage',
-			'wcsw_pluginPage_section'
-		);
-
-		add_settings_field(
-			'wcsw_checkbox_field_1',
-			__( 'Show button on archive pages', 'wcsw' ),
-			array( $this, 'checkbox_field_1_render' ),
-			'pluginPage',
-			'wcsw_pluginPage_section'
-		);
-
-		add_settings_field(
-			'wcsw_checkbox_field_2',
-			__( 'Show "Clear wishlist" button', 'wcsw' ),
-			array( $this, 'checkbox_field_2_render' ),
-			'pluginPage',
-			'wcsw_pluginPage_section'
-		);
-
-	}
+    }
 
 	/**
-	 * Select.
-	 *
-	 * @since    1.0.0
+     * Creates the settings fields.
+     *
+	 * @since     1.0.0
+	 * @return    array
 	 */
-	public function select_field_0_render() {
+    private function get_settings() {
 
-		$options = get_option( 'wcsw_settings' );
+	    $settings = array(
+		    'wcsw_settings_title' => array(
+			    'name'    => __( 'WooCommerce Simple Wishlist Settings', 'wcsw' ),
+			    'type'    => 'title',
+			    'desc'    => '',
+			    'id'      => 'wcsw_settings_title'
+		    ),
+		    'wcsw_settings_button_style' => array(
+			    'name'    => __( 'Button style', 'wcsw' ),
+			    'type'    => 'select',
+			    'options' => array(
+                    'icon'      => __( 'Icon', 'wcsw' ),
+                    'text'      => __( 'Text', 'wcsw' ),
+                    'icon_text' => __( 'Icon & Text', 'wcsw' ),
+                ),
+			    'default' => 'icon',
+			    'desc'    => '',
+			    'id'      => 'wcsw_settings_button_style'
+		    ),
+		    'wcsw_settings_button_archive' => array(
+			    'name'    => __( 'Show button on archive pages', 'wcsw' ),
+			    'type'    => 'checkbox',
+			    'default' => 'yes',
+			    'desc'    => '',
+			    'id'      => 'wcsw_settings_button_archive'
+		    ),
+		    'wcsw_settings_button_clear' => array(
+			    'name'    => __( 'Show the "Clear Wishlist" button in the "My Account" section.', 'wcsw' ),
+			    'type'    => 'checkbox',
+			    'default' => 'yes',
+			    'desc'    => '',
+			    'id'      => 'wcsw_settings_button_clear'
+		    ),
+		    'wcsw_settings_section_end' => array(
+			    'type'    => 'sectionend',
+			    'id'      => 'wcsw_settings_section_end'
+		    ),
+	    );
 
-		?>
+	    return $settings;
 
-        <select name='wcsw_settings[wcsw_select_field_0]'>
-            <option value='1' <?php selected( $options['wcsw_select_field_0'], 1 ); ?>>
-                <?php _e( 'Icon', 'wcsw' ); ?>
-            </option>
-            <option value='2' <?php selected( $options['wcsw_select_field_0'], 2 ); ?>>
-	            <?php _e( 'Text', 'wcsw' ); ?>
-            </option>
-            <option value='3' <?php selected( $options['wcsw_select_field_0'], 3 ); ?>>
-	            <?php _e( 'Icon & text', 'wcsw' ); ?>
-            </option>
-        </select>
-
-		<?php
-
-	}
+    }
 
 	/**
-	 * Checkbox.
-	 *
-	 * @since    1.0.0
+	 * Saves the settings.
 	 */
-	public function checkbox_field_1_render() {
+	function update_settings() {
 
-		$options = get_option( 'wcsw_settings' );
-
-		?>
-
-        <input type='checkbox' name='wcsw_settings[wcsw_checkbox_field_1]' <?php checked( isset( $options['wcsw_checkbox_field_1'] ) ? $options['wcsw_checkbox_field_1'] : '', 1 ); ?> value='1'>
-
-		<?php
-
-	}
-
-	/**
-	 * Checkbox.
-	 *
-	 * @since    1.0.0
-	 */
-	public function checkbox_field_2_render() {
-
-		$options = get_option( 'wcsw_settings' );
-
-		?>
-
-        <input type='checkbox' name='wcsw_settings[wcsw_checkbox_field_2]' <?php checked( isset( $options['wcsw_checkbox_field_2'] ) ? $options['wcsw_checkbox_field_2'] : '', 1 ); ?> value='1'>
-
-		<?php
-
-	}
-
-	/**
-	 * Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public function settings_section_callback() {
-
-	    echo __( '', 'wcsw' );
-
-	}
-
-	/**
-	 * Settings form.
-	 *
-	 * @since    1.0.0
-	 */
-	public function options_page() {
-
-		?>
-
-        <form action='options.php' method='POST'>
-
-            <h2>WooCommerce Simple Wishlist</h2>
-
-			<?php
-
-			settings_fields( 'pluginPage' );
-			do_settings_sections( 'pluginPage' );
-			submit_button();
-
-			?>
-
-        </form>
-
-		<?php
+		woocommerce_update_options( $this->get_settings() );
 
 	}
 

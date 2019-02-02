@@ -39,13 +39,21 @@ class WCSW_Activator {
 
 		}
 
-		if ( ! get_option( 'wcsw_settings' ) ) {
+		if ( ! get_option( 'wcsw_settings_button_style' ) ) {
 
-			add_option( 'wcsw_settings', array(
-				'wcsw_select_field_0'   => 1,
-				'wcsw_checkbox_field_1' => 1,
-				'wcsw_checkbox_field_2' => 1,
-			) );
+			add_option( 'wcsw_settings_button_style', 'icon' );
+
+		}
+
+		if ( ! get_option( 'wcsw_settings_button_archive' ) ) {
+
+			add_option( 'wcsw_settings_button_archive', 'yes' );
+
+		}
+
+		if ( ! get_option( 'wcsw_settings_button_clear' ) ) {
+
+			add_option( 'wcsw_settings_button_clear', 'yes' );
 
 		}
 

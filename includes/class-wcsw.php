@@ -171,9 +171,7 @@ class WCSW {
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
 
 		// Show the "Add to wishlist" button on product archive pages.
-		$settings = get_option( 'wcsw_settings' );
-
-		if ( isset( $settings['wcsw_checkbox_field_1'] ) ) {
+		if ( get_option( 'wcsw_settings_button_archive' ) && get_option( 'wcsw_settings_button_archive' ) === 'yes' ) {
 
 			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist, 'add_button', 12 );
 
@@ -198,8 +196,9 @@ class WCSW {
 
 		$this->loader->add_action( 'admin_init', $admin, 'check_for_dependencies' );
 		$this->loader->add_action( 'admin_notices', $admin, 'add_notices' );
-		$this->loader->add_action( 'admin_init', $admin, 'settings_init' );
-		$this->loader->add_action( 'admin_menu', $admin, 'add_admin_menu' );
+		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $admin, 'add_settings_tab', 50 );
+		$this->loader->add_action( 'woocommerce_settings_tabs_wcsw_tab', $admin, 'settings_tab' );
+		$this->loader->add_action( 'woocommerce_update_options_wcsw_tab', $admin, 'update_settings' );
 
 	}
 

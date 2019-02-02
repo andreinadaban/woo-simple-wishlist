@@ -51,16 +51,14 @@ class WCSW_Public_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 
-		$settings = get_option( 'wcsw_settings' );
-
-		switch ( $settings['wcsw_select_field_0'] ) {
-			case '1':
+		switch ( get_option( 'wcsw_settings_button_style' ) ) {
+			case 'icon':
 				$label = $icon;
 				break;
-			case '2':
+			case 'text':
 				$label = __( 'Add to wishlist', 'wcsw' );
 				break;
-			case '3':
+			case 'icon_text':
 				$label = $icon . __( 'Add to wishlist', 'wcsw' );
 				break;
 			default:
@@ -83,16 +81,14 @@ class WCSW_Public_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 
-		$settings = get_option( 'wcsw_settings' );
-
-		switch ( $settings['wcsw_select_field_0'] ) {
-			case '1':
+		switch ( get_option( 'wcsw_settings_button_style' ) ) {
+			case 'icon':
 				$label = $icon;
 				break;
-			case '2':
+			case 'text':
 				$label = __( 'Remove from wishlist', 'wcsw' );
 				break;
-			case '3':
+			case 'icon_text':
 				$label = $icon . __( 'Remove from wishlist', 'wcsw' );
 				break;
 			default:
@@ -110,10 +106,8 @@ class WCSW_Public_Wishlist {
 	 */
 	public function get_clear_wishlist_button() {
 
-		$settings = get_option( 'wcsw_settings' );
-
 		// Show the "Clear wishlist" button.
-		if ( ! isset( $settings['wcsw_checkbox_field_2'] ) ) {
+		if ( ! get_option( 'wcsw_settings_button_clear' ) || get_option( 'wcsw_settings_button_clear' ) === 'no' ) {
 			return false;
 		}
 
