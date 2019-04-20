@@ -21,6 +21,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_Assets {
 
 	/**
+	 * Registers the stylesheets for the public area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+
+		wp_enqueue_style( 'wcsw-public-css', plugin_dir_url( __FILE__ ) . 'assets/dist/css/wcsw-public.css', array(), filemtime( WCSW_DIR . '/public/assets/dist/css/wcsw-public.css' ), 'all' );
+
+	}
+
+	/**
 	 * Registers the JavaScript files for the public side of the website.
 	 *
 	 * @since    1.0.0
