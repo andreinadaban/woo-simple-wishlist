@@ -70,7 +70,7 @@ EOT;
 	 */
     public function add_settings_tab( $settings_tabs ) {
 
-	    $settings_tabs['wcsw_tab'] = __( 'Wishlist', 'wcsw' );
+	    $settings_tabs['wcsw_tab'] = __( 'WooCommerce Simple Wishlist', 'wcsw' );
 
 	    return $settings_tabs;
 
@@ -97,7 +97,7 @@ EOT;
 
 	    $settings = array(
 		    'wcsw_settings_title' => array(
-			    'name'    => __( 'WooCommerce Simple Wishlist Settings', 'wcsw' ),
+			    'name'    => __( 'General Settings', 'wcsw' ),
 			    'type'    => 'title',
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_title'
@@ -115,17 +115,17 @@ EOT;
 			    'id'      => 'wcsw_settings_button_style'
 		    ),
 		    'wcsw_settings_button_archive' => array(
-			    'name'    => __( 'Show button on archive pages', 'wcsw' ),
+			    'name'    => __( '"Add to Wishlist" button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => '',
+			    'desc'    => __( 'Show the "Add to Wishlist" button on archive pages.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_archive'
 		    ),
 		    'wcsw_settings_button_clear' => array(
-			    'name'    => __( 'Show the "Clear Wishlist" button in the "My Account" section.', 'wcsw' ),
+			    'name'    => __( '"Clear Wishlist" button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => '',
+			    'desc'    => __( 'Show the "Clear Wishlist" button in the "My Account" section.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_clear'
 		    ),
 		    'wcsw_settings_section_end' => array(
