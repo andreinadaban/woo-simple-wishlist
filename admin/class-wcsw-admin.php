@@ -97,7 +97,7 @@ EOT;
 
 	    $settings = array(
 		    'wcsw_settings_title' => array(
-			    'name'    => __( 'General Settings', 'wcsw' ),
+			    'name'    => __( 'General settings', 'wcsw' ),
 			    'type'    => 'title',
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_title'
@@ -118,14 +118,14 @@ EOT;
 			    'name'    => __( '"Add to Wishlist" button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => __( 'Show the "Add to Wishlist" button on archive pages.', 'wcsw' ),
+			    'desc'    => __( 'Show the "Add to Wishlist" button in archive pages.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_archive'
 		    ),
 		    'wcsw_settings_button_clear' => array(
 			    'name'    => __( '"Clear Wishlist" button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => __( 'Show the "Clear Wishlist" button in the "My Account" section.', 'wcsw' ),
+			    'desc'    => __( 'Show the "Clear Wishlist" button in the "My Account" page.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_clear'
 		    ),
 		    'wcsw_settings_section_end' => array(
