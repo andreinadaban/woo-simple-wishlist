@@ -147,4 +147,17 @@ EOT;
 
 	}
 
+	/**
+	 * Adds a link to the settings page in the plugins page.
+	 */
+	function add_settings_link( $links ) {
+
+		$action_links = array(
+			'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=wcsw_tab' ) . '">' . __( 'Settings', 'wcsw' ) . '</a>'
+		);
+
+		return array_merge( $action_links, $links );
+
+	}
+
 }

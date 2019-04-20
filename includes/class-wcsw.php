@@ -200,6 +200,7 @@ class WCSW {
 		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $admin, 'add_settings_tab', 50 );
 		$this->loader->add_action( 'woocommerce_settings_tabs_wcsw_tab', $admin, 'settings_tab' );
 		$this->loader->add_action( 'woocommerce_update_options_wcsw_tab', $admin, 'update_settings' );
+		$this->loader->add_filter( 'plugin_action_links_' . WCSW_PLUGIN, $admin, 'add_settings_link' );
 
 	}
 
