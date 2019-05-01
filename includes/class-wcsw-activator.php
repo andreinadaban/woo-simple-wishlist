@@ -57,6 +57,12 @@ class WCSW_Activator {
 
 		}
 
+		if ( ! get_option( 'wcsw_settings_load_css' ) ) {
+
+			add_option( 'wcsw_settings_load_css', 'yes' );
+
+		}
+
 	}
 
 }

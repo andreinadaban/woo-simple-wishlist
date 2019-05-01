@@ -128,6 +128,13 @@ EOT;
 			    'desc'    => __( 'Show the Clear wishlist button in the My account page.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_clear'
 		    ),
+		    'wcsw_settings_load_css' => array(
+			    'name'    => __( 'CSS', 'wcsw' ),
+			    'type'    => 'checkbox',
+			    'default' => 'yes',
+			    'desc'    => __( 'Load basic styles.', 'wcsw' ),
+			    'id'      => 'wcsw_settings_load_css'
+		    ),
 		    'wcsw_settings_section_end' => array(
 			    'type'    => 'sectionend',
 			    'id'      => 'wcsw_settings_section_end'
