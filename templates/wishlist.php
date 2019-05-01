@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'wcsw_before_table' ); ?>
 
-<table class="wcsw-table woocommerce-table">
+<table class="wcsw-table">
 
     <thead>
 
@@ -43,19 +43,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <?php do_action( 'wcsw_before_td_title' ); ?>
 
-            <td class="wcsw-title">
+            <td class="wcsw-td">
 
                 <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
-                    <a href="<?php echo get_the_permalink( $product_id ); ?>">
+                    <a href="<?php echo get_the_permalink( $product_id ); ?>" class="wcsw-title">
 
-                        <?php echo get_the_title( $product_id ); ?>
+                        <img src="<?php echo get_the_post_thumbnail_url( $product_id, 'woocommerce_gallery_thumbnail' ) ?>" alt="<?php echo get_the_title( $product_id ); ?>" class="wcsw-thumb">
+
+                        <span class="wcsw-title-text"><?php echo get_the_title( $product_id ); ?></span>
 
                     </a>
 
                 <?php } else { ?>
 
-                    <?php echo $product_data['title'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?>
+                    <div class="wcsw-title">
+
+                        <img src="<?php echo wc_placeholder_img_src(); ?>" alt="" class="wcsw-thumb">
+
+                        <span class="wcsw-title-text">
+
+                            <?php echo $product_data['title'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?>
+
+                        </span>
+
+                    </div>
 
                 <?php } ?>
 
@@ -63,9 +75,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <?php do_action( 'wcsw_after_td_title' ); ?>
 
-            <td class="wcsw-remove">
+            <td class="wcsw-td wcsw-actions">
 
-	            <?php echo $this->get_remove_from_wishlist_button( $product_id ); ?>
+                <a href="?wcsw-remove=<?php echo $product_id; ?>&nonce-token=<?php echo wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id ) ?>" class="wcsw-button wcsw-button-ajax wcsw-button-remove remove" title="<?php _e( 'Remove from wishlist', 'wcsw' ); ?>"></a>
 
             </td>
 

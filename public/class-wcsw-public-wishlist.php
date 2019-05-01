@@ -35,7 +35,7 @@ class WCSW_Public_Wishlist {
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
 		echo $this->get_add_to_wishlist_button( $product_id, $is_in_wishlist );
-		echo $this->get_remove_from_wishlist_button( $product_id, $is_in_wishlist, 'star-fill' );
+		echo $this->get_remove_from_wishlist_button( $product_id, $is_in_wishlist );
 
 	}
 
@@ -47,7 +47,7 @@ class WCSW_Public_Wishlist {
 	public function get_add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
 		$style = $is_in_wishlist ? 'display: none;' : '';
-		$icon  = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/star-stroke.svg' );
+		$icon  = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/add.svg' );
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 
@@ -59,13 +59,13 @@ class WCSW_Public_Wishlist {
 				$label = __( 'Add to wishlist', 'wcsw' );
 				break;
 			case 'icon_text':
-				$label = $icon . __( 'Add to wishlist', 'wcsw' );
+				$label = $icon . '<span class="wcsw-spacer"></span>' . __( 'Add to wishlist', 'wcsw' );
 				break;
 			default:
 				$label = $icon;
 		}
 
-		return sprintf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add button', $style, __( 'Add to wishlist', 'wcsw' ), $label );
+		return sprintf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add', $style, __( 'Add to wishlist', 'wcsw' ), $label );
 
 	}
 
@@ -74,10 +74,10 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true, $svg = 'x' ) {
+	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
 
 		$style = $is_in_wishlist ? '' : 'display: none;';
-		$icon  = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . $svg . '.svg' );
+		$icon  = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/remove.svg' );
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 
@@ -89,13 +89,13 @@ class WCSW_Public_Wishlist {
 				$label = __( 'Remove from wishlist', 'wcsw' );
 				break;
 			case 'icon_text':
-				$label = $icon . __( 'Remove from wishlist', 'wcsw' );
+				$label = $icon . '<span class="wcsw-spacer"></span>' . __( 'Remove from wishlist', 'wcsw' );
 				break;
 			default:
 				$label = $icon;
 		}
 
-		return sprintf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove button', $style, __( 'Remove from wishlist', 'wcsw' ), $label );
+		return sprintf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove', $style, __( 'Remove from wishlist', 'wcsw' ), $label );
 
 	}
 
@@ -113,7 +113,7 @@ class WCSW_Public_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
 
-		return sprintf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear button', __( 'Clear wishlist', 'wcsw' ) );
+		return sprintf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', __( 'Clear wishlist', 'wcsw' ) );
 
 	}
 

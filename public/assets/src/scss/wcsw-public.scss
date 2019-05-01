@@ -1,8 +1,38 @@
-.wcsw-button {
-    display: flex;
-    align-items: center;
+.wcsw {
 
-    svg {
+    &-td {
+        vertical-align: middle;
+    }
+
+    &-title {
+        display: flex;
+        align-items: center;
+        text-decoration: none !important;
+    }
+
+    &-thumb {
+        width: 60px;
+        margin-right: 20px;
+    }
+
+    &-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none !important;
+        color: #000;
+
+        .archive &,
+        .single-product & {
+            padding: 10px 20px;
+        }
+
+        svg {
+            flex: 0 0 auto;
+        }
+    }
+
+    &-spacer {
         margin-right: 10px;
     }
 }
