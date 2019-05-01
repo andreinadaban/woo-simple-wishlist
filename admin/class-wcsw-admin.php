@@ -108,24 +108,24 @@ EOT;
 			    'options' => array(
                     'icon'      => __( 'Icon', 'wcsw' ),
                     'text'      => __( 'Text', 'wcsw' ),
-                    'icon_text' => __( 'Icon & Text', 'wcsw' ),
+                    'icon_text' => __( 'Icon & text', 'wcsw' ),
                 ),
 			    'default' => 'icon',
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_button_style'
 		    ),
 		    'wcsw_settings_button_archive' => array(
-			    'name'    => __( 'Add to Wishlist button', 'wcsw' ),
+			    'name'    => __( 'Add to wishlist button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => __( 'Show the Add to Wishlist button in archive pages.', 'wcsw' ),
+			    'desc'    => __( 'Show the Add to wishlist button in archive pages.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_archive'
 		    ),
 		    'wcsw_settings_button_clear' => array(
-			    'name'    => __( 'Clear Wishlist button', 'wcsw' ),
+			    'name'    => __( 'Clear wishlist button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => __( 'Show the Clear Wishlist button in the My Account page.', 'wcsw' ),
+			    'desc'    => __( 'Show the Clear wishlist button in the My account page.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_clear'
 		    ),
 		    'wcsw_settings_section_end' => array(
