@@ -233,7 +233,7 @@ class WCSW_Public_Wishlist {
 			// Success.
 			if ( $result ) {
 				wc_add_notice( ${$type . '_success_message'}, 'success' );
-				// Failure.
+			// Failure.
 			} else {
 				wc_add_notice( ${$type . '_error_message'}, 'error' );
 			}
@@ -243,7 +243,7 @@ class WCSW_Public_Wishlist {
 			// Success.
 			if ( $result ) {
 				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
-				// Failure.
+			// Failure.
 			} else {
 				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
 			}
