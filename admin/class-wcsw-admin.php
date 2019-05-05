@@ -70,7 +70,7 @@ EOT;
 	 */
     public function add_settings_tab( $settings_tabs ) {
 
-	    $settings_tabs['wcsw_tab'] = __( 'WooCommerce Simple Wishlist', 'wcsw' );
+	    $settings_tabs['wcsw_tab'] = __( 'Simple Wishlist', 'wcsw' );
 
 	    return $settings_tabs;
 
