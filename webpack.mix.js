@@ -4,6 +4,14 @@ let imageminSvgo = require('imagemin-svgo');
 
 mix.js('public/assets/src/js/wcsw-public.js', 'public/assets/dist/js')
     .sass('public/assets/src/scss/wcsw-public.scss', 'public/assets/dist/css')
+    .browserSync({
+        proxy: 'wp.test',
+        files: [
+            'public/assets/dist/css/*.css',
+            'public/assets/dist/js/*.js',
+            '**/*.php'
+        ]
+    })
     .setPublicPath('./')
     .options({
         processCssUrls: false
