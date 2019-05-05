@@ -9,7 +9,9 @@ mix.js('public/assets/src/js/wcsw-public.js', 'public/assets/dist/js')
         files: [
             'public/assets/dist/css/*.css',
             'public/assets/dist/js/*.js',
-            '**/*.php'
+            'includes/*.php',
+            'public/*.php',
+            '*.php',
         ]
     })
     .setPublicPath('./')
