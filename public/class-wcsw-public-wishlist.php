@@ -34,8 +34,12 @@ class WCSW_Public_Wishlist {
 		$product_id = get_the_ID();
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
-		echo $this->get_add_to_wishlist_button( $product_id, $is_in_wishlist );
-		echo $this->get_remove_from_wishlist_button( $product_id, $is_in_wishlist );
+		echo '<div class="wcsw-button-container">';
+
+		$this->add_to_wishlist_button( $product_id, $is_in_wishlist );
+		$this->remove_from_wishlist_button( $product_id, $is_in_wishlist );
+
+		echo '</div>';
 
 	}
 
@@ -44,7 +48,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
+	public function add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
 		$text  = __( 'Add to wishlist', 'wcsw' );
 
@@ -57,7 +61,7 @@ class WCSW_Public_Wishlist {
 
 		$label = $this->create_label( $icon, $text );
 
-		return sprintf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add', $style, $text, $label );
+		printf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add', $style, $text, $label );
 
 	}
 
@@ -66,7 +70,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
+	public function remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
 
 		$text  = __( 'Remove from wishlist', 'wcsw' );
 
@@ -79,7 +83,7 @@ class WCSW_Public_Wishlist {
 
 		$label = $this->create_label( $icon, $text );
 
-		return sprintf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove', $style, $text, $label );
+		printf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove', $style, $text, $label );
 
 	}
 
@@ -88,11 +92,11 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_clear_wishlist_button() {
+	public function clear_wishlist_button() {
 
 		// Show the "Clear wishlist" button.
 		if ( ! get_option( 'wcsw_settings_button_clear' ) || get_option( 'wcsw_settings_button_clear' ) === 'no' ) {
-			return false;
+			return;
 		}
 
 		$text  = __( 'Clear wishlist', 'wcsw' );
@@ -105,7 +109,7 @@ class WCSW_Public_Wishlist {
 
 		$label = $this->create_label( $icon, $text );
 
-		return sprintf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', $style, $text, $label );
+		printf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', $style, $text, $label );
 
 	}
 
