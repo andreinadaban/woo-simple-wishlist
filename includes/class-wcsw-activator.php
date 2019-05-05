@@ -63,9 +63,6 @@ class WCSW_Activator {
 
 		}
 
-		if ( ! get_option( 'wcsw_settings_button_text_color' ) ) {
-
-			add_option( 'wcsw_settings_button_text_color', '#3c3c3c' );
 
 		}
 
