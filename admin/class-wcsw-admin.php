@@ -133,6 +133,14 @@ EOT;
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_button_icon_color'
 		    ),
+		    'wcsw_settings_button_text_color' => array(
+			    'name'    => __( 'Button text color', 'wcsw' ),
+			    'type'    => 'color',
+			    'default' => '#3c3c3c',
+			    'css'     => 'width: 6em;',
+			    'desc'    => '',
+			    'id'      => 'wcsw_settings_button_text_color'
+		    ),
 		    'wcsw_settings_button_archive' => array(
 			    'name'    => __( 'Add to wishlist button', 'wcsw' ),
 			    'type'    => 'checkbox',
