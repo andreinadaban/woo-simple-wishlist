@@ -144,7 +144,7 @@ EOT;
 			    'name'    => __( 'Clear wishlist button', 'wcsw' ),
 			    'type'    => 'checkbox',
 			    'default' => 'yes',
-			    'desc'    => __( 'Show the Clear wishlist button in the My account page.', 'wcsw' ),
+			    'desc'    => __( 'Show the Clear wishlist button in the My account - Wishlist page.', 'wcsw' ),
 			    'id'      => 'wcsw_settings_button_clear'
 		    ),
 		    'wcsw_settings_section_end' => array(
