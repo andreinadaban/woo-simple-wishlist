@@ -47,7 +47,7 @@ class WCSW_Public_Wishlist {
 	public function get_add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
 		$style  = $is_in_wishlist ? 'display: none; ' : '';
-		$icon   = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/add.svg' );
+		$icon   = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-add.svg' );
 		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', $icon );
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
@@ -78,7 +78,7 @@ class WCSW_Public_Wishlist {
 	public function get_remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
 
 		$style  = $is_in_wishlist ? '' : 'display: none; ';
-		$icon   = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/remove.svg' );
+		$icon   = file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-remove.svg' );
 		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', $icon );
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );

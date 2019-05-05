@@ -57,7 +57,9 @@ class WCSW_Activator {
 
 		}
 
+		if ( ! get_option( 'wcsw_settings_button_icon' ) ) {
 
+			add_option( 'wcsw_settings_button_icon', 'star' );
 
 		}
 

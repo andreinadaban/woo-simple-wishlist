@@ -114,7 +114,16 @@ EOT;
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_button_style'
 		    ),
+		    'wcsw_settings_button_icon' => array(
+			    'name'    => __( 'Button icon', 'wcsw' ),
+			    'type'    => 'select',
+			    'options' => array(
+				    'star'  => __( 'Star', 'wcsw' ),
+				    'heart' => __( 'Heart', 'wcsw' ),
+			    ),
+			    'default' => 'star',
 			    'desc'    => '',
+			    'id'      => 'wcsw_settings_button_icon'
 		    ),
 		    'wcsw_settings_button_icon_color' => array(
 			    'name'    => __( 'Button icon color', 'wcsw' ),
