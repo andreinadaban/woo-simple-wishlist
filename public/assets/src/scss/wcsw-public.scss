@@ -15,16 +15,16 @@
         margin-right: 20px;
     }
 
+    &-button-container {
+        padding-top: 10px;
+    }
+
     &-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        padding: 10px;
         text-decoration: none !important;
-
-        .archive &,
-        .single-product & {
-            padding: 10px;
-        }
 
         svg {
             flex: 0 0 auto;
