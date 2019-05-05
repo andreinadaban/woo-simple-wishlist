@@ -16,14 +16,14 @@
     }
 
     &-button-container {
-        padding-top: 10px;
+        padding-top: 20px;
+        clear: both;
     }
 
     &-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 10px;
         text-decoration: none !important;
 
         svg {
