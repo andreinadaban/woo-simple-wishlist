@@ -167,14 +167,7 @@ class WCSW {
 		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'add', 10 );
 		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'remove', 10 );
 		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'clear', 10 );
-
-		// Loads CSS.
-		if ( get_option( 'wcsw_settings_load_css' ) && get_option( 'wcsw_settings_load_css' ) === 'yes' ) {
-
-			$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_styles' );
-
-		}
-
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_scripts' );
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
 
