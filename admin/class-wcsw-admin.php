@@ -118,10 +118,10 @@ EOT;
 			    'name'    => __( 'Button icon', 'wcsw' ),
 			    'type'    => 'select',
 			    'options' => array(
-				    'star'  => __( 'Star', 'wcsw' ),
 				    'heart' => __( 'Heart', 'wcsw' ),
+				    'star'  => __( 'Star', 'wcsw' ),
 			    ),
-			    'default' => 'star',
+			    'default' => 'heart',
 			    'desc'    => '',
 			    'id'      => 'wcsw_settings_button_icon'
 		    ),
