@@ -55,7 +55,7 @@ class WCSW_Public_Wishlist {
 		$style  = $is_in_wishlist ? 'display: none; ' : '';
 		$style .= 'color: ' . get_option( 'wcsw_settings_button_text_color' );
 
-		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-add.svg' ) );
+		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-stroke.svg' ) );
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 
@@ -77,7 +77,7 @@ class WCSW_Public_Wishlist {
 		$style  = $is_in_wishlist ? '' : 'display: none; ';
 		$style .= 'color: ' . get_option( 'wcsw_settings_button_text_color' );
 
-		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-remove.svg' ) );
+		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '.svg' ) );
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 
@@ -103,7 +103,7 @@ class WCSW_Public_Wishlist {
 
 		$style = 'color: ' . get_option( 'wcsw_settings_button_text_color' );
 
-		$icon  = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-remove.svg' ) );
+		$icon  = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/undo.svg' ) );
 
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
 
