@@ -106,9 +106,9 @@ EOT;
 			    'name'    => __( 'Button style', 'wcsw' ),
 			    'type'    => 'select',
 			    'options' => array(
-                    'icon'      => __( 'Icon', 'wcsw' ),
+				    'icon_text' => __( 'Icon & text', 'wcsw' ),
+				    'icon'      => __( 'Icon', 'wcsw' ),
                     'text'      => __( 'Text', 'wcsw' ),
-                    'icon_text' => __( 'Icon & text', 'wcsw' ),
                 ),
 			    'default' => 'icon',
 			    'desc'    => '',

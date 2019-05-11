@@ -41,7 +41,7 @@ class WCSW_Activator {
 
 		if ( ! get_option( 'wcsw_settings_button_style' ) ) {
 
-			add_option( 'wcsw_settings_button_style', 'icon' );
+			add_option( 'wcsw_settings_button_style', 'icon_text' );
 
 		}
 
