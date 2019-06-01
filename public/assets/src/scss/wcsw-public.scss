@@ -27,7 +27,34 @@
         text-decoration: none !important;
 
         svg {
-            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            overflow: visible !important;
+
+            .fadein,
+            .fadeout {
+                transition: opacity 0.2s ease;
+            }
+
+            .fadein {
+                opacity: 0;
+            }
+
+            .fadeout {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+
+            .fadein {
+                opacity: 1;
+            }
+
+            .fadeout {
+                opacity: 0;
+            }
         }
     }
 
