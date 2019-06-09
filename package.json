@@ -11,7 +11,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "browser-sync": "2.26.5",
+        "browser-sync": "2.26.7",
         "browser-sync-webpack-plugin": "2.2.2",
         "cross-env": "5.2.0",
         "imagemin-svgo": "7.0.0",
