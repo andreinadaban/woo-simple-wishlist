@@ -73,9 +73,17 @@ require WCSW_DIR . '/includes/class-wcsw.php';
  */
 function wcsw_run() {
 
-	$plugin = new WCSW();
+	$plugin = new WCSW( apply_filters( 'wcsw_config', array(
+		'button_add_icon'    => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
+		'button_remove_icon' => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
+		'button_clear_icon'  => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
+		'button_style'       => 'icon_text',
+		'button_in_archive'  => true,
+		'button_clear'       => true,
+	) ) );
+
 	$plugin->run();
 
 }
 
-wcsw_run();
+add_action( 'after_setup_theme', 'wcsw_run' );

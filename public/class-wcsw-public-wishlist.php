@@ -21,6 +21,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Public_Wishlist {
 
 	/**
+	 * The configuration array.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 * @var       array    $config    The configuration array.
+	 */
+	private $config;
+
+	/**
+	 * Sets the config variable.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct( $config ) {
+
+		$this->config = $config;
+
+	}
+
+	/**
 	 * Creates the add to wishlist and remove from wishlist buttons on the product page and on the product archive pages.
 	 *
 	 * @since    1.0.0
@@ -50,16 +70,11 @@ class WCSW_Public_Wishlist {
 	 */
 	public function add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
 
-		$text  = __( 'Add to wishlist', 'wcsw' );
-
-		$style  = $is_in_wishlist ? 'display: none; ' : '';
-		$style .= 'color: ' . get_option( 'wcsw_settings_button_text_color' );
-
-		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '-stroke.svg' ) );
-
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
-
-		$label = $this->create_label( $icon, $text );
+		$style       = $is_in_wishlist ? 'display: none; ' : '';
+		$text        = __( 'Add to wishlist', 'wcsw' );
+		$icon        = file_get_contents( $this->config['button_add_icon'] );
+		$label       = $this->create_label( $icon, $text );
 
 		printf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add', $style, $text, $label );
 
@@ -72,16 +87,11 @@ class WCSW_Public_Wishlist {
 	 */
 	public function remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
 
-		$text  = __( 'Remove from wishlist', 'wcsw' );
-
-		$style  = $is_in_wishlist ? '' : 'display: none; ';
-		$style .= 'color: ' . get_option( 'wcsw_settings_button_text_color' );
-
-		$icon   = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/' . get_option( 'wcsw_settings_button_icon' ) . '.svg' ) );
-
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
-
-		$label = $this->create_label( $icon, $text );
+		$style       = $is_in_wishlist ? '' : 'display: none; ';
+		$text        = __( 'Remove from wishlist', 'wcsw' );
+		$icon        = file_get_contents( $this->config['button_remove_icon'] );
+		$label       = $this->create_label( $icon, $text );
 
 		printf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove', $style, $text, $label );
 
@@ -95,28 +105,23 @@ class WCSW_Public_Wishlist {
 	public function clear_wishlist_button() {
 
 		// Show the "Clear wishlist" button.
-		if ( ! get_option( 'wcsw_settings_button_clear' ) || get_option( 'wcsw_settings_button_clear' ) === 'no' ) {
+		if ( ! $this->config['button_clear'] ) {
 			return;
 		}
 
-		$text  = __( 'Clear wishlist', 'wcsw' );
-
-		$style = 'color: ' . get_option( 'wcsw_settings_button_text_color' );
-
-		$icon  = str_replace( '<path', '<path fill="' . get_option( 'wcsw_settings_button_icon_color' ) . '"', file_get_contents( WCSW_DIR . '/public/assets/dist/svg/undo.svg' ) );
-
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
+		$text        = __( 'Clear wishlist', 'wcsw' );
+		$icon        = file_get_contents( $this->config['button_clear_icon'] );
+		$label       = $this->create_label( $icon, $text );
 
-		$label = $this->create_label( $icon, $text );
-
-		printf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', $style, $text, $label );
+		printf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', $text, $label );
 
 	}
 
 	// Creates button label.
 	private function create_label( $icon, $text ) {
 
-		switch ( get_option( 'wcsw_settings_button_style' ) ) {
+		switch ( $this->config['button_style'] ) {
 			case 'icon':
 				$label = $icon;
 				break;
@@ -224,8 +229,8 @@ class WCSW_Public_Wishlist {
 		$remove_success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
 		$remove_error_message   = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
 
-		$clear_success_message = __( 'The wishlist was successfully cleared.', 'wcsw' );
-		$clear_error_message   = __( 'The wishlist was not cleared. Please try again.', 'wcsw' );
+		$clear_success_message  = __( 'The wishlist was successfully cleared.', 'wcsw' );
+		$clear_error_message    = __( 'The wishlist was not cleared. Please try again.', 'wcsw' );
 
 		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {

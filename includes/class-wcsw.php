@@ -42,6 +42,15 @@ class WCSW {
 	private $version;
 
 	/**
+	 * The configuration array.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 * @var       array    $config    The configuration array.
+	 */
+	private $config;
+
+	/**
 	 * Defines the core functionality of the plugin.
 	 *
 	 * Sets the plugin name and version that can be used throughout the plugin.
@@ -49,7 +58,7 @@ class WCSW {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct( $config ) {
 
 		if ( defined( 'WCSW_VERSION' ) ) {
 			$this->version = WCSW_VERSION;
@@ -58,6 +67,9 @@ class WCSW {
 		}
 
 		$this->set_version();
+
+		$this->config = $config;
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
@@ -159,7 +171,7 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$public_wishlist = new WCSW_Public_Wishlist();
+		$public_wishlist = new WCSW_Public_Wishlist( $this->config );
 		$public_assets   = new WCSW_Public_Assets();
 
 		$this->loader->add_action( 'wp_loaded', $this, 'add_endpoint', 10 );
@@ -172,7 +184,7 @@ class WCSW {
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
 
 		// Shows the Add to wishlist button on product archive pages.
-		if ( get_option( 'wcsw_settings_button_archive' ) && get_option( 'wcsw_settings_button_archive' ) === 'yes' ) {
+		if ( $this->config['button_in_archive'] ) {
 
 			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist, 'add_button', 12 );
 
@@ -197,10 +209,6 @@ class WCSW {
 
 		$this->loader->add_action( 'admin_init', $admin, 'check_for_dependencies' );
 		$this->loader->add_action( 'admin_notices', $admin, 'add_notices' );
-		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $admin, 'add_settings_tab', 50 );
-		$this->loader->add_action( 'woocommerce_settings_tabs_wcsw_tab', $admin, 'settings_tab' );
-		$this->loader->add_action( 'woocommerce_update_options_wcsw_tab', $admin, 'update_settings' );
-		$this->loader->add_filter( 'plugin_action_links_' . WCSW_PLUGIN, $admin, 'add_settings_link' );
 
 	}
 

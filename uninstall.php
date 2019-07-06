@@ -21,8 +21,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 if ( get_option( 'wcsw_version' ) ) {
 
 	delete_option( 'wcsw_version' );
-	delete_option( 'wcsw_settings_button_style' );
-	delete_option( 'wcsw_settings_button_archive' );
-	delete_option( 'wcsw_settings_button_clear' );
 
 }
