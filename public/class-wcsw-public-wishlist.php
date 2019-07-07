@@ -52,12 +52,11 @@ class WCSW_Public_Wishlist {
 		$product_id = get_the_ID();
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
-		echo '<div class="wcsw-button-container">';
-
-		$this->add_to_wishlist_button( $product_id, $is_in_wishlist );
-		$this->remove_from_wishlist_button( $product_id, $is_in_wishlist );
-
-		echo '</div>';
+		printf(
+			'<div class="wcsw-button-container">%s%s</div>',
+			$this->add_to_wishlist_button( $product_id, $is_in_wishlist ),
+			$this->remove_from_wishlist_button( $product_id, $is_in_wishlist )
+		);
 
 	}
 
@@ -74,7 +73,15 @@ class WCSW_Public_Wishlist {
 		$icon        = file_get_contents( $this->config['button_add_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
-		printf( ' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-add', $style, $text, $label );
+		return sprintf(
+			' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			$product_id,
+			$nonce_token,
+			'wcsw-button wcsw-button-ajax wcsw-button-add',
+			$style,
+			$text,
+			$label
+		);
 
 	}
 
@@ -91,7 +98,15 @@ class WCSW_Public_Wishlist {
 		$icon        = file_get_contents( $this->config['button_remove_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
-		printf( ' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>', $product_id, $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-remove', $style, $text, $label );
+		return sprintf(
+			' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			$product_id,
+			$nonce_token,
+			'wcsw-button wcsw-button-ajax wcsw-button-remove',
+			$style,
+			$text,
+			$label
+		);
 
 	}
 
@@ -112,7 +127,13 @@ class WCSW_Public_Wishlist {
 		$icon        = file_get_contents( $this->config['button_clear_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
-		printf( ' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>', $nonce_token, 'wcsw-button wcsw-button-ajax wcsw-button-clear', $text, $label );
+		printf(
+			' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>',
+			$nonce_token,
+			'wcsw-button wcsw-button-ajax wcsw-button-clear',
+			$text,
+			$label
+		);
 
 	}
 
@@ -210,7 +231,14 @@ class WCSW_Public_Wishlist {
 		$label   = __( $this->config['message_empty_label'], 'wcsw' );
 		$message = __( $this->config['message_empty'], 'wcsw' );
 
-		return sprintf( '<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info"><a class="woocommerce-Button button" href="%s">%s</a>%s</div>', $url, $label, $message );
+		return sprintf(
+			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
+			'woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info',
+			'woocommerce-Button button',
+			$url,
+			$label,
+			$message
+		);
 
 	}
 
@@ -221,12 +249,16 @@ class WCSW_Public_Wishlist {
 	 */
 	public function display_notice( $type, $result ) {
 
-		$add_success_message    = sprintf( '<a href="%s" class="button wc-forward">%s</a>%s', wc_get_account_endpoint_url( 'wishlist' ), __( $this->config['message_add_view'], 'wcsw' ), __( $this->config['message_add_success'], 'wcsw' ) );
+		$add_success_message    = sprintf(
+			'<a href="%s" class="%s">%s</a>%s',
+			wc_get_account_endpoint_url( 'wishlist' ),
+			'button wc-forward',
+			__( $this->config['message_add_view'], 'wcsw' ),
+			__( $this->config['message_add_success'], 'wcsw' )
+		);
 		$add_error_message      = __( $this->config['message_add_error'], 'wcsw' );
-
 		$remove_success_message = __( $this->config['message_remove_success'], 'wcsw' );
 		$remove_error_message   = __( $this->config['message_remove_error'], 'wcsw' );
-
 		$clear_success_message  = __( $this->config['message_clear_success'], 'wcsw' );
 		$clear_error_message    = __( $this->config['message_clear_error'], 'wcsw' );
 
