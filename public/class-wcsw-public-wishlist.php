@@ -485,6 +485,17 @@ EOT;
 	}
 
 	/**
+	 * Gets existing data, for any user, from the database as JSON and converts it to a PHP array before returning it.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_any_user_data( $user_id ) {
+
+		return json_decode( get_user_meta( $user_id, 'wcsw_data', true ), true );
+
+	}
+
+	/**
 	 * Checks if the product is already in the wishlist.
 	 *
 	 * @since    1.0.0
