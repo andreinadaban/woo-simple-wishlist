@@ -127,10 +127,13 @@ class WCSW {
 			// Creates the instance with the default options.
 			self::$instance = new WCSW( apply_filters( 'wcsw_config', array(
 				'button_add_icon'        => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
+				'button_add_label'       => 'Add to wishlist',
 				'button_clear'           => true,
 				'button_clear_icon'      => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
+				'button_clear_label'     => 'Clear wishlist',
 				'button_in_archive'      => true,
 				'button_remove_icon'     => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
+				'button_remove_label'    => 'Remove from wishlist',
 				'button_style'           => 'icon_text',
 				'menu_name'              => 'Wishlist',
 				'menu_position'          => 2,

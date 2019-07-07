@@ -70,7 +70,7 @@ class WCSW_Public_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
-		$text        = __( 'Add to wishlist', 'wcsw' );
+		$text        = __( $this->config['button_add_label'], 'wcsw' );
 		$icon        = file_get_contents( $this->config['button_add_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
@@ -87,7 +87,7 @@ class WCSW_Public_Wishlist {
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
-		$text        = __( 'Remove from wishlist', 'wcsw' );
+		$text        = __( $this->config['button_remove_label'], 'wcsw' );
 		$icon        = file_get_contents( $this->config['button_remove_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
@@ -108,7 +108,7 @@ class WCSW_Public_Wishlist {
 		}
 
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
-		$text        = __( 'Clear wishlist', 'wcsw' );
+		$text        = __( $this->config['button_clear_label'], 'wcsw' );
 		$icon        = file_get_contents( $this->config['button_clear_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
