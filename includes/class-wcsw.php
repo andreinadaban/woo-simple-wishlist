@@ -121,10 +121,10 @@ class WCSW {
 	 */
 	public static function instantiate() {
 
-		// Checks is $instance has been set
+		// Checks is $instance has been set.
 		if ( ! isset( self::$instance ) ) {
 
-			// Creates sets object to instance
+			// Creates the instance with the default options.
 			self::$instance = new WCSW( apply_filters( 'wcsw_config', array(
 				'button_add_icon'        => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
 				'button_clear'           => true,
@@ -147,7 +147,7 @@ class WCSW {
 
 		}
 
-		// Returns the instance
+		// Returns the instance.
 		return self::$instance;
 
 	}
