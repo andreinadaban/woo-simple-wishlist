@@ -35,9 +35,7 @@ class WCSW_Public_Wishlist {
 	 * @since    1.0.0
 	 */
 	public function __construct( $config ) {
-
 		$this->config = $config;
-
 	}
 
 	/**
