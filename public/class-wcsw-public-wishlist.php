@@ -459,7 +459,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_raw_data() {
+	private function get_raw_data() {
 
 		if ( ! is_user_logged_in() ) {
 			return false;
@@ -474,7 +474,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_data_array() {
+	private function get_data_array() {
 
 		if ( ! $this->get_raw_data() ) {
 			return false;
@@ -523,7 +523,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function is_get_request( $param ) {
+	private function is_get_request( $param ) {
 
 		if ( isset( $_GET[$param] ) && ! empty( $_GET[$param] ) ) {
 			return true;
@@ -538,7 +538,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function is_valid_nonce( $action ) {
+	private function is_valid_nonce( $action ) {
 
 		if ( ! isset( $_GET['nonce-token'] ) ) {
 			return false;
@@ -555,7 +555,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function is_valid_id( $id ) {
+	private function is_valid_id( $id ) {
 
 		if ( ! is_numeric( $id ) || $id <= 0 || $id != round( $id, 0 ) ) {
 			return false;
