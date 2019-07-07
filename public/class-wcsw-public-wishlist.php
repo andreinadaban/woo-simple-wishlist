@@ -43,7 +43,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_button() {
+	public function add_buttons() {
 
 		if ( ! is_user_logged_in() ) {
 			return;

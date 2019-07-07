@@ -254,12 +254,12 @@ class WCSW {
 		$this->loader->add_action( 'wp_loaded', $this->public, 'clear', 10 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'add_button' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'add_buttons' );
 
 		// Shows the Add to wishlist button on product archive pages.
 		if ( $this->config['button_in_archive'] ) {
 
-			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'add_button', 12 );
+			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'add_buttons', 12 );
 
 		}
 
