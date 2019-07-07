@@ -261,9 +261,7 @@ class WCSW {
 
 		// Shows the Add to wishlist button on product archive pages.
 		if ( $this->config['button_in_archive'] ) {
-
 			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'add_buttons', 12 );
-
 		}
 
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'load_template' );
