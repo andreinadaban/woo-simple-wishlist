@@ -76,6 +76,13 @@ function wcsw() {
 }
 
 /**
+ * Loads the functions.
+ *
+ * @since  1.0.0
+ */
+require WCSW_DIR . '/includes/functions.php';
+
+/**
  * Begins execution of the plugin.
  *
  * @since  1.0.0
