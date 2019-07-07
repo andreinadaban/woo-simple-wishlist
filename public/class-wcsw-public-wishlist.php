@@ -148,12 +148,12 @@ class WCSW_Public_Wishlist {
 
 		// The menu item position.
 		// Default: between Orders and Downloads(2).
-		$position = apply_filters( 'wcsw_my_account_menu_position', 2 );
+		$position = $this->config['menu_position'];
 
 		$items_1 = array_slice( $items, 0, $position, true );
 		$items_2 = array_slice( $items, $position, null, true );
 
-		$items_1['wishlist'] = __( 'Wishlist', 'wcsw' );
+		$items_1['wishlist'] = __( $this->config['menu_name'], 'wcsw' );
 
 		$items = array_merge( $items_1, $items_2 );
 

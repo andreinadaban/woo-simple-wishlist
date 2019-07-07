@@ -80,6 +80,8 @@ function wcsw_run() {
 		'button_style'       => 'icon_text',
 		'button_in_archive'  => true,
 		'button_clear'       => true,
+		'menu_name'          => 'Wishlist',
+		'menu_position'      => 2,
 	) ) );
 
 	$plugin->run();
