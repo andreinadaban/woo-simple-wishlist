@@ -24,15 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all the hooks that power the plugin.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 * @var       WCSW_Loader    $loader    Maintains and registers all the hooks for the plugin.
-	 */
-	private $loader;
-
-	/**
 	 * The current version of the plugin.
 	 *
 	 * @since     1.0.0
@@ -49,6 +40,47 @@ class WCSW {
 	 * @var       array    $config    The configuration array.
 	 */
 	private $config;
+
+	/**
+	 * The loader that's responsible for maintaining and registering all the hooks that power the plugin.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 * @var       WCSW_Loader    $loader    Maintains and registers all the hooks for the plugin.
+	 */
+	private $loader;
+
+	/**
+	 * Internationalization.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private $i18n;
+
+	/**
+	 * Public.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private $public;
+
+	/**
+	 * Public assets.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private $public_assets;
+
+	/**
+	 * Admin.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private $admin;
 
 	/**
 	 * Defines the core functionality of the plugin.
@@ -72,8 +104,8 @@ class WCSW {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_public_hooks();
 		$this->define_admin_hooks();
+		$this->define_public_hooks();
 
 	}
 
@@ -113,7 +145,11 @@ class WCSW {
 		// The classes responsible for defining all actions that occur in the admin area.
 		require_once WCSW_DIR . '/admin/class-wcsw-admin.php';
 
-		$this->loader = new WCSW_Loader();
+		$this->loader        = new WCSW_Loader();
+		$this->i18n          = new WCSW_i18n();
+		$this->public        = new WCSW_Public_Wishlist( $this->config );
+		$this->public_assets = new WCSW_Public_Assets();
+		$this->admin         = new WCSW_Admin();
 
 	}
 
@@ -127,9 +163,7 @@ class WCSW {
 	 */
 	private function set_locale() {
 
-		$i18n = new WCSW_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'plugins_loaded', $this->i18n, 'load_plugin_textdomain' );
 
 	}
 
@@ -156,7 +190,6 @@ class WCSW {
 		if ( get_transient( 'wcsw_flush' ) ) {
 
 			flush_rewrite_rules();
-
 			delete_transient( 'wcsw_flush' );
 
 		}
@@ -171,29 +204,26 @@ class WCSW {
 	 */
 	private function define_public_hooks() {
 
-		$public_wishlist = new WCSW_Public_Wishlist( $this->config );
-		$public_assets   = new WCSW_Public_Assets();
-
 		$this->loader->add_action( 'wp_loaded', $this, 'add_endpoint', 10 );
 		$this->loader->add_action( 'wp_loaded', $this, 'flush', 20 );
-		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'add', 10 );
-		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'remove', 10 );
-		$this->loader->add_action( 'wp_loaded', $public_wishlist, 'clear', 10 );
-		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $public_assets, 'enqueue_scripts' );
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $public_wishlist, 'add_button' );
+		$this->loader->add_action( 'wp_loaded', $this->public, 'add', 10 );
+		$this->loader->add_action( 'wp_loaded', $this->public, 'remove', 10 );
+		$this->loader->add_action( 'wp_loaded', $this->public, 'clear', 10 );
+		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
+		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'add_button' );
 
 		// Shows the Add to wishlist button on product archive pages.
 		if ( $this->config['button_in_archive'] ) {
 
-			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $public_wishlist, 'add_button', 12 );
+			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'add_button', 12 );
 
 		}
 
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $public_wishlist, 'load_template' );
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $public_wishlist, 'add_menu', 10, 1 );
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $public_wishlist, 'process_ajax_request' );
-		$this->loader->add_action( 'wp_footer', $public_wishlist, 'add_js_variables' );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'load_template' );
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'add_menu', 10, 1 );
+		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $this->public, 'process_ajax_request' );
+		$this->loader->add_action( 'wp_footer', $this->public, 'add_js_variables' );
 
 	}
 
@@ -205,10 +235,8 @@ class WCSW {
 	 */
 	private function define_admin_hooks() {
 
-		$admin = new WCSW_Admin();
-
-		$this->loader->add_action( 'admin_init', $admin, 'check_for_dependencies' );
-		$this->loader->add_action( 'admin_notices', $admin, 'add_notices' );
+		$this->loader->add_action( 'admin_init', $this->admin, 'check_for_dependencies' );
+		$this->loader->add_action( 'admin_notices', $this->admin, 'add_notices' );
 
 	}
 
