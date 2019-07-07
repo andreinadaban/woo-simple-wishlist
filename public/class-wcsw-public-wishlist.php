@@ -151,7 +151,7 @@ class WCSW_Public_Wishlist {
 				$label = $icon . '<span class="wcsw-spacer"></span>' . $text;
 				break;
 			default:
-				$label = $icon;
+				$label = $icon . '<span class="wcsw-spacer"></span>' . $text;
 		}
 
 		return $label;
