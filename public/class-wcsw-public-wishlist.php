@@ -166,7 +166,6 @@ class WCSW_Public_Wishlist {
 	public function add_menu( $items ) {
 
 		// The menu item position.
-		// Default: between Orders and Downloads(2).
 		$position = $this->config['menu_position'];
 
 		$items_1 = array_slice( $items, 0, $position, true );
