@@ -291,59 +291,57 @@ class WCSW_Public_Wishlist {
 	}
 
 	/**
-	 * Adds the product to the wishlist when the "Add to wishlist" button is clicked.
+	 * Adds the product to the current user's wishlist.
 	 *
 	 * @since    1.0.0
 	 */
-	public function add() {
+	public function add_product() {
 
+		// If the user is not logged in.
+		// If there is no get request.
+		// If the nonce is not valid.
+		// If the product is already in the wishlist.
 		if ( ! is_user_logged_in() ||
 		     ! $this->is_get_request( 'wcsw-add' ) ||
 		     ! $this->is_valid_nonce( 'wcsw_add_to_wishlist_' . $_GET['wcsw-add'] ) ||
-		     $this->is_in_wishlist( $_GET['wcsw-add'] ) ) {
+		       $this->is_in_wishlist( $_GET['wcsw-add'] ) ) {
 
 			return;
 
 		}
 
-		if ( $new_wishlist_data = $this->add_product( $this->get_data_array() ) ) {
-
-			$result = update_user_meta( get_current_user_id(), 'wcsw_data', $new_wishlist_data );
-
-			$this->display_notice( 'add', $result );
-
-		}
-
-	}
-
-	/**
-	 * Validates the $_GET variable and adds the ID to the data array.
-	 *
-	 * @since    1.0.0
-	 */
-	private function add_product( $wishlist_content = array() ) {
-
+		// The ID of the product meant to be added.
 		$id = $_GET['wcsw-add'];
 
+		// If the GET variable is not a valid ID then do nothing.
 		if ( ! $this->is_valid_id( $id ) ) {
-			return false;
+			return;
 		}
 
+		// Gets the current wishlist data.
+		$wishlist_content = $this->get_data_array();
+
+		// Adds the new product to the array.
 		$wishlist_content['products'][$id] = array(
 			'title' => get_the_title( $id ),
 		);
 
-		return json_encode( $wishlist_content );
+		// Tries to save to the database and shows a notice based on the result.
+		$this->display_notice( 'add', update_user_meta( get_current_user_id(), 'wcsw_data', json_encode( $wishlist_content ) ) );
 
 	}
 
 	/**
-	 * Removes the product from the wishlist.
+	 * Removes the product from the current user's wishlist.
 	 *
 	 * @since    1.0.0
 	 */
-	public function remove() {
+	public function remove_product() {
 
+		// If the user is not logged in.
+		// If there is no get request.
+		// If the nonce is not valid.
+		// If the product is not in the wishlist.
 		if ( ! is_user_logged_in() ||
 		     ! $this->is_get_request( 'wcsw-remove' ) ||
 		     ! $this->is_valid_nonce( 'wcsw_remove_from_wishlist_' . $_GET['wcsw-remove'] ) ||
@@ -353,38 +351,16 @@ class WCSW_Public_Wishlist {
 
 		}
 
-		// The "$data" variable contains the new products array after the product removal.
-		if ( $new_wishlist_data = $this->remove_product( $this->get_data_array() ) ) {
-
-			$user_id = get_current_user_id();
-
-			// Deletes the database record if the last product was removed.
-			if ( empty( json_decode( $new_wishlist_data ) ) ) {
-				$result = delete_user_meta( $user_id, 'wcsw_data' );
-			} else {
-				$result = update_user_meta( $user_id, 'wcsw_data', $new_wishlist_data );
-			}
-
-			$this->display_notice( 'remove', $result );
-
-		}
-
-	}
-
-	/**
-	 * Validates the $_GET variable and removes the ID from the data array.
-	 *
-	 * @since    1.0.0
-	 */
-	private function remove_product( $wishlist_content = array() ) {
-
 		// The ID of the product meant to be removed.
 		$id = $_GET['wcsw-remove'];
 
 		// If the GET variable is not a valid ID then do nothing.
 		if ( ! $this->is_valid_id( $id ) ) {
-			return false;
+			return;
 		}
+
+		// Gets the current wishlist data.
+		$wishlist_content = $this->get_data_array();
 
 		// The new products array that will exclude the removed product.
 		$new_wishlist_data = array();
@@ -396,31 +372,42 @@ class WCSW_Public_Wishlist {
 
 				// If the ID from the GET variable is equal to the current ID then skip the following code.
 				if ( $id == $key ) {
-
 					continue;
-
 				}
 
 				// Add each product to the new products array.
-				// The "$value" variable contains the product data(eg. product title).
+				// The $value variable contains the product data (e.g. product title).
 				$new_wishlist_data['products'][$key] = $value;
 
 			}
 
 		}
 
-		// Returns the new data after product removal.
-		return json_encode( $new_wishlist_data );
+		// Current user ID.
+		$user_id = get_current_user_id();
+
+		// Deletes the database record if the last product was removed.
+		if ( empty( $new_wishlist_data ) ) {
+			$result = delete_user_meta( $user_id, 'wcsw_data' );
+		} else {
+			$result = update_user_meta( $user_id, 'wcsw_data', json_encode( $new_wishlist_data ) );
+		}
+
+		// Tries to save to the database and shows a notice based on the result.
+		$this->display_notice( 'remove', $result );
 
 	}
 
 	/**
-	 * Clears the wishlist.
+	 * Clears the current user's wishlist.
 	 *
 	 * @since    1.0.0
 	 */
 	public function clear() {
 
+		// If the user is not logged in.
+		// If there is no get request.
+		// If the nonce is not valid.
 		if ( ! is_user_logged_in() ||
 		     ! $this->is_get_request( 'wcsw-clear' ) ||
 		     ! $this->is_valid_nonce( 'wcsw_clear_wishlist' ) ) {
@@ -429,12 +416,8 @@ class WCSW_Public_Wishlist {
 
 		}
 
-		$user_id = get_current_user_id();
-
-		// Deletes the database record.
-		$result = delete_user_meta( $user_id, 'wcsw_data' );
-
-		$this->display_notice( 'clear', $result );
+		// Tries to save to the database and shows a notice based on the result.
+		$this->display_notice( 'clear', delete_user_meta( get_current_user_id(), 'wcsw_data' ) );
 
 	}
 

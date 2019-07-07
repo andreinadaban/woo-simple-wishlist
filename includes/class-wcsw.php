@@ -252,8 +252,8 @@ class WCSW {
 
 		$this->loader->add_action( 'wp_loaded', $this, 'add_endpoint', 10 );
 		$this->loader->add_action( 'wp_loaded', $this, 'flush', 20 );
-		$this->loader->add_action( 'wp_loaded', $this->public, 'add', 10 );
-		$this->loader->add_action( 'wp_loaded', $this->public, 'remove', 10 );
+		$this->loader->add_action( 'wp_loaded', $this->public, 'add_product', 10 );
+		$this->loader->add_action( 'wp_loaded', $this->public, 'remove_product', 10 );
 		$this->loader->add_action( 'wp_loaded', $this->public, 'clear', 10 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
