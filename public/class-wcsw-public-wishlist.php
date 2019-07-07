@@ -61,7 +61,7 @@ class WCSW_Public_Wishlist {
 	}
 
 	/**
-	 * Returns the add to wishlist button HTML.
+	 * Returns the Add to wishlist button HTML.
 	 *
 	 * @since    1.0.0
 	 */
@@ -86,7 +86,7 @@ class WCSW_Public_Wishlist {
 	}
 
 	/**
-	 * Returns the remove from wishlist button HTML.
+	 * Returns the Remove from wishlist button HTML.
 	 *
 	 * @since    1.0.0
 	 */
@@ -111,7 +111,7 @@ class WCSW_Public_Wishlist {
 	}
 
 	/**
-	 * Returns the clear wishlist button HTML.
+	 * Shows the Clear wishlist button HTML.
 	 *
 	 * @since    1.0.0
 	 */
