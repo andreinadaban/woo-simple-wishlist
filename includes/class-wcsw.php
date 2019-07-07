@@ -24,6 +24,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW {
 
 	/**
+	 * The core class instance.
+	 *
+	 * @since     1.0.0
+	 */
+	private static $instance;
+
+	/**
 	 * The current version of the plugin.
 	 *
 	 * @since     1.0.0
@@ -90,7 +97,7 @@ class WCSW {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct( $config ) {
+	private function __construct( $config ) {
 
 		if ( defined( 'WCSW_VERSION' ) ) {
 			$this->version = WCSW_VERSION;
@@ -106,6 +113,33 @@ class WCSW {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+
+	}
+
+	/**
+	 * Instantiates the class and allows only one instance.
+	 */
+	public static function init() {
+
+		// Checks is $instance has been set
+		if ( ! isset( self::$instance ) ) {
+
+			// Creates sets object to instance
+			self::$instance = new WCSW( apply_filters( 'wcsw_config', array(
+				'button_add_icon'    => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
+				'button_remove_icon' => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
+				'button_clear_icon'  => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
+				'button_style'       => 'icon_text',
+				'button_in_archive'  => true,
+				'button_clear'       => true,
+				'menu_name'          => 'Wishlist',
+				'menu_position'      => 2,
+			) ) );
+
+		}
+
+		// Returns the instance
+		return self::$instance;
 
 	}
 
@@ -247,6 +281,15 @@ class WCSW {
 	 */
 	public function run() {
 		$this->loader->run();
+	}
+
+	/**
+	 * Gets the public instance.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_public() {
+		return $this->public;
 	}
 
 }

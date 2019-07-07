@@ -67,25 +67,21 @@ register_deactivation_hook( __FILE__, 'wcsw_deactivate' );
 require WCSW_DIR . '/includes/class-wcsw.php';
 
 /**
+ * Returns the core class instance.
+ *
+ * @since  1.0.0
+ */
+function wcsw() {
+	return WCSW::init();
+}
+
+/**
  * Begins execution of the plugin.
  *
  * @since  1.0.0
  */
 function wcsw_run() {
-
-	$plugin = new WCSW( apply_filters( 'wcsw_config', array(
-		'button_add_icon'    => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
-		'button_remove_icon' => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
-		'button_clear_icon'  => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
-		'button_style'       => 'icon_text',
-		'button_in_archive'  => true,
-		'button_clear'       => true,
-		'menu_name'          => 'Wishlist',
-		'menu_position'      => 2,
-	) ) );
-
-	$plugin->run();
-
+	wcsw()->run();
 }
 
 add_action( 'after_setup_theme', 'wcsw_run' );
