@@ -207,8 +207,8 @@ class WCSW_Public_Wishlist {
 	public function get_empty_wishlist_notice() {
 
 		$url     = wc_get_page_permalink( 'shop' );
-		$label   = __( 'Go shop', 'wcsw' );
-		$message = __( 'There are no products in the wishlist yet.', 'wcsw' );
+		$label   = __( $this->config['message_empty_label'], 'wcsw' );
+		$message = __( $this->config['message_empty'], 'wcsw' );
 
 		return sprintf( '<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info"><a class="woocommerce-Button button" href="%s">%s</a>%s</div>', $url, $label, $message );
 
@@ -221,14 +221,14 @@ class WCSW_Public_Wishlist {
 	 */
 	public function display_notice( $type, $result ) {
 
-		$add_success_message    = sprintf( '<a href="%s" class="button wc-forward">%s</a>%s', wc_get_account_endpoint_url( 'wishlist' ), __( 'View wishlist', 'wcsw' ), __( 'The product was successfully added to your wishlist.', 'wcsw' ) );
-		$add_error_message      = __( 'The product was not added to your wishlist. Please try again.', 'wcsw' );
+		$add_success_message    = sprintf( '<a href="%s" class="button wc-forward">%s</a>%s', wc_get_account_endpoint_url( 'wishlist' ), __( $this->config['message_add_view'], 'wcsw' ), __( $this->config['message_add_success'], 'wcsw' ) );
+		$add_error_message      = __( $this->config['message_add_error'], 'wcsw' );
 
-		$remove_success_message = __( 'The product was successfully removed from your wishlist.', 'wcsw' );
-		$remove_error_message   = __( 'The product was not removed from your wishlist. Please try again.', 'wcsw' );
+		$remove_success_message = __( $this->config['message_remove_success'], 'wcsw' );
+		$remove_error_message   = __( $this->config['message_remove_error'], 'wcsw' );
 
-		$clear_success_message  = __( 'The wishlist was successfully cleared.', 'wcsw' );
-		$clear_error_message    = __( 'The wishlist was not cleared. Please try again.', 'wcsw' );
+		$clear_success_message  = __( $this->config['message_clear_success'], 'wcsw' );
+		$clear_error_message    = __( $this->config['message_clear_error'], 'wcsw' );
 
 		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {

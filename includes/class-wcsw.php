@@ -126,14 +126,23 @@ class WCSW {
 
 			// Creates sets object to instance
 			self::$instance = new WCSW( apply_filters( 'wcsw_config', array(
-				'button_add_icon'    => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
-				'button_remove_icon' => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
-				'button_clear_icon'  => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
-				'button_style'       => 'icon_text',
-				'button_in_archive'  => true,
-				'button_clear'       => true,
-				'menu_name'          => 'Wishlist',
-				'menu_position'      => 2,
+				'button_add_icon'        => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
+				'button_clear'           => true,
+				'button_clear_icon'      => WCSW_DIR . '/public/assets/dist/svg/clear.svg',
+				'button_in_archive'      => true,
+				'button_remove_icon'     => WCSW_DIR . '/public/assets/dist/svg/heart-remove.svg',
+				'button_style'           => 'icon_text',
+				'menu_name'              => 'Wishlist',
+				'menu_position'          => 2,
+				'message_add_error'      => 'The product was not added to your wishlist. Please try again.',
+				'message_add_success'    => 'The product was successfully added to your wishlist.',
+				'message_add_view'       => 'View wishlist',
+				'message_empty'          => 'There are no products in the wishlist yet.',
+				'message_empty_label'    => 'Go shop',
+				'message_clear_error'    => 'The wishlist was not cleared. Please try again.',
+				'message_clear_success'  => 'The wishlist was successfully cleared.',
+				'message_remove_error'   => 'The product was not removed from your wishlist. Please try again.',
+				'message_remove_success' => 'The product was successfully removed from your wishlist.',
 			) ) );
 
 		}
