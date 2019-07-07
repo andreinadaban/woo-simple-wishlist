@@ -72,7 +72,7 @@ require WCSW_DIR . '/includes/class-wcsw.php';
  * @since  1.0.0
  */
 function wcsw() {
-	return WCSW::init();
+	return WCSW::instantiate();
 }
 
 /**

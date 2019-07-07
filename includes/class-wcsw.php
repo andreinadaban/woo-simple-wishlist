@@ -119,7 +119,7 @@ class WCSW {
 	/**
 	 * Instantiates the class and allows only one instance.
 	 */
-	public static function init() {
+	public static function instantiate() {
 
 		// Checks is $instance has been set
 		if ( ! isset( self::$instance ) ) {
