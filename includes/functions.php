@@ -5,9 +5,9 @@
  *
  * @since    1.0.0
  */
-function wcsw_add_buttons( $product_id ) {
+function wcsw_add_remove_buttons( $product_id ) {
 
-	wcsw()->get_public()->add_buttons( $product_id );
+	wcsw()->get_public()->add_remove_buttons( $product_id );
 
 }
 
