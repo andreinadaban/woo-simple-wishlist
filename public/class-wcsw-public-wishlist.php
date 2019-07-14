@@ -151,10 +151,10 @@ class WCSW_Public_Wishlist {
 				$label = $text;
 				break;
 			case 'icon_text':
-				$label = $icon . '<span class="wcsw-spacer"></span>' . $text;
+				$label = $icon . '<span class="wcsw-button-text">' . $text . '</span>';
 				break;
 			default:
-				$label = $icon . '<span class="wcsw-spacer"></span>' . $text;
+				$label = $icon . '<span class="wcsw-button-text">' . $text . '</span>';
 		}
 
 		return $label;
