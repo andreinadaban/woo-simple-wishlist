@@ -50,6 +50,8 @@ class WCSW_Public_Wishlist {
 		}
 
 		$product_id = get_the_ID();
+
+		// Checks if the product is in the wishlist only once to minimize database calls.
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
 		printf(
@@ -65,7 +67,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_to_wishlist_button( $product_id, $is_in_wishlist = false ) {
+	private function add_to_wishlist_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
@@ -90,7 +92,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function remove_from_wishlist_button( $product_id, $is_in_wishlist = true ) {
+	private function remove_from_wishlist_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
@@ -117,7 +119,6 @@ class WCSW_Public_Wishlist {
 	 */
 	public function clear_wishlist_button() {
 
-		// Show the "Clear wishlist" button.
 		if ( ! $this->config['button_clear'] ) {
 			return;
 		}
