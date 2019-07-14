@@ -53,11 +53,9 @@ class WCSW_Admin {
 		     current_user_can( 'activate_plugins' ) &&
 		     ! is_plugin_active( WCSW_WOO ) ) {
 
-			$notice = __( 'Please activate the WooCommerce plugin.', 'wcsw' );
+			$notice = __( 'Please install and activate the WooCommerce plugin.', 'wcsw' );
 
-			echo <<<EOT
-		        <div class="error"><p><strong>WooCommerce Simple Wishlist: </strong>{$notice}</p></div>
-EOT;
+			printf( '<div class="error"><p><strong>WooCommerce Simple Wishlist: </strong>%s</p></div>', $notice );
 
 		}
 

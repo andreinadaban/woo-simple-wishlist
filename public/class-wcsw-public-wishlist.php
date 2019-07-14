@@ -451,7 +451,6 @@ class WCSW_Public_Wishlist {
 			                     is_singular( 'product' ) ) ? 'true' : 'false';
 
 			echo <<<EOT
-			
 				<script>
 				
 					var ajaxURL = '{$ajax_url}';
@@ -462,7 +461,6 @@ class WCSW_Public_Wishlist {
 					var isSinglePage  = {$is_single_page};
 				
 				</script>
-
 EOT;
 
 		}
