@@ -251,9 +251,9 @@ class WCSW_Public_Wishlist {
 		$wishlist_content = $this->get_data_array();
 
 		// Adds the new product to the array.
-		$wishlist_content['products'][$id] = array(
+		$wishlist_content['products'][$id] = apply_filters( 'wcsw_save_data', array(
 			'title' => get_the_title( $id ),
-		);
+		) );
 
 		// Tries to save to the database and shows a notice based on the result.
 		$this->display_notice( 'add', update_user_meta( get_current_user_id(), 'wcsw_data', json_encode( $wishlist_content ) ) );
