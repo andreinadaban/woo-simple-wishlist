@@ -119,7 +119,7 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function clear_wishlist_button() {
+	public function clear_button() {
 
 		if ( ! $this->config['button_clear'] ) {
 			return;

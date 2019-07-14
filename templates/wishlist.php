@@ -111,6 +111,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'wcsw_after_table' ); ?>
 
-<?php $this->clear_wishlist_button(); ?>
+<?php wcsw_clear_button(); ?>
 
 <?php do_action( 'wcsw_after_clear_button' ); ?>

@@ -12,6 +12,17 @@ function wcsw_add_buttons( $product_id ) {
 }
 
 /**
+ * Shows the Clear wishlist button HTML.
+ *
+ * @since    1.0.0
+ */
+function wcsw_clear_button() {
+
+	wcsw()->get_public()->clear_button();
+
+}
+
+/**
  * Checks if the product is already in the wishlist.
  *
  * @since    1.0.0
