@@ -220,76 +220,6 @@ class WCSW_Public_Wishlist {
 	}
 
 	/**
-	 * Returns the empty wishlist notice HTML.
-	 *
-	 * @since    1.0.0
-	 */
-	public function get_empty_wishlist_notice() {
-
-		$url     = wc_get_page_permalink( 'shop' );
-		$label   = __( $this->config['message_empty_label'], 'wcsw' );
-		$message = __( $this->config['message_empty'], 'wcsw' );
-
-		return sprintf(
-			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
-			'woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info',
-			'woocommerce-Button button',
-			$url,
-			$label,
-			$message
-		);
-
-	}
-
-	/**
-	 * Displays the appropriate notice.
-	 *
-	 * @since    1.0.0
-	 */
-	public function display_notice( $type, $result ) {
-
-		$add_success_message    = sprintf(
-			'<a href="%s" class="%s">%s</a>%s',
-			wc_get_account_endpoint_url( 'wishlist' ),
-			'button wc-forward',
-			__( $this->config['message_add_view'], 'wcsw' ),
-			__( $this->config['message_add_success'], 'wcsw' )
-		);
-		$add_error_message      = __( $this->config['message_add_error'], 'wcsw' );
-		$remove_success_message = __( $this->config['message_remove_success'], 'wcsw' );
-		$remove_error_message   = __( $this->config['message_remove_error'], 'wcsw' );
-		$clear_success_message  = __( $this->config['message_clear_success'], 'wcsw' );
-		$clear_error_message    = __( $this->config['message_clear_error'], 'wcsw' );
-
-		// Adds a WC notice only if the request was NOT made with AJAX.
-		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
-
-			// Success.
-			if ( $result ) {
-				wc_add_notice( ${$type . '_success_message'}, 'success' );
-			// Failure.
-			} else {
-				wc_add_notice( ${$type . '_error_message'}, 'error' );
-			}
-
-		} else {
-
-			// Success.
-			if ( $result ) {
-				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
-			// Failure.
-			} else {
-				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
-			}
-
-			// Prevents other output.
-			exit;
-
-		}
-
-	}
-
-	/**
 	 * Adds the product to the current user's wishlist.
 	 *
 	 * @since    1.0.0
@@ -417,6 +347,76 @@ class WCSW_Public_Wishlist {
 
 		// Tries to save to the database and shows a notice based on the result.
 		$this->display_notice( 'clear', delete_user_meta( get_current_user_id(), 'wcsw_data' ) );
+
+	}
+
+	/**
+	 * Returns the empty wishlist notice HTML.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_empty_wishlist_notice() {
+
+		$url     = wc_get_page_permalink( 'shop' );
+		$label   = __( $this->config['message_empty_label'], 'wcsw' );
+		$message = __( $this->config['message_empty'], 'wcsw' );
+
+		return sprintf(
+			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
+			'woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info',
+			'woocommerce-Button button',
+			$url,
+			$label,
+			$message
+		);
+
+	}
+
+	/**
+	 * Displays the appropriate notice.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_notice( $type, $result ) {
+
+		$add_success_message    = sprintf(
+			'<a href="%s" class="%s">%s</a>%s',
+			wc_get_account_endpoint_url( 'wishlist' ),
+			'button wc-forward',
+			__( $this->config['message_add_view'], 'wcsw' ),
+			__( $this->config['message_add_success'], 'wcsw' )
+		);
+		$add_error_message      = __( $this->config['message_add_error'], 'wcsw' );
+		$remove_success_message = __( $this->config['message_remove_success'], 'wcsw' );
+		$remove_error_message   = __( $this->config['message_remove_error'], 'wcsw' );
+		$clear_success_message  = __( $this->config['message_clear_success'], 'wcsw' );
+		$clear_error_message    = __( $this->config['message_clear_error'], 'wcsw' );
+
+		// Adds a WC notice only if the request was NOT made with AJAX.
+		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
+
+			// Success.
+			if ( $result ) {
+				wc_add_notice( ${$type . '_success_message'}, 'success' );
+				// Failure.
+			} else {
+				wc_add_notice( ${$type . '_error_message'}, 'error' );
+			}
+
+		} else {
+
+			// Success.
+			if ( $result ) {
+				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
+				// Failure.
+			} else {
+				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
+			}
+
+			// Prevents other output.
+			exit;
+
+		}
 
 	}
 
