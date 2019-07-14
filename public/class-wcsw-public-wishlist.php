@@ -43,13 +43,15 @@ class WCSW_Public_Wishlist {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_buttons() {
+	public function add_buttons( $product_id = false ) {
 
 		if ( ! is_user_logged_in() ) {
 			return;
 		}
 
-		$product_id = get_the_ID();
+		if ( ! $product_id ) {
+			$product_id = get_the_ID();
+		}
 
 		// Checks if the product is in the wishlist only once to minimize database calls.
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );

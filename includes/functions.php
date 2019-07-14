@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Creates the add to wishlist and remove from wishlist buttons.
+ *
+ * @since    1.0.0
+ */
+function wcsw_add_buttons( $product_id ) {
+
+	wcsw()->get_public()->add_buttons( $product_id );
+
+}
+
+/**
  * Checks if the product is already in the wishlist.
  *
  * @since    1.0.0
