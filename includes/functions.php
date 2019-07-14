@@ -38,7 +38,7 @@ function wcsw_is_in_wishlist( $product_id ) {
  *
  * @since    1.0.0
  */
-function wcsw_get_any_user_data( $user_id ) {
+function wcsw_get_user_data( $user_id ) {
 
 	return wcsw()->get_public()->get_any_user_data( $user_id );
 

@@ -504,7 +504,7 @@ EOT;
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_any_user_data( $user_id ) {
+	public function get_user_data( $user_id ) {
 
 		return json_decode( get_user_meta( $user_id, 'wcsw_data', true ), true );
 
