@@ -126,6 +126,7 @@ class WCSW {
 
 			// Creates the instance with the default options.
 			self::$instance = new WCSW( apply_filters( 'wcsw_config', array(
+				'ajax'                   => true,
 				'button_add_icon'        => WCSW_DIR . '/public/assets/dist/svg/heart-add.svg',
 				'button_add_label'       => 'Add to wishlist',
 				'button_clear'           => true,
@@ -256,7 +257,11 @@ class WCSW {
 		$this->loader->add_action( 'wp_loaded', $this->public, 'remove_product', 10 );
 		$this->loader->add_action( 'wp_loaded', $this->public, 'clear', 10 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
+
+		if ( $this->config['ajax'] ) {
+			$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
+		}
+
 		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'add_remove_buttons' );
 
 		// Shows the Add to wishlist button on product archive pages.
