@@ -21,41 +21,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WCSW_Admin {
 
 	/**
-	 * Checks if WooCommerce is active.
+	 * Checks if the required plugins are active.
      *
      * @since    1.0.0
 	 */
-	public function check_for_dependencies() {
+	public function check_dependencies() {
 
-		if ( is_admin() &&
-             current_user_can( 'activate_plugins' ) &&
-             ! is_plugin_active( WCSW_WOO ) ) {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+
+			// If the required plugins are not active, the plugin is deactivated.
+			if ( isset( $_GET['activate'] ) ) {
+				unset( $_GET['activate'] );
+			}
 
 			deactivate_plugins( WCSW_PLUGIN );
 
-			if ( isset( $_GET['activate'] ) ) {
-
-				unset( $_GET['activate'] );
-
-			}
 		}
 
 	}
 
 	/**
-	 * Displays admin notices.
+	 * Adds admin notices.
 	 *
 	 * @since    1.0.0
 	 */
 	public function add_notices() {
 
-		if ( is_admin() &&
-		     current_user_can( 'activate_plugins' ) &&
-		     ! is_plugin_active( WCSW_WOO ) ) {
+		// If the required plugins are not active.
+		if ( ! class_exists( 'WooCommerce' ) ) {
 
-			$notice = __( 'Please install and activate the WooCommerce plugin.', 'wcsw' );
+			$message = __( 'The WooCommerce Simple Wishlist plugin requires WooCommerce to be installed and active.', 'wcsw' );
 
-			printf( '<div class="error"><p><strong>WooCommerce Simple Wishlist: </strong>%s</p></div>', $notice );
+			printf( '<div class="error"><p>%s</p></div>', $message );
 
 		}
 

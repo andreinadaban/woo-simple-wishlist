@@ -29,7 +29,7 @@ class WCSW_Activator {
 	 */
 	public static function activate() {
 
-		if ( ! is_plugin_active( WCSW_WOO ) ) {
+		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
 

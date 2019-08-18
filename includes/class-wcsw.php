@@ -283,7 +283,7 @@ class WCSW {
 	 */
 	private function define_admin_hooks() {
 
-		$this->loader->add_action( 'admin_init', $this->admin, 'check_for_dependencies' );
+		$this->loader->add_action( 'admin_init', $this->admin, 'check_dependencies' );
 		$this->loader->add_action( 'admin_notices', $this->admin, 'add_notices' );
 
 	}

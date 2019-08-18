@@ -36,11 +36,6 @@ define( 'WCSW_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WCSW_PLUGIN', plugin_basename( __FILE__ ) );
 
 /**
- * WooCommerce main file.
- */
-define( 'WCSW_WOO', 'woocommerce/woocommerce.php' );
-
-/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wcsw-activator.php.
  */
