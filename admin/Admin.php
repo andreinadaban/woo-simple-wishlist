@@ -1,5 +1,7 @@
 <?php
 
+namespace WCSW;
+
 /**
  * The admin class.
  *
@@ -18,10 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Admin {
+class Admin {
 
 	/**
 	 * Checks if the required plugins are active.
+	 *
+	 * If the required plugins are not active the plugin is deactivated.
+	 * Hooked to the "admin_init" action.
      *
      * @since    1.0.0
 	 */
@@ -29,12 +34,11 @@ class WCSW_Admin {
 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
-			// If the required plugins are not active, the plugin is deactivated.
 			if ( isset( $_GET['activate'] ) ) {
 				unset( $_GET['activate'] );
 			}
 
-			deactivate_plugins( WCSW_PLUGIN );
+			deactivate_plugins( PLUGIN );
 
 		}
 
@@ -42,6 +46,8 @@ class WCSW_Admin {
 
 	/**
 	 * Adds admin notices.
+	 *
+	 * Hooked to the "admin_notices" action.
 	 *
 	 * @since    1.0.0
 	 */

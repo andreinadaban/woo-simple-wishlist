@@ -1,7 +1,9 @@
 <?php
 
+namespace WCSW;
+
 /**
- * Fired during plugin activation.
+ * The activator class.
  *
  * @since    1.0.0
  */
@@ -14,25 +16,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Fired during plugin activation.
+ * The activator class.
  *
- * This class defines all code necessary to run during the plugin's activation.
- *
- * @since     1.0.0
+ * @since    1.0.0
  */
-class WCSW_Activator {
+class Activator {
 
 	/**
-	 * Fired during plugin activation. Saves default settings in the database.
+	 * Runs on plugin activation.
 	 *
 	 * @since    1.0.0
 	 */
 	public static function activate() {
 
+		// If the required plugins are not active.
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}
 
+		// Sets a transient that is used to flush the rewrite rules only once.
 		if ( ! get_transient( 'wcsw_flush' ) ) {
 
 			set_transient( 'wcsw_flush', '1', 0 );

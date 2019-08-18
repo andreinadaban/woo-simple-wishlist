@@ -1,5 +1,7 @@
 <?php
 
+namespace WCSW;
+
 /**
  * Plugin Name:    WooCommerce Simple Wishlist
  * Plugin URI:     http://andreinadaban.ro
@@ -23,67 +25,41 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'WCSW_VERSION', '1.0.0' );
+define( __NAMESPACE__ . '\VERSION', '1.0.0' );
 
 /**
  * Plugin directory.
  */
-define( 'WCSW_DIR', plugin_dir_path( __FILE__ ) );
+define( __NAMESPACE__ . '\DIR', plugin_dir_path( __FILE__ ) );
 
 /**
  * Plugin main file.
  */
-define( 'WCSW_PLUGIN', plugin_basename( __FILE__ ) );
+define( __NAMESPACE__ . '\PLUGIN', plugin_basename( __FILE__ ) );
 
 /**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-wcsw-activator.php.
+ * Loads the Activator and Deactivator classes.
  */
-function wcsw_activate() {
-	require_once WCSW_DIR . '/includes/class-wcsw-activator.php';
-	WCSW_Activator::activate();
-}
+require_once DIR . '/includes/Activator.php';
+require_once DIR . '/includes/Deactivator.php';
 
 /**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wcsw-deactivator.php.
+ * Hooks the Activator and Deactivator methods.
  */
-function wcsw_deactivate() {
-	require_once WCSW_DIR . '/includes/class-wcsw-deactivator.php';
-	WCSW_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'wcsw_activate' );
-register_deactivation_hook( __FILE__, 'wcsw_deactivate' );
+register_activation_hook( __FILE__, array( __NAMESPACE__ . '\Activator', 'activate' ) );
+register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\Deactivator', 'deactivate' ) );
 
 /**
- * The core plugin class that is used to define internationalization, admin and public hooks.
+ * The core plugin class.
  */
-require WCSW_DIR . '/includes/class-wcsw.php';
+require DIR . '/includes/Core.php';
 
 /**
- * Returns the core class instance.
- *
- * @since  1.0.0
+ * The functions.
  */
-function wcsw() {
-	return WCSW::instantiate();
-}
+require DIR . '/includes/functions.php';
 
 /**
- * Loads the functions.
- *
- * @since  1.0.0
+ * Runs the plugin after theme setup to allow developers to change the config array in the theme's functions.php file.
  */
-require WCSW_DIR . '/includes/functions.php';
-
-/**
- * Begins execution of the plugin.
- *
- * @since  1.0.0
- */
-function wcsw_run() {
-	wcsw()->run();
-}
-
-add_action( 'after_setup_theme', 'wcsw_run' );
+add_action( 'after_setup_theme', __NAMESPACE__ . '\run' );

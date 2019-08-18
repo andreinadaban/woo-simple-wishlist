@@ -1,5 +1,7 @@
 <?php
 
+namespace WCSW;
+
 /**
  * The public wishlist class.
  *
@@ -18,30 +20,32 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class WCSW_Public_Wishlist {
+class PublicWishlist {
 
 	/**
-	 * The configuration array.
+	 * The configuration array from the core class.
 	 *
 	 * @since     1.0.0
 	 * @access    private
-	 * @var       array    $config    The configuration array.
+	 * @var       array    $core_config
 	 */
-	private $config;
+	private $core_config;
 
 	/**
 	 * Sets the config variable.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function __construct( $config ) {
-		$this->config = $config;
+		$this->core_config = $config;
 	}
 
 	/**
 	 * Creates the add to wishlist and remove from wishlist buttons on the product page and on the product archive pages.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function add_remove_buttons( $product_id = false ) {
 
@@ -67,14 +71,16 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Returns the Add to wishlist button HTML.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    string
 	 */
 	private function add_to_wishlist_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
-		$text        = __( $this->config['button_add_label'], 'wcsw' );
-		$icon        = file_get_contents( $this->config['button_add_icon'] );
+		$text        = __( $this->core_config['button_add_label'], 'wcsw' );
+		$icon        = file_get_contents( $this->core_config['button_add_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
@@ -92,14 +98,16 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Returns the Remove from wishlist button HTML.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    string
 	 */
 	private function remove_from_wishlist_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
-		$text        = __( $this->config['button_remove_label'], 'wcsw' );
-		$icon        = file_get_contents( $this->config['button_remove_icon'] );
+		$text        = __( $this->core_config['button_remove_label'], 'wcsw' );
+		$icon        = file_get_contents( $this->core_config['button_remove_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
@@ -117,17 +125,18 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Shows the Clear wishlist button HTML.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function clear_button() {
 
-		if ( ! $this->config['button_clear'] ) {
+		if ( ! $this->core_config['button_clear'] ) {
 			return;
 		}
 
 		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
-		$text        = __( $this->config['button_clear_label'], 'wcsw' );
-		$icon        = file_get_contents( $this->config['button_clear_icon'] );
+		$text        = __( $this->core_config['button_clear_label'], 'wcsw' );
+		$icon        = file_get_contents( $this->core_config['button_clear_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		printf(
@@ -140,10 +149,16 @@ class WCSW_Public_Wishlist {
 
 	}
 
-	// Creates button label.
+	/**
+	 * Creates button label.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    string
+	 */
 	private function create_label( $icon, $text ) {
 
-		switch ( $this->config['button_style'] ) {
+		switch ( $this->core_config['button_style'] ) {
 			case 'icon':
 				$label = $icon;
 				break;
@@ -164,17 +179,19 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Creates the new menu item.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
+	 * @return    array
 	 */
 	public function add_menu( $items ) {
 
 		// The menu item position.
-		$position = $this->config['menu_position'];
+		$position = $this->core_config['menu_position'];
 
 		$items_1 = array_slice( $items, 0, $position, true );
 		$items_2 = array_slice( $items, $position, null, true );
 
-		$items_1['wishlist'] = __( $this->config['menu_name'], 'wcsw' );
+		$items_1['wishlist'] = __( $this->core_config['menu_name'], 'wcsw' );
 
 		$items = array_merge( $items_1, $items_2 );
 
@@ -185,7 +202,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Loads the wishlist template.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function load_template() {
 
@@ -216,7 +234,7 @@ class WCSW_Public_Wishlist {
 		// Loads the default template.
 		if ( ! file_exists( $custom_template ) ) {
 
-			require_once WCSW_DIR . '/templates/wishlist.php';
+			require_once DIR . '/templates/wishlist.php';
 
 		}
 
@@ -225,7 +243,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Adds the product to the current user's wishlist.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function add_product() {
 
@@ -266,7 +285,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Removes the product from the current user's wishlist.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function remove_product() {
 
@@ -333,7 +353,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Clears the current user's wishlist.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function clear() {
 
@@ -356,13 +377,15 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Returns the empty wishlist notice HTML.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
+	 * @return    string
 	 */
 	public function get_empty_wishlist_notice() {
 
 		$url     = wc_get_page_permalink( 'shop' );
-		$label   = __( $this->config['message_empty_label'], 'wcsw' );
-		$message = __( $this->config['message_empty'], 'wcsw' );
+		$label   = __( $this->core_config['message_empty_label'], 'wcsw' );
+		$message = __( $this->core_config['message_empty'], 'wcsw' );
 
 		return sprintf(
 			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
@@ -378,7 +401,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Displays the appropriate notice.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function display_notice( $type, $result ) {
 
@@ -386,14 +410,14 @@ class WCSW_Public_Wishlist {
 			'<a href="%s" class="%s">%s</a>%s',
 			wc_get_account_endpoint_url( 'wishlist' ),
 			'button wc-forward',
-			__( $this->config['message_add_view'], 'wcsw' ),
-			__( $this->config['message_add_success'], 'wcsw' )
+			__( $this->core_config['message_add_view'], 'wcsw' ),
+			__( $this->core_config['message_add_success'], 'wcsw' )
 		);
-		$add_error_message      = __( $this->config['message_add_error'], 'wcsw' );
-		$remove_success_message = __( $this->config['message_remove_success'], 'wcsw' );
-		$remove_error_message   = __( $this->config['message_remove_error'], 'wcsw' );
-		$clear_success_message  = __( $this->config['message_clear_success'], 'wcsw' );
-		$clear_error_message    = __( $this->config['message_clear_error'], 'wcsw' );
+		$add_error_message      = __( $this->core_config['message_add_error'], 'wcsw' );
+		$remove_success_message = __( $this->core_config['message_remove_success'], 'wcsw' );
+		$remove_error_message   = __( $this->core_config['message_remove_error'], 'wcsw' );
+		$clear_success_message  = __( $this->core_config['message_clear_success'], 'wcsw' );
+		$clear_error_message    = __( $this->core_config['message_clear_error'], 'wcsw' );
 
 		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
@@ -426,7 +450,8 @@ class WCSW_Public_Wishlist {
 	/**
 	 * Adds some JavaScript variables.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function add_js_variables() {
 
@@ -470,7 +495,9 @@ EOT;
 	/**
 	 * Gets existing user data from the database as JSON.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    string
 	 */
 	private function get_raw_data() {
 
@@ -485,7 +512,9 @@ EOT;
 	/**
 	 * Gets existing user data from the database as JSON and converts it to a PHP array before returning it.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    array|bool
 	 */
 	private function get_data_array() {
 
@@ -498,9 +527,11 @@ EOT;
 	}
 
 	/**
-	 * Gets existing data, for any user, from the database as JSON and converts it to a PHP array before returning it.
+	 * Gets existing data, for any user, from the database as JSON and converts it to an array before returning it.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
+	 * @return    array
 	 */
 	public function get_user_data( $user_id ) {
 
@@ -511,7 +542,9 @@ EOT;
 	/**
 	 * Checks if the product is already in the wishlist.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
+	 * @return    bool
 	 */
 	public function is_in_wishlist( $product_id ) {
 
@@ -545,7 +578,9 @@ EOT;
 	/**
 	 * Checks if there is a GET request.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    bool
 	 */
 	private function is_get_request( $param ) {
 
@@ -560,7 +595,9 @@ EOT;
 	/**
 	 * Validates nonce.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    bool
 	 */
 	private function is_valid_nonce( $action ) {
 
@@ -577,7 +614,9 @@ EOT;
 	/**
 	 * Checks if the $_GET variable is a valid product ID.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    private
+	 * @return    bool
 	 */
 	private function is_valid_id( $id ) {
 
@@ -592,7 +631,8 @@ EOT;
 	/**
 	 * AJAX processing function.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 * @access    public
 	 */
 	public function process_ajax_request() {
 

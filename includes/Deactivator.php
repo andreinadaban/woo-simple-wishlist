@@ -1,7 +1,9 @@
 <?php
 
+namespace WCSW;
+
 /**
- * Fired during plugin deactivation.
+ * The deactivator class.
  *
  * @since    1.0.0
  */
@@ -14,16 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Fired during plugin deactivation.
- *
- * This class defines all code necessary to run during the plugin's deactivation.
+ * The deactivator class.
  *
  * @since     1.0.0
  */
-class WCSW_Deactivator {
+class Deactivator {
 
 	/**
-	 * Fired during plugin deactivation.
+	 * Runs on plugin deactivation.
 	 *
 	 * @since    1.0.0
 	 */

@@ -1,14 +1,32 @@
 <?php
 
+namespace WCSW;
+
+/**
+ * Returns the core class instance.
+ *
+ * @since  1.0.0
+ */
+function core() {
+	return Core::instantiate();
+}
+
+/**
+ * Runs the plugin.
+ *
+ * @since  1.0.0
+ */
+function run() {
+	core()->run();
+}
+
 /**
  * Creates the add to wishlist and remove from wishlist buttons.
  *
  * @since    1.0.0
  */
-function wcsw_add_remove_buttons( $product_id ) {
-
-	wcsw()->get_public()->add_remove_buttons( $product_id );
-
+function add_remove_buttons( $product_id ) {
+	core()->get_public()->add_remove_buttons( $product_id );
 }
 
 /**
@@ -16,10 +34,8 @@ function wcsw_add_remove_buttons( $product_id ) {
  *
  * @since    1.0.0
  */
-function wcsw_clear_button() {
-
-	wcsw()->get_public()->clear_button();
-
+function clear_button() {
+	core()->get_public()->clear_button();
 }
 
 /**
@@ -27,19 +43,15 @@ function wcsw_clear_button() {
  *
  * @since    1.0.0
  */
-function wcsw_is_in_wishlist( $product_id ) {
-
-	return wcsw()->get_public()->is_in_wishlist( $product_id );
-
+function is_in_wishlist( $product_id ) {
+	return core()->get_public()->is_in_wishlist( $product_id );
 }
 
 /**
- * Gets existing data, for any user, from the database as JSON and converts it to a PHP array before returning it.
+ * Gets existing data, for any user, from the database as JSON and converts it to an array before returning it.
  *
  * @since    1.0.0
  */
-function wcsw_get_user_data( $user_id ) {
-
-	return wcsw()->get_public()->get_any_user_data( $user_id );
-
+function get_user_data( $user_id ) {
+	return core()->get_public()->get_user_data( $user_id );
 }
