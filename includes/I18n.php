@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since     1.0.0
  */
-class Internationalization {
+class I18n {
 
 	/**
 	 * Loads the plugin text domain for translation.

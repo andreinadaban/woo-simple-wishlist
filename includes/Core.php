@@ -172,7 +172,7 @@ class Core {
 		require_once DIR . 'includes/Loader.php';
 
 		// The class responsible for defining internationalization functionality.
-		require_once DIR . 'includes/Internationalization.php';
+		require_once DIR . 'includes/I18n.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
 		require_once DIR . 'public/Wishlist.php';
@@ -182,7 +182,7 @@ class Core {
 		require_once DIR . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
-		$this->i18n          = new Internationalization();
+		$this->i18n          = new I18n();
 		$this->public        = new Wishlist( $this->config );
 		$this->public_assets = new Assets();
 		$this->admin         = new Admin();
