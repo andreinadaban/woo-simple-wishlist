@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class PublicAssets {
+class Assets {
 
 	/**
 	 * Registers the CSS for the public area.

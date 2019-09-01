@@ -175,16 +175,16 @@ class Core {
 		require_once DIR . 'includes/Internationalization.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
-		require_once DIR . 'public/PublicWishlist.php';
-		require_once DIR . 'public/PublicAssets.php';
+		require_once DIR . 'public/Wishlist.php';
+		require_once DIR . 'public/Assets.php';
 
 		// The class responsible for defining all actions that occur in the admin area.
 		require_once DIR . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
 		$this->i18n          = new Internationalization();
-		$this->public        = new PublicWishlist( $this->config );
-		$this->public_assets = new PublicAssets();
+		$this->public        = new Wishlist( $this->config );
+		$this->public_assets = new Assets();
 		$this->admin         = new Admin();
 
 	}

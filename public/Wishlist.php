@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  */
-class PublicWishlist {
+class Wishlist {
 
 	/**
 	 * The configuration array from the core class.
