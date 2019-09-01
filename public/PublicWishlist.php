@@ -234,7 +234,7 @@ class PublicWishlist {
 		// Loads the default template.
 		if ( ! file_exists( $custom_template ) ) {
 
-			require_once DIR . '/templates/wishlist.php';
+			require_once DIR . 'templates/wishlist.php';
 
 		}
 

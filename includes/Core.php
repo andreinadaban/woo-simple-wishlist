@@ -131,13 +131,13 @@ class Core {
 			// Creates the instance with the default options.
 			self::$instance = new Core( apply_filters( 'wcsw_config', array(
 				'ajax'                   => true,
-				'button_add_icon'        => DIR . '/public/assets/dist/svg/heart-add.svg',
+				'button_add_icon'        => DIR . 'public/assets/dist/svg/heart-add.svg',
 				'button_add_label'       => 'Add to wishlist',
 				'button_clear'           => true,
-				'button_clear_icon'      => DIR . '/public/assets/dist/svg/clear.svg',
+				'button_clear_icon'      => DIR . 'public/assets/dist/svg/clear.svg',
 				'button_clear_label'     => 'Clear wishlist',
 				'button_in_archive'      => true,
-				'button_remove_icon'     => DIR . '/public/assets/dist/svg/heart-remove.svg',
+				'button_remove_icon'     => DIR . 'public/assets/dist/svg/heart-remove.svg',
 				'button_remove_label'    => 'Remove from wishlist',
 				'button_style'           => 'icon_text',
 				'menu_name'              => 'Wishlist',
@@ -169,17 +169,17 @@ class Core {
 	private function load_dependencies() {
 
 		// The class responsible for orchestrating the actions and filters of the plugin.
-		require_once DIR . '/includes/Loader.php';
+		require_once DIR . 'includes/Loader.php';
 
 		// The class responsible for defining internationalization functionality.
-		require_once DIR . '/includes/Internationalization.php';
+		require_once DIR . 'includes/Internationalization.php';
 
 		// The classes responsible for defining all actions that occur in the public side of the site.
-		require_once DIR . '/public/PublicWishlist.php';
-		require_once DIR . '/public/PublicAssets.php';
+		require_once DIR . 'public/PublicWishlist.php';
+		require_once DIR . 'public/PublicAssets.php';
 
 		// The class responsible for defining all actions that occur in the admin area.
-		require_once DIR . '/admin/Admin.php';
+		require_once DIR . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
 		$this->i18n          = new Internationalization();

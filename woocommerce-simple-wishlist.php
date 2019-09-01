@@ -40,8 +40,8 @@ define( __NAMESPACE__ . '\PLUGIN', plugin_basename( __FILE__ ) );
 /**
  * Loads the Activator and Deactivator classes.
  */
-require_once DIR . '/includes/Activator.php';
-require_once DIR . '/includes/Deactivator.php';
+require_once DIR . 'includes/Activator.php';
+require_once DIR . 'includes/Deactivator.php';
 
 /**
  * Hooks the Activator and Deactivator methods.
@@ -52,12 +52,12 @@ register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\Deactivator', 'de
 /**
  * The core plugin class.
  */
-require DIR . '/includes/Core.php';
+require DIR . 'includes/Core.php';
 
 /**
  * The functions.
  */
-require DIR . '/includes/functions.php';
+require DIR . 'includes/functions.php';
 
 /**
  * Runs the plugin after theme setup to allow developers to change the config array in the theme's functions.php file.

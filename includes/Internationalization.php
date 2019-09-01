@@ -33,7 +33,7 @@ class Internationalization {
 	 */
 	public function load_plugin_textdomain() {
 
-		load_plugin_textdomain( 'wcsw', false, DIR . '/languages/' );
+		load_plugin_textdomain( 'wcsw', false, DIR . 'languages/' );
 
 	}
 
