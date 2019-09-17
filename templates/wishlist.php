@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-?>
+do_action( 'wcsw_before_table' );
 
-<?php do_action( 'wcsw_before_table' ); ?>
+?>
 
 <table class="wcsw-table">
 
@@ -109,8 +109,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </table>
 
-<?php do_action( 'wcsw_after_table' ); ?>
-
-<?php WCSW\button_clear(); ?>
-
-<?php do_action( 'wcsw_after_clear_button' ); ?>
+<?php do_action( 'wcsw_after_table' );

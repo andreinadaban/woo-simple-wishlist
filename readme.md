@@ -36,7 +36,6 @@ wcsw_after_td_actions
 wcsw_before_tbody_end
 wcsw_after_tbody
 wcsw_after_table
-wcsw_after_clear_button
 ```
 
 ### Filters
