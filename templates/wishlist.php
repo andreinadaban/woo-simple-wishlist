@@ -111,6 +111,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'wcsw_after_table' ); ?>
 
-<?php WCSW\clear_button(); ?>
+<?php WCSW\button_clear(); ?>
 
 <?php do_action( 'wcsw_after_clear_button' ); ?>
