@@ -5,6 +5,7 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 ## The plugin:
 
 - Is powered by AJAX
+- Also works with AJAX disabled
 - Uses WordPress nonces for extra protection
 - Provides a customization filter
 - Saves the data in the usermeta table as JSON
@@ -12,6 +13,8 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 - Provides SVG icons
 - Loads a 2.6 KB minified JS
 - Has no styles and loads no CSS
+- Does not support the creation of multiple wishlists
+- Does not support sharing the wishlist
 
 ## Documentation
 
@@ -85,6 +88,32 @@ add_filter( 'wcsw_config', function( $config ) {
     return $config;
 } );
 ```
+
+#### The options
+
+`ajax`
+- `true | false`
+- Disables AJAX support by not loading the external JS file
+
+`button_add_icon`,
+`button_clear_icon`,
+`button_remove_icon`
+- `string`
+- The relative path of the icon
+
+`button_add_label`,
+`button_clear_label`,
+`button_remove_label`
+- `string`
+- The label of the button
+
+`button_clear`
+- `true | false`
+- Controls if the clear wishlist button is shown on the My Account page
+
+`button_in_archive`
+- `true | false`
+- Controls if the add and remove buttons are shown on archive pages
 
 #### The custom data filter
 
