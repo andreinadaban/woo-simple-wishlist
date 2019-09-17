@@ -191,7 +191,7 @@ class Wishlist {
 		$items_1 = array_slice( $items, 0, $position, true );
 		$items_2 = array_slice( $items, $position, null, true );
 
-		$items_1['wishlist'] = __( $this->core_config['menu_name'], 'wcsw' );
+		$items_1[ $this->core_config['endpoint'] ] = __( $this->core_config['menu_name'], 'wcsw' );
 
 		$items = array_merge( $items_1, $items_2 );
 
@@ -408,7 +408,7 @@ class Wishlist {
 
 		$add_success_message    = sprintf(
 			'<a href="%s" class="%s">%s</a>%s',
-			wc_get_account_endpoint_url( 'wishlist' ),
+			wc_get_account_endpoint_url( $this->core_config['endpoint'] ),
 			'button wc-forward',
 			__( $this->core_config['message_add_view'], 'wcsw' ),
 			__( $this->core_config['message_add_success'], 'wcsw' )

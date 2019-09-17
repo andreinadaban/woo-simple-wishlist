@@ -140,6 +140,7 @@ class Core {
 				'button_remove_icon'     => DIR . 'public/assets/dist/svg/heart-remove.svg',
 				'button_remove_label'    => 'Remove from wishlist',
 				'button_style'           => 'icon_text',
+				'endpoint'               => 'wishlist',
 				'menu_name'              => 'Wishlist',
 				'menu_position'          => 2,
 				'message_add_error'      => 'The product was not added to your wishlist. Please try again.',
@@ -265,7 +266,7 @@ class Core {
 	 * @access    public
 	 */
 	public function add_endpoint() {
-		add_rewrite_endpoint( 'wishlist', EP_PAGES );
+		add_rewrite_endpoint( $this->config['endpoint'], EP_PAGES );
 	}
 
 	/**
