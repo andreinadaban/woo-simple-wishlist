@@ -222,7 +222,7 @@ class Wishlist {
 		}
 
 		// This variable is used inside the template.
-		$products = $wishlist_data['products'];
+		$products = $wishlist_data;
 
 		// Loads the custom template if one exists.
 		if ( file_exists( $custom_template ) ) {
@@ -273,8 +273,8 @@ class Wishlist {
 		$wishlist_content = $this->get_data_array();
 
 		// Adds the new product to the array.
-		$wishlist_content['products'][$id] = apply_filters( 'wcsw_save_data', array(
-			'title' => get_the_title( $id ),
+		$wishlist_content[$id] = apply_filters( 'wcsw_save_data', array(
+			't' => get_the_title( $id ),
 		) );
 
 		// Tries to save to the database and shows a notice based on the result.
@@ -329,7 +329,7 @@ class Wishlist {
 
 				// Add each product to the new products array.
 				// The $value variable contains the product data (e.g. product title).
-				$new_wishlist_data['products'][$key] = $value;
+				$new_wishlist_data[$key] = $value;
 
 			}
 

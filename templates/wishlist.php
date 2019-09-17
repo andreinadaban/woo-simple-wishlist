@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <?php } else { ?>
 
-                        <div><?php echo $product_data['title'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?></div>
+                        <div><?php echo $product_data['t'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?></div>
 
                     <?php } ?>
 
