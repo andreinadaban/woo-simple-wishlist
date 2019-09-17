@@ -47,7 +47,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function add_remove_buttons( $product_id = false ) {
+	public function button_add_remove( $product_id = false ) {
 
 		if ( ! is_user_logged_in() ) {
 			return;
@@ -128,7 +128,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function clear_button() {
+	public function button_clear() {
 
 		if ( ! $this->core_config['button_clear'] ) {
 			return;

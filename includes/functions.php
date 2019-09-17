@@ -25,8 +25,8 @@ function run() {
  *
  * @since    1.0.0
  */
-function add_remove_buttons( $product_id ) {
-	core()->get_public()->add_remove_buttons( $product_id );
+function button_add_remove( $product_id ) {
+	core()->get_public()->button_add_remove( $product_id );
 }
 
 /**
@@ -34,17 +34,8 @@ function add_remove_buttons( $product_id ) {
  *
  * @since    1.0.0
  */
-function clear_button() {
-	core()->get_public()->clear_button();
-}
-
-/**
- * Checks if the product is already in the wishlist.
- *
- * @since    1.0.0
- */
-function is_in_wishlist( $product_id ) {
-	return core()->get_public()->is_in_wishlist( $product_id );
+function button_clear() {
+	core()->get_public()->button_clear();
 }
 
 /**
@@ -54,4 +45,13 @@ function is_in_wishlist( $product_id ) {
  */
 function get_user_data( $user_id ) {
 	return core()->get_public()->get_user_data( $user_id );
+}
+
+/**
+ * Checks if the product is already in the wishlist.
+ *
+ * @since    1.0.0
+ */
+function is_in_wishlist( $product_id ) {
+	return core()->get_public()->is_in_wishlist( $product_id );
 }
