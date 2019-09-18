@@ -318,20 +318,16 @@ class Wishlist {
 		$new_wishlist_data = array();
 
 		// Loop through the added products.
-		foreach ( $wishlist_content as $data_key => $data_value ) {
+		foreach ( $wishlist_content as $key => $value ) {
 
-			foreach ( $data_value as $key => $value ) {
-
-				// If the ID from the GET variable is equal to the current ID then skip the following code.
-				if ( $id == $key ) {
-					continue;
-				}
-
-				// Add each product to the new products array.
-				// The $value variable contains the product data (e.g. product title).
-				$new_wishlist_data[$key] = $value;
-
+			// If the ID from the GET variable is equal to the current ID then skip the following code.
+			if ( $id == $key ) {
+				continue;
 			}
+
+			// Add each product to the new products array.
+			// The $value variable contains the product data (e.g. product title).
+			$new_wishlist_data[$key] = $value;
 
 		}
 
@@ -553,17 +549,13 @@ EOT;
 
 		if ( $wishlist_content ) {
 
-			foreach ( $wishlist_content as $products => $product ) {
+			foreach ( $wishlist_content as $id => $details ) {
 
-				foreach ( $product as $id => $details ) {
+				$product_ids[] = $id;
 
-					$product_ids[] = $id;
+				if ( in_array( $product_id, $product_ids ) ) {
 
-					if ( in_array( $product_id, $product_ids ) ) {
-
-						return true;
-
-					}
+					return true;
 
 				}
 
