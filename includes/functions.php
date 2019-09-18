@@ -39,6 +39,15 @@ function button_clear() {
 }
 
 /**
+ * Loads the wishlist template.
+ *
+ * @since    1.0.0
+ */
+function load_template() {
+	core()->get_public()->load_template();
+}
+
+/**
  * Gets existing data, for any user, from the database as JSON and converts it to an array before returning it.
  *
  * @since    1.0.0
