@@ -13,8 +13,10 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 - Provides SVG icons
 - Loads a 2.6 KB minified JS
 - Has no styles and loads no CSS
-- Does not support the creation of multiple wishlists
-- Does not support sharing the wishlist
+
+## Usage
+
+Out of the box, the plugin provides an add to wishlist and a remove from wishlist button under each product, on both archive pages and single pages. It also provides a new section under My Account, where the wishlist content is displayed.
 
 ## Documentation
 
