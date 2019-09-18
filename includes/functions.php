@@ -25,7 +25,7 @@ function run() {
  *
  * @since    1.0.0
  */
-function button_add_remove( $product_id ) {
+function button_add_remove( $product_id = false ) {
 	core()->get_public()->button_add_remove( $product_id );
 }
 

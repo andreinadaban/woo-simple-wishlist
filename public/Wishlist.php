@@ -53,6 +53,7 @@ class Wishlist {
 			return;
 		}
 
+		// This works inside loops and on single product pages.
 		if ( ! $product_id ) {
 			$product_id = get_the_ID();
 		}
