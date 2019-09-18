@@ -217,7 +217,7 @@ class Core {
 
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'load_template' );
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'add_menu', 10, 1 );
-		$this->loader->add_filter( 'wcsw_after_table', $this->public, 'button_clear' );
+		$this->loader->add_action( 'wcsw_after_table', $this->public, 'button_clear' );
 		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $this->public, 'process_ajax_request' );
 		$this->loader->add_action( 'wp_footer', $this->public, 'add_js_variables' );
 
