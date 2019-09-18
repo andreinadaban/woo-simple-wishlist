@@ -130,28 +130,29 @@ class Core {
 
 			// Creates the instance with the default options.
 			self::$instance = new Core( apply_filters( 'wcsw_config', array(
-				'ajax'                   => true,
-				'button_add_icon'        => DIR . 'public/assets/dist/svg/heart-add.svg',
-				'button_add_label'       => 'Add to wishlist',
-				'button_clear'           => true,
-				'button_clear_icon'      => DIR . 'public/assets/dist/svg/clear.svg',
-				'button_clear_label'     => 'Clear wishlist',
-				'button_in_archive'      => true,
-				'button_remove_icon'     => DIR . 'public/assets/dist/svg/heart-remove.svg',
-				'button_remove_label'    => 'Remove from wishlist',
-				'button_style'           => 'icon_text',
-				'endpoint'               => 'wishlist',
-				'menu_name'              => 'Wishlist',
-				'menu_position'          => 2,
-				'message_add_error'      => 'The product was not added to your wishlist. Please try again.',
-				'message_add_success'    => 'The product was successfully added to your wishlist.',
-				'message_add_view'       => 'View wishlist',
-				'message_empty'          => 'There are no products in the wishlist yet.',
-				'message_empty_label'    => 'Go shop',
-				'message_clear_error'    => 'The wishlist was not cleared. Please try again.',
-				'message_clear_success'  => 'The wishlist was successfully cleared.',
-				'message_remove_error'   => 'The product was not removed from your wishlist. Please try again.',
-				'message_remove_success' => 'The product was successfully removed from your wishlist.',
+				'ajax'                    => true,
+				'button_add_icon'         => DIR . 'public/assets/dist/svg/heart-add.svg',
+				'button_add_label'        => 'Add to wishlist',
+				'button_clear'            => true,
+				'button_clear_icon'       => DIR . 'public/assets/dist/svg/clear.svg',
+				'button_clear_label'      => 'Clear wishlist',
+				'button_default'          => true,
+				'button_in_archive'       => true,
+				'button_remove_icon'      => DIR . 'public/assets/dist/svg/heart-remove.svg',
+				'button_remove_label'     => 'Remove from wishlist',
+				'button_style'            => 'icon_text',
+				'endpoint'                => 'wishlist',
+				'menu_name'               => 'Wishlist',
+				'menu_position'           => 2,
+				'message_add_error'       => 'The product was not added to your wishlist. Please try again.',
+				'message_add_success'     => 'The product was successfully added to your wishlist.',
+				'message_add_view'        => 'View wishlist',
+				'message_empty'           => 'There are no products in the wishlist yet.',
+				'message_empty_label'     => 'Go shop',
+				'message_clear_error'     => 'The wishlist was not cleared. Please try again.',
+				'message_clear_success'   => 'The wishlist was successfully cleared.',
+				'message_remove_error'    => 'The product was not removed from your wishlist. Please try again.',
+				'message_remove_success'  => 'The product was successfully removed from your wishlist.',
 			) ) );
 
 		}
@@ -209,15 +210,21 @@ class Core {
 			$this->loader->add_action( 'wp_enqueue_scripts', $this->public_assets, 'enqueue_scripts' );
 		}
 
-		$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'button_add_remove' );
+		if ( $this->config['button_default'] ) {
+			$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'button_add_remove' );
+		}
 
-		if ( $this->config['button_in_archive'] ) {
+		if ( $this->config['button_default'] && $this->config['button_in_archive'] ) {
 			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'button_add_remove', 12 );
 		}
 
 		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'load_template' );
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'add_menu', 10, 1 );
-		$this->loader->add_action( 'wcsw_after_table', $this->public, 'button_clear' );
+
+		if ( $this->config['button_default'] ) {
+			$this->loader->add_action( 'wcsw_after_table', $this->public, 'button_clear' );
+		}
+
 		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $this->public, 'process_ajax_request' );
 		$this->loader->add_action( 'wp_footer', $this->public, 'add_js_variables' );
 
