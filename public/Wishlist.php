@@ -229,12 +229,12 @@ class Wishlist {
 		if ( file_exists( $custom_template ) ) {
 
 			// Loads the custom template if one exists.
-			require_once $custom_template;
+			require $custom_template;
 
 		} else {
 
 			// Loads the default template.
-			require_once DIR . 'templates/wishlist.php';
+			require DIR . 'templates/wishlist.php';
 
 		}
 
