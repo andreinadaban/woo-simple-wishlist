@@ -69,7 +69,7 @@
 
 		if ( isSinglePage ) {
 
-			// Display a notice. See the "add()" function in the "class-wcsw-public-functions.php" file.
+			// Display a notice.
 			$('#content .col-full > .woocommerce').html(result);
 
 		}
@@ -88,7 +88,7 @@
 
 			if ( isSinglePage ) {
 
-				// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
+				// Display a notice.
 				$('#content .col-full > .woocommerce').html(result);
 
 			}
@@ -104,7 +104,7 @@
 
 			row.remove();
 
-			// Display a notice. See the "remove()" function in the "class-wcsw-public-functions.php" file.
+			// Display a notice.
 			$('#content .col-full > .woocommerce').html(result);
 
 			// If the last product was removed.
