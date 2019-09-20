@@ -1,0 +1,66 @@
+.wcsw {
+
+    &-td {
+        vertical-align: middle;
+    }
+
+    &-title {
+        display: flex;
+        align-items: center;
+        line-height: 1.2;
+        text-decoration: none !important;
+    }
+
+    &-thumb {
+        width: 60px;
+        flex: 0 0 60px;
+        margin-right: 20px;
+    }
+
+    &-button-container {
+        padding-top: 20px;
+        clear: both;
+    }
+
+    &-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none !important;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            overflow: visible !important;
+
+            .fadein,
+            .fadeout {
+                transition: opacity 0.2s ease;
+            }
+
+            .fadein {
+                opacity: 0;
+            }
+
+            .fadeout {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+
+            .fadein {
+                opacity: 1;
+            }
+
+            .fadeout {
+                opacity: 0;
+            }
+        }
+    }
+
+    &-spacer {
+        margin-right: 10px;
+    }
+}

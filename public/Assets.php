@@ -23,6 +23,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Assets {
 
 	/**
+	 * Registers the CSS for the public area.
+	 *
+	 * @since     1.0.0
+	 * @access    public
+	 */
+	public function enqueue_styles() {
+
+		wp_enqueue_style( 'wcsw-public-css', plugin_dir_url( __FILE__ ) . 'assets/dist/css/wcsw-public.css', array(), filemtime( DIR . 'public/assets/dist/css/wcsw-public.css' ), 'all' );
+
+	}
+
+	/**
 	 * Registers the JavaScript for the public area.
 	 *
 	 * @since     1.0.0
