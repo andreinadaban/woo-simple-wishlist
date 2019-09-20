@@ -208,8 +208,6 @@ class Wishlist {
 	 */
 	public function load_template() {
 
-		$custom_template = get_template_directory() . '/woocommerce-simple-wishlist/wishlist.php';
-
 		$wishlist_data = $this->get_data_array();
 
 		// Shows the notice if there are no products in the wishlist...
@@ -225,16 +223,17 @@ class Wishlist {
 		// This variable is used inside the template.
 		$products = $wishlist_data;
 
-		// Loads the custom template if one exists.
+		// Tries to get the custom template.
+		$custom_template = get_template_directory() . '/woocommerce-simple-wishlist/wishlist.php';
+
 		if ( file_exists( $custom_template ) ) {
 
+			// Loads the custom template if one exists.
 			require_once $custom_template;
 
-		}
+		} else {
 
-		// Loads the default template.
-		if ( ! file_exists( $custom_template ) ) {
-
+			// Loads the default template.
 			require_once DIR . 'templates/wishlist.php';
 
 		}
