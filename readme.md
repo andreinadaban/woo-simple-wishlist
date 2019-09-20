@@ -94,33 +94,32 @@ add_filter( 'wcsw_config', function( $config ) {
 
 #### The options
 
-- `ajax`
-  - Argument: `bool`
-  - Disables AJAX support by not loading the external JS file
+`ajax`
+- Boolean
+- Disables AJAX support by not loading the external JS file
 
-- `button_default`
-  - Argument: `bool`
-  - Setting the value to `false` disables the add, remove and clear buttons
+`button_default`
+- Boolean
+- Setting the value to `false` disables the add, remove and clear buttons
 
-`button_add_icon`,
-`button_clear_icon`,
-`button_remove_icon`
-- `string`
+`button_add_icon`, `button_clear_icon`, `button_remove_icon`
+- String
 - The relative path of the icon
 
-`button_add_label`,
-`button_clear_label`,
-`button_remove_label`
-- `string`
+`button_add_label`, `button_clear_label`, `button_remove_label`
+- String
 - The label of the button
 
 `button_clear`
-- `bool`
+- Boolean
 - Controls if the clear wishlist button is shown on the My Account page
 
 `button_in_archive`
-- `bool`
+- Boolean
 - Controls if the add and remove buttons are shown on archive pages
+
+`button_style`
+- `icon` | `text` | `icon_text`
 
 #### The custom data filter
 
