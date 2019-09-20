@@ -53,7 +53,7 @@
 			success: function(result) {
 
 				// Runs the corresponding function.
-				fn(thisBtn, result);
+				fn(thisBtn, id, result);
 
 			}
 		});
@@ -61,7 +61,7 @@
 	});
 
 	// The code to run when the "Add to wishlist" button is clicked.
-	function add(btn, result) {
+	function add(btn, id, result) {
 
 		// Replace the "Add to wishlist" button with the "Remove from wishlist" button.
 		btn.siblings($('.wcsw-button-remove')).show();
@@ -78,6 +78,7 @@
 		let eventAdd = new CustomEvent('wcsw_add', {
 			detail: {
 				btn: btn,
+				id: id,
 				result: result
 			}
 		});
@@ -87,7 +88,7 @@
 	}
 
 	// The code to run when the "Remove from wishlist" button is clicked.
-	function remove(btn, result) {
+	function remove(btn, id, result) {
 
 		// If on a product page.
 		if ( isProductPage ) {
@@ -108,9 +109,8 @@
 		// If on the account page.
 		if ( isAccountPage ) {
 
-			var row = btn.parents('tr');
-
-			row.remove();
+			// Remove row by ID.
+			$('.wcsw-tr-' + id).remove();
 
 			// Display a notice.
 			$('#content .col-full > .woocommerce').html(result);
@@ -132,6 +132,7 @@
 		let eventRemove = new CustomEvent('wcsw_remove', {
 			detail: {
 				btn: btn,
+				id: id,
 				result: result
 			}
 		});
@@ -141,7 +142,7 @@
 	}
 
 	// The code to run when the "Clear wishlist" button is clicked.
-	function clear(btn, result) {
+	function clear(btn, id, result) {
 
 		$('#content .col-full > .woocommerce').html(result);
 
@@ -155,6 +156,7 @@
 		let eventClear = new CustomEvent('wcsw_clear', {
 			detail: {
 				btn: btn,
+				id: id,
 				result: result
 			}
 		});

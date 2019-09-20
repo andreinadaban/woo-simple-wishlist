@@ -45,7 +45,7 @@ do_action( 'wcsw_before_table' );
 
         <?php foreach ( $products as $product_id => $product_data ) { ?>
 
-            <tr>
+            <tr class="wcsw-tr-<?php echo $product_id; ?>">
 
 	            <?php do_action( 'wcsw_before_td_thumb' ); ?>
 
