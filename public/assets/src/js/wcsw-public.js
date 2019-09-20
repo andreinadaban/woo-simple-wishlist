@@ -74,6 +74,16 @@
 
 		}
 
+		// Event.
+		let eventAdd = new CustomEvent('wcsw_add', {
+			detail: {
+				btn: btn,
+				result: result
+			}
+		});
+
+		document.dispatchEvent(eventAdd);
+
 	}
 
 	// The code to run when the "Remove from wishlist" button is clicked.
@@ -92,8 +102,6 @@
 				$('#content .col-full > .woocommerce').html(result);
 
 			}
-
-			return;
 
 		}
 
@@ -120,6 +128,16 @@
 
 		}
 
+		// Event.
+		let eventRemove = new CustomEvent('wcsw_remove', {
+			detail: {
+				btn: btn,
+				result: result
+			}
+		});
+
+		document.dispatchEvent(eventRemove);
+
 	}
 
 	// The code to run when the "Clear wishlist" button is clicked.
@@ -132,6 +150,16 @@
 		$('.wcsw-table').remove();
 
 		btn.remove();
+
+		// Event.
+		let eventClear = new CustomEvent('wcsw_clear', {
+			detail: {
+				btn: btn,
+				result: result
+			}
+		});
+
+		document.dispatchEvent(eventClear);
 
 	}
 
