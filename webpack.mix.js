@@ -3,9 +3,6 @@ let imagemin = require('imagemin');
 let imageminSvgo = require('imagemin-svgo');
 
 mix.js('public/assets/src/js/wcsw-public.js', 'public/assets/dist/js')
-    .sass('public/assets/src/scss/wcsw-public.scss', 'public/assets/dist/css', {
-        indentWidth: 4
-    })
     .browserSync({
         proxy: 'wp.test',
         files: [
