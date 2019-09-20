@@ -52,12 +52,12 @@ register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\Deactivator', 'de
 /**
  * The core plugin class.
  */
-require DIR . 'includes/Core.php';
+require_once DIR . 'includes/Core.php';
 
 /**
  * The functions.
  */
-require DIR . 'includes/functions.php';
+require_once DIR . 'includes/functions.php';
 
 /**
  * Runs the plugin after theme setup to allow developers to change the config array in the theme's functions.php file.
