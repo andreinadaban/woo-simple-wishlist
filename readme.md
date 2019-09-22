@@ -46,13 +46,7 @@ wcsw_after_table
 
 #### The configuration filter
 
-Use this filter to change the default options.
-
-```
-wcsw_config
-```
-
-The default options are the following:
+Use the `wcsw_config` filter to change the default options. The default options are the following:
 
 ```
 array(
@@ -93,47 +87,44 @@ add_filter( 'wcsw_config', function( $config ) {
 
 #### The options
 
-`ajax`
-
-- Boolean
-- Enables or disables AJAX support. If the value is set to `false` the external script file is not loaded
-
-`button_default`
-
-- Boolean
-- Enables or disables the add, remove and clear buttons
-
-`button_add_icon`, `button_clear_icon`, `button_remove_icon`
-
-- String
-- The relative path of the icon
-
-`button_add_label`, `button_clear_label`, `button_remove_label`
-
-- String
-- The label of the button
-
-`button_clear`
-
-- Boolean
-- Enables or disables the clear wishlist button from the My Account page
-
-`button_in_archive`
-
-- Boolean
-- Enables or disables the add and remove buttons from the archive pages
-
-`button_style`
-
-- `icon` | `text` | `icon_text`
+<table>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ajax</code></td>
+            <td>Enables or disables AJAX support. If the value is set to <code>false</code> the external script file is not loaded.</td>
+        </tr>
+        <tr>
+            <td><code>button_default</code></td>
+            <td>Enables or disables the add, remove and clear buttons.</td>
+        </tr>
+        <tr>
+            <td><code>button_add_icon</code>, <code>button_clear_icon</code>, <code>button_remove_icon</code></td>
+            <td>The relative path of the icon.</td>
+        </tr>
+        <tr>
+            <td><code>button_clear</code></td>
+            <td>Enables or disables the clear wishlist button from the My Account page.</td>
+        </tr>
+        <tr>
+            <td><code>button_in_archive</code></td>
+            <td>Enables or disables the add and remove buttons from the archive pages.</td>
+        </tr>
+        <tr>
+            <td><code>button_style</code></td>
+            <td>The available options are <code>icon</code>, <code>text</code> or <code>icon_text</code>.</td>
+        </tr>
+    </tbody>
+</table>
 
 #### The custom data filter
 
-Use this filter to add more information to the product data or remove the default data. The data is saved in the usermeta table, with the meta_key `wcsw_data`.
-
-```
-wcsw_save_data
-```
+Use the `wcsw_save_data` filter to add more information to each product saved in the wishlist. The data is stored in the usermeta table, with the `wcsw_data` meta key.
 
 **Example:** Adding the date when the product was added:
 
@@ -146,42 +137,33 @@ add_filter( 'wcsw_save_data', function( $data ) {
 
 ### Functions
 
-#### Add and remove buttons
-
-Displays the buttons for adding a product to the wishlist and removing a product from the wishlist. Pass the product ID or the parent product ID in the case of variable products.
-
-```
-\WCSW\button_add_remove( $product_id );
-```
-
-#### Clear wishlist button
-
-Displays the clear wishlist button.
-
-```
-\WCSW\button_clear();
-```
-
-#### Load template
-
-Loads the default or the custom template.
-
-```
-\WCSW\load_template();
-```
-
-#### User data
-
-Gets the wishlist data of a certain user. The function returns an array.
-
-```
-\WCSW\get_user_data( $user_id );
-```
-
-#### Conditional
-
-Checks if a product is in the wishlist.
-
-```
-\WCSW\is_in_wishlist( $product_id );
-```
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>\WCSW\button_add_remove( $product_id );</code></td>
+            <td>Displays the add and remove buttons. Pass the product ID or the parent product ID in the case of variable products.</td>
+        </tr>
+        <tr>
+            <td><code>\WCSW\button_clear();</code></td>
+            <td>Displays the clear wishlist button.</td>
+        </tr>
+        <tr>
+            <td><code>\WCSW\load_template();</code></td>
+            <td>Loads the default or the custom template.</td>
+        </tr>
+        <tr>
+            <td><code>\WCSW\get_user_data( $user_id );</code></td>
+            <td>Gets the wishlist data of a certain user. The function returns an array.</td>
+        </tr>
+        <tr>
+            <td><code>\WCSW\is_in_wishlist( $product_id );</code></td>
+            <td>Checks if a product is in the wishlist.</td>
+        </tr>
+    </tbody>
+</table>
