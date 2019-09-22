@@ -10,7 +10,7 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 - Options filter
 - Filter for adding additional data to each product in the wishlist
 - SVG icons
-- 2.6 KB minified JS
+- 2.8 KB minified JS
 - No CSS
 
 ## Usage
