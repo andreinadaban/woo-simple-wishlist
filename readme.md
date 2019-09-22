@@ -5,7 +5,7 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 ## Features
 
 - AJAX
-- [Editable template](#template)
+- Editable template
 - Template action hooks
 - Options filter
 - Filter for adding additional data to each product in the wishlist
@@ -18,8 +18,6 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 Out of the box, the plugin provides an add to wishlist and a remove from wishlist button under each product, on both archive pages and single pages. It also provides a new section under My Account, where the wishlist content is displayed.
 
 ## Documentation
-
-<a name="template"></a>
 
 ### The default template
 
@@ -96,30 +94,37 @@ add_filter( 'wcsw_config', function( $config ) {
 #### The options
 
 `ajax`
+
 - Boolean
 - Enables or disables AJAX support. If the value is set to `false` the external script file is not loaded
 
 `button_default`
+
 - Boolean
 - Enables or disables the add, remove and clear buttons
 
 `button_add_icon`, `button_clear_icon`, `button_remove_icon`
+
 - String
 - The relative path of the icon
 
 `button_add_label`, `button_clear_label`, `button_remove_label`
+
 - String
 - The label of the button
 
 `button_clear`
+
 - Boolean
 - Enables or disables the clear wishlist button from the My Account page
 
 `button_in_archive`
+
 - Boolean
 - Enables or disables the add and remove buttons from the archive pages
 
 `button_style`
+
 - `icon` | `text` | `icon_text`
 
 #### The custom data filter
