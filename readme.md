@@ -2,23 +2,24 @@
 
 A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
 
-## The plugin
+## Features
 
-- Is powered by AJAX
-- Also works with AJAX disabled
-- Uses WordPress nonces for extra protection
-- Provides an options filter
-- Saves the data in the usermeta table as JSON
-- Provides a filter for adding additional data to each product in the wishlist
-- Provides SVG icons
-- Loads a 2.6 KB minified JS
-- Has no styles and loads no CSS
+- AJAX
+- [Editable template](#template)
+- Template action hooks
+- Options filter
+- Filter for adding additional data to each product in the wishlist
+- SVG icons
+- 2.6 KB minified JS
+- No CSS
 
 ## Usage
 
 Out of the box, the plugin provides an add to wishlist and a remove from wishlist button under each product, on both archive pages and single pages. It also provides a new section under My Account, where the wishlist content is displayed.
 
 ## Documentation
+
+<a name="template"></a>
 
 ### The default template
 
@@ -142,8 +143,7 @@ add_filter( 'wcsw_save_data', function( $data ) {
 
 #### Add and remove buttons
 
-Displays the buttons for adding a product to the wishlist and removing a product from the wishlist.
-- `$product_id`: The product ID or the parent product ID in the case of variable products
+Displays the buttons for adding a product to the wishlist and removing a product from the wishlist. Pass the product ID or the parent product ID in the case of variable products.
 
 ```
 \WCSW\button_add_remove( $product_id );
@@ -167,9 +167,7 @@ Loads the default or the custom template.
 
 #### User data
 
-Gets the wishlist data of a certain user.
-- `$user_id`: The user ID
-- returns `array`
+Gets the wishlist data of a certain user. The function returns an array.
 
 ```
 \WCSW\get_user_data( $user_id );
@@ -178,8 +176,6 @@ Gets the wishlist data of a certain user.
 #### Conditional
 
 Checks if a product is in the wishlist.
-- `$product_id`: The product ID or the parent product ID in the case of variable products
-- returns `bool`
 
 ```
 \WCSW\is_in_wishlist( $product_id );
