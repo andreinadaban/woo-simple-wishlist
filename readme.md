@@ -96,11 +96,11 @@ add_filter( 'wcsw_config', function( $config ) {
 
 `ajax`
 - Boolean
-- Disables AJAX support by not loading the external JS file
+- Enables or disables AJAX support. If the value is set to `false` the external script file is not loaded
 
 `button_default`
 - Boolean
-- Setting the value to `false` disables the add, remove and clear buttons
+- Enables or disables the add, remove and clear buttons
 
 `button_add_icon`, `button_clear_icon`, `button_remove_icon`
 - String
@@ -112,18 +112,18 @@ add_filter( 'wcsw_config', function( $config ) {
 
 `button_clear`
 - Boolean
-- Controls if the clear wishlist button is shown on the My Account page
+- Enables or disables the clear wishlist button from the My Account page
 
 `button_in_archive`
 - Boolean
-- Controls if the add and remove buttons are shown on archive pages
+- Enables or disables the add and remove buttons from the archive pages
 
 `button_style`
 - `icon` | `text` | `icon_text`
 
 #### The custom data filter
 
-Use this filter to add more information to the product data or remove the default data:
+Use this filter to add more information to the product data or remove the default data. The data is saved in the usermeta table, with the meta_key `wcsw_data`.
 
 ```
 wcsw_save_data
