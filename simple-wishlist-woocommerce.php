@@ -3,8 +3,8 @@
 namespace WCSW;
 
 /**
- * Plugin Name:    WooCommerce Simple Wishlist
- * Plugin URI:     http://andreinadaban.ro
+ * Plugin Name:    Simple Wishlist for WooCommerce
+ * Plugin URI:     https://github.com/andreinadaban/simple-wishlist-woocommerce
  * Description:    A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
  * Version:        1.0.0
  * Author:         Andrei Nadaban

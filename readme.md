@@ -21,7 +21,7 @@ Out of the box, the plugin provides an add to wishlist and a remove from wishlis
 
 ### The default template
 
-The default template used on the My Account page is located at `templates/wishlist.php`. Similar to WooCommerce templates, you can override it by copying it in your theme directory at `woocommerce-simple-wishlist/wishlist.php`.
+The default template used on the My Account page is located at `templates/wishlist.php`. Similar to WooCommerce templates, you can override it by copying it in your theme directory at `simple-wishlist-woocommerce/wishlist.php`.
 
 ### Actions
 
