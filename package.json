@@ -1,5 +1,5 @@
 {
-    "name": "wcsw",
+    "name": "sw",
     "version": "1.0.0",
     "scripts": {
         "dev": "npm run development",

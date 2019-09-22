@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * The core plugin class.
@@ -129,7 +129,7 @@ class Core {
 		if ( ! isset( self::$instance ) ) {
 
 			// Creates the instance with the default options.
-			self::$instance = new Core( apply_filters( 'wcsw_config', array(
+			self::$instance = new Core( apply_filters( 'sw_config', array(
 				'ajax'                    => true,
 				'button_add_icon'         => DIR . 'public/assets/dist/svg/heart-add.svg',
 				'button_add_label'        => 'Add to wishlist',
@@ -221,10 +221,10 @@ class Core {
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'add_menu', 10, 1 );
 
 		if ( $this->config['button_default'] ) {
-			$this->loader->add_action( 'wcsw_after_table', $this->public, 'button_clear' );
+			$this->loader->add_action( 'sw_after_table', $this->public, 'button_clear' );
 		}
 
-		$this->loader->add_action( 'wp_ajax_wcsw_ajax', $this->public, 'process_ajax_request' );
+		$this->loader->add_action( 'wp_ajax_sw_ajax', $this->public, 'process_ajax_request' );
 		$this->loader->add_action( 'wp_footer', $this->public, 'add_js_variables' );
 
 	}
@@ -250,8 +250,8 @@ class Core {
 	 */
 	private function set_version() {
 
-		if ( ! get_option( 'wcsw_version' ) ) {
-			add_option( 'wcsw_version', $this->version );
+		if ( ! get_option( 'sw_version' ) ) {
+			add_option( 'sw_version', $this->version );
 		}
 
 	}
@@ -286,12 +286,12 @@ class Core {
 
 		// Flushes the rewrite rules only once, if the transient exists.
 		// The transient is created on plugin activation.
-		if ( get_transient( 'wcsw_flush' ) ) {
+		if ( get_transient( 'sw_flush' ) ) {
 
 			flush_rewrite_rules();
 
 			// Deletes the transient to prevent flushing more than once.
-			delete_transient( 'wcsw_flush' );
+			delete_transient( 'sw_flush' );
 
 		}
 

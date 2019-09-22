@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * The assets class.
@@ -30,7 +30,7 @@ class Assets {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'wcsw-public-js', plugin_dir_url( __FILE__ ) . 'assets/dist/js/wcsw-public.js', array( 'jquery' ), filemtime( DIR . 'public/assets/dist/js/wcsw-public.js' ), true );
+		wp_enqueue_script( 'sw-public-js', plugin_dir_url( __FILE__ ) . 'assets/dist/js/sw-public.js', array( 'jquery' ), filemtime( DIR . 'public/assets/dist/js/sw-public.js' ), true );
 
 	}
 

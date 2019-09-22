@@ -28,25 +28,25 @@ The default template used on the My Account page is located at `templates/wishli
 The following actions are present in the template used on the My Account page.
 
 ```
-wcsw_before_table
-wcsw_before_th_thumb
-wcsw_after_th_thumb
-wcsw_after_th_title
-wcsw_after_tbody_start
-wcsw_before_td_thumb
-wcsw_after_td_thumb
-wcsw_after_td_title
-wcsw_after_td_actions
-wcsw_before_tbody_end
-wcsw_after_tbody
-wcsw_after_table
+sw_before_table
+sw_before_th_thumb
+sw_after_th_thumb
+sw_after_th_title
+sw_after_tbody_start
+sw_before_td_thumb
+sw_after_td_thumb
+sw_after_td_title
+sw_after_td_actions
+sw_before_tbody_end
+sw_after_tbody
+sw_after_table
 ```
 
 ### Filters
 
 #### The configuration filter
 
-Use the `wcsw_config` filter to change the default options. The default options are the following:
+Use the `sw_config` filter to change the default options. The default options are the following:
 
 ```
 array(
@@ -79,7 +79,7 @@ array(
 **Example:** Changing the menu position.
 
 ```
-add_filter( 'wcsw_config', function( $config ) {
+add_filter( 'sw_config', function( $config ) {
     $config['menu_position'] = 3;
     return $config;
 } );
@@ -124,12 +124,12 @@ add_filter( 'wcsw_config', function( $config ) {
 
 #### The custom data filter
 
-Use the `wcsw_save_data` filter to add more information to each product saved in the wishlist. The data is stored in the usermeta table, with the `wcsw_data` meta key.
+Use the `sw_save_data` filter to add more information to each product saved in the wishlist. The data is stored in the usermeta table, with the `sw_data` meta key.
 
 **Example:** Adding the date when the product was added:
 
 ```
-add_filter( 'wcsw_save_data', function( $data ) {
+add_filter( 'sw_save_data', function( $data ) {
     $data['d'] = current_time( 'timestamp' );
     return $data;
 } );
@@ -146,23 +146,23 @@ add_filter( 'wcsw_save_data', function( $data ) {
     </thead>
     <tbody>
         <tr>
-            <td><code>\WCSW\button_add_remove( $product_id );</code></td>
+            <td><code>\SW\button_add_remove( $product_id );</code></td>
             <td>Displays the add and remove buttons. Pass the product ID or the parent product ID in the case of variable products.</td>
         </tr>
         <tr>
-            <td><code>\WCSW\button_clear();</code></td>
+            <td><code>\SW\button_clear();</code></td>
             <td>Displays the clear wishlist button.</td>
         </tr>
         <tr>
-            <td><code>\WCSW\load_template();</code></td>
+            <td><code>\SW\load_template();</code></td>
             <td>Loads the default or the custom template.</td>
         </tr>
         <tr>
-            <td><code>\WCSW\get_user_data( $user_id );</code></td>
+            <td><code>\SW\get_user_data( $user_id );</code></td>
             <td>Gets the wishlist data of a certain user. The function returns an array.</td>
         </tr>
         <tr>
-            <td><code>\WCSW\is_in_wishlist( $product_id );</code></td>
+            <td><code>\SW\is_in_wishlist( $product_id );</code></td>
             <td>Checks if a product is in the wishlist.</td>
         </tr>
     </tbody>

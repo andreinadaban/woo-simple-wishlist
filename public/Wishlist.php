@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * The public wishlist class.
@@ -62,7 +62,7 @@ class Wishlist {
 		$is_in_wishlist = $this->is_in_wishlist( $product_id );
 
 		printf(
-			'<div class="wcsw-button-container">%s%s</div>',
+			'<div class="sw-button-container">%s%s</div>',
 			$this->add_to_wishlist_button( $product_id, $is_in_wishlist ),
 			$this->remove_from_wishlist_button( $product_id, $is_in_wishlist )
 		);
@@ -78,17 +78,17 @@ class Wishlist {
 	 */
 	private function add_to_wishlist_button( $product_id, $is_in_wishlist ) {
 
-		$nonce_token = wp_create_nonce( 'wcsw_add_to_wishlist_' . $product_id );
+		$nonce_token = wp_create_nonce( 'sw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
-		$text        = esc_html__( $this->core_config['button_add_label'], 'wcsw' );
+		$text        = esc_html__( $this->core_config['button_add_label'], 'sw' );
 		$icon        = file_get_contents( $this->core_config['button_add_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
-			' <a href="?wcsw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			' <a href="?sw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
 			$product_id,
 			$nonce_token,
-			'wcsw-button wcsw-button-ajax wcsw-button-add',
+			'sw-button sw-button-ajax sw-button-add',
 			$style,
 			$text,
 			$label
@@ -105,17 +105,17 @@ class Wishlist {
 	 */
 	private function remove_from_wishlist_button( $product_id, $is_in_wishlist ) {
 
-		$nonce_token = wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id );
+		$nonce_token = wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
-		$text        = esc_html__( $this->core_config['button_remove_label'], 'wcsw' );
+		$text        = esc_html__( $this->core_config['button_remove_label'], 'sw' );
 		$icon        = file_get_contents( $this->core_config['button_remove_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
-			' <a href="?wcsw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			' <a href="?sw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
 			$product_id,
 			$nonce_token,
-			'wcsw-button wcsw-button-ajax wcsw-button-remove',
+			'sw-button sw-button-ajax sw-button-remove',
 			$style,
 			$text,
 			$label
@@ -135,15 +135,15 @@ class Wishlist {
 			return;
 		}
 
-		$nonce_token = wp_create_nonce( 'wcsw_clear_wishlist' );
-		$text        = esc_html__( $this->core_config['button_clear_label'], 'wcsw' );
+		$nonce_token = wp_create_nonce( 'sw_clear_wishlist' );
+		$text        = esc_html__( $this->core_config['button_clear_label'], 'sw' );
 		$icon        = file_get_contents( $this->core_config['button_clear_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
 		printf(
-			' <a href="?wcsw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>',
+			' <a href="?sw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>',
 			$nonce_token,
-			'wcsw-button wcsw-button-ajax wcsw-button-clear',
+			'sw-button sw-button-ajax sw-button-clear',
 			$text,
 			$label
 		);
@@ -167,10 +167,10 @@ class Wishlist {
 				$label = $text;
 				break;
 			case 'icon_text':
-				$label = $icon . '<span class="wcsw-button-text">' . $text . '</span>';
+				$label = $icon . '<span class="sw-button-text">' . $text . '</span>';
 				break;
 			default:
-				$label = $icon . '<span class="wcsw-button-text">' . $text . '</span>';
+				$label = $icon . '<span class="sw-button-text">' . $text . '</span>';
 		}
 
 		return $label;
@@ -192,7 +192,7 @@ class Wishlist {
 		$items_1 = array_slice( $items, 0, $position, true );
 		$items_2 = array_slice( $items, $position, null, true );
 
-		$items_1[ esc_html__( $this->core_config['endpoint'] ) ] = esc_html__( $this->core_config['menu_name'], 'wcsw' );
+		$items_1[ esc_html__( $this->core_config['endpoint'] ) ] = esc_html__( $this->core_config['menu_name'], 'sw' );
 
 		$items = array_merge( $items_1, $items_2 );
 
@@ -253,16 +253,16 @@ class Wishlist {
 		// If the nonce is not valid.
 		// If the product is already in the wishlist.
 		if ( ! is_user_logged_in() ||
-		     ! $this->is_get_request( 'wcsw-add' ) ||
-		     ! $this->is_valid_nonce( 'wcsw_add_to_wishlist_' . $_GET['wcsw-add'] ) ||
-		       $this->is_in_wishlist( $_GET['wcsw-add'] ) ) {
+		     ! $this->is_get_request( 'sw-add' ) ||
+		     ! $this->is_valid_nonce( 'sw_add_to_wishlist_' . $_GET['sw-add'] ) ||
+		       $this->is_in_wishlist( $_GET['sw-add'] ) ) {
 
 			return;
 
 		}
 
 		// The ID of the product meant to be added.
-		$id = $_GET['wcsw-add'];
+		$id = $_GET['sw-add'];
 
 		// If the GET variable is not a valid ID then do nothing.
 		if ( ! $this->is_valid_id( $id ) ) {
@@ -273,12 +273,12 @@ class Wishlist {
 		$wishlist_content = $this->get_data_array();
 
 		// Adds the new product to the array.
-		$wishlist_content[$id] = apply_filters( 'wcsw_save_data', array(
+		$wishlist_content[$id] = apply_filters( 'sw_save_data', array(
 			't' => get_the_title( $id ),
 		) );
 
 		// Tries to save to the database and shows a notice based on the result.
-		$this->display_notice( 'add', update_user_meta( get_current_user_id(), 'wcsw_data', json_encode( $wishlist_content ) ) );
+		$this->display_notice( 'add', update_user_meta( get_current_user_id(), 'sw_data', json_encode( $wishlist_content ) ) );
 
 	}
 
@@ -295,16 +295,16 @@ class Wishlist {
 		// If the nonce is not valid.
 		// If the product is not in the wishlist.
 		if ( ! is_user_logged_in() ||
-		     ! $this->is_get_request( 'wcsw-remove' ) ||
-		     ! $this->is_valid_nonce( 'wcsw_remove_from_wishlist_' . $_GET['wcsw-remove'] ) ||
-		     ! $this->is_in_wishlist( $_GET['wcsw-remove'] ) ) {
+		     ! $this->is_get_request( 'sw-remove' ) ||
+		     ! $this->is_valid_nonce( 'sw_remove_from_wishlist_' . $_GET['sw-remove'] ) ||
+		     ! $this->is_in_wishlist( $_GET['sw-remove'] ) ) {
 
 			return;
 
 		}
 
 		// The ID of the product meant to be removed.
-		$id = $_GET['wcsw-remove'];
+		$id = $_GET['sw-remove'];
 
 		// If the GET variable is not a valid ID then do nothing.
 		if ( ! $this->is_valid_id( $id ) ) {
@@ -336,9 +336,9 @@ class Wishlist {
 
 		// Deletes the database record if the last product was removed.
 		if ( empty( $new_wishlist_data ) ) {
-			$result = delete_user_meta( $user_id, 'wcsw_data' );
+			$result = delete_user_meta( $user_id, 'sw_data' );
 		} else {
-			$result = update_user_meta( $user_id, 'wcsw_data', json_encode( $new_wishlist_data ) );
+			$result = update_user_meta( $user_id, 'sw_data', json_encode( $new_wishlist_data ) );
 		}
 
 		// Tries to save to the database and shows a notice based on the result.
@@ -358,15 +358,15 @@ class Wishlist {
 		// If there is no get request.
 		// If the nonce is not valid.
 		if ( ! is_user_logged_in() ||
-		     ! $this->is_get_request( 'wcsw-clear' ) ||
-		     ! $this->is_valid_nonce( 'wcsw_clear_wishlist' ) ) {
+		     ! $this->is_get_request( 'sw-clear' ) ||
+		     ! $this->is_valid_nonce( 'sw_clear_wishlist' ) ) {
 
 			return;
 
 		}
 
 		// Tries to save to the database and shows a notice based on the result.
-		$this->display_notice( 'clear', delete_user_meta( get_current_user_id(), 'wcsw_data' ) );
+		$this->display_notice( 'clear', delete_user_meta( get_current_user_id(), 'sw_data' ) );
 
 	}
 
@@ -380,8 +380,8 @@ class Wishlist {
 	public function get_empty_wishlist_notice() {
 
 		$url     = wc_get_page_permalink( 'shop' );
-		$label   = esc_html__( $this->core_config['message_empty_label'], 'wcsw' );
-		$message = esc_html__( $this->core_config['message_empty'], 'wcsw' );
+		$label   = esc_html__( $this->core_config['message_empty_label'], 'sw' );
+		$message = esc_html__( $this->core_config['message_empty'], 'sw' );
 
 		return sprintf(
 			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
@@ -406,17 +406,17 @@ class Wishlist {
 			'<a href="%s" class="%s">%s</a>%s',
 			wc_get_account_endpoint_url( $this->core_config['endpoint'] ),
 			'button wc-forward',
-			esc_html__( $this->core_config['message_add_view'], 'wcsw' ),
-			esc_html__( $this->core_config['message_add_success'], 'wcsw' )
+			esc_html__( $this->core_config['message_add_view'], 'sw' ),
+			esc_html__( $this->core_config['message_add_success'], 'sw' )
 		);
-		$add_error_message      = esc_html__( $this->core_config['message_add_error'], 'wcsw' );
-		$remove_success_message = esc_html__( $this->core_config['message_remove_success'], 'wcsw' );
-		$remove_error_message   = esc_html__( $this->core_config['message_remove_error'], 'wcsw' );
-		$clear_success_message  = esc_html__( $this->core_config['message_clear_success'], 'wcsw' );
-		$clear_error_message    = esc_html__( $this->core_config['message_clear_error'], 'wcsw' );
+		$add_error_message      = esc_html__( $this->core_config['message_add_error'], 'sw' );
+		$remove_success_message = esc_html__( $this->core_config['message_remove_success'], 'sw' );
+		$remove_error_message   = esc_html__( $this->core_config['message_remove_error'], 'sw' );
+		$clear_success_message  = esc_html__( $this->core_config['message_clear_success'], 'sw' );
+		$clear_error_message    = esc_html__( $this->core_config['message_clear_error'], 'sw' );
 
 		// Adds a WC notice only if the request was NOT made with AJAX.
-		if ( ! $this->is_get_request( 'wcsw-ajax' ) ) {
+		if ( ! $this->is_get_request( 'sw-ajax' ) ) {
 
 			// Success.
 			if ( $result ) {
@@ -501,7 +501,7 @@ EOT;
 			return false;
 		}
 
-		return get_user_meta( get_current_user_id(), 'wcsw_data', true );
+		return get_user_meta( get_current_user_id(), 'sw_data', true );
 
 	}
 
@@ -531,7 +531,7 @@ EOT;
 	 */
 	public function get_user_data( $user_id ) {
 
-		return json_decode( get_user_meta( $user_id, 'wcsw_data', true ), true );
+		return json_decode( get_user_meta( $user_id, 'sw_data', true ), true );
 
 	}
 

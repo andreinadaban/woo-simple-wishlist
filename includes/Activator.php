@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * The activator class.
@@ -35,9 +35,9 @@ class Activator {
 		}
 
 		// Sets a transient that is used to flush the rewrite rules only once.
-		if ( ! get_transient( 'wcsw_flush' ) ) {
+		if ( ! get_transient( 'sw_flush' ) ) {
 
-			set_transient( 'wcsw_flush', '1', 0 );
+			set_transient( 'sw_flush', '1', 0 );
 
 		}
 

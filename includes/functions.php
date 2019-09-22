@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * Returns the core class instance.

@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * The deactivator class.
@@ -29,9 +29,9 @@ class Deactivator {
 	 */
 	public static function deactivate() {
 
-		if ( get_transient( 'wcsw_flush' ) ) {
+		if ( get_transient( 'sw_flush' ) ) {
 
-			delete_transient( 'wcsw_flush' );
+			delete_transient( 'sw_flush' );
 
 		}
 

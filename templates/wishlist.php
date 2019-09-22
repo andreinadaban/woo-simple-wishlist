@@ -13,25 +13,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-do_action( 'wcsw_before_table' );
+do_action( 'sw_before_table' );
 
 ?>
 
-<table class="wcsw-table">
+<table class="sw-table">
 
-    <thead class="wcsw-thead">
+    <thead class="sw-thead">
 
         <tr>
 
-	        <?php do_action( 'wcsw_before_th_thumb' ); ?>
+	        <?php do_action( 'sw_before_th_thumb' ); ?>
 
             <th></th>
 
-            <?php do_action( 'wcsw_after_th_thumb' ); ?>
+            <?php do_action( 'sw_after_th_thumb' ); ?>
 
-            <th><?php _e( 'Product', 'wcsw' ); ?></th>
+            <th><?php _e( 'Product', 'sw' ); ?></th>
 
-            <?php do_action( 'wcsw_after_th_title' ); ?>
+            <?php do_action( 'sw_after_th_title' ); ?>
 
             <th></th>
 
@@ -39,17 +39,17 @@ do_action( 'wcsw_before_table' );
 
     </thead>
 
-    <tbody class="wcsw-tbody">
+    <tbody class="sw-tbody">
 
-        <?php do_action( 'wcsw_after_tbody_start' ); ?>
+        <?php do_action( 'sw_after_tbody_start' ); ?>
 
         <?php foreach ( $products as $product_id => $product_data ) { ?>
 
-            <tr class="wcsw-tr-<?php echo $product_id; ?>">
+            <tr class="sw-tr-<?php echo $product_id; ?>">
 
-	            <?php do_action( 'wcsw_before_td_thumb' ); ?>
+	            <?php do_action( 'sw_before_td_thumb' ); ?>
 
-                <td class="wcsw-thumb">
+                <td class="sw-thumb">
 
 	                <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
@@ -67,9 +67,9 @@ do_action( 'wcsw_before_table' );
 
                 </td>
 
-                <?php do_action( 'wcsw_after_td_thumb' ); ?>
+                <?php do_action( 'sw_after_td_thumb' ); ?>
 
-                <td class="wcsw-title">
+                <td class="sw-title">
 
                     <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
@@ -81,32 +81,32 @@ do_action( 'wcsw_before_table' );
 
                     <?php } else { ?>
 
-                        <div><?php echo $product_data['t'] . ' (' . __( 'no longer available', 'wcsw' ) . ')'; ?></div>
+                        <div><?php echo $product_data['t'] . ' (' . __( 'no longer available', 'sw' ) . ')'; ?></div>
 
                     <?php } ?>
 
                 </td>
 
-                <?php do_action( 'wcsw_after_td_title' ); ?>
+                <?php do_action( 'sw_after_td_title' ); ?>
 
-                <td class="wcsw-actions">
+                <td class="sw-actions">
 
-                    <a href="?wcsw-remove=<?php echo $product_id; ?>&nonce-token=<?php echo wp_create_nonce( 'wcsw_remove_from_wishlist_' . $product_id ) ?>" class="wcsw-button wcsw-button-ajax wcsw-button-remove remove" title="<?php _e( 'Remove from wishlist', 'wcsw' ); ?>"></a>
+                    <a href="?sw-remove=<?php echo $product_id; ?>&nonce-token=<?php echo wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id ) ?>" class="sw-button sw-button-ajax sw-button-remove remove" title="<?php _e( 'Remove from wishlist', 'sw' ); ?>"></a>
 
                 </td>
 
-	            <?php do_action( 'wcsw_after_td_actions' ); ?>
+	            <?php do_action( 'sw_after_td_actions' ); ?>
 
             </tr>
 
         <?php } ?>
 
-        <?php do_action( 'wcsw_before_tbody_end' ); ?>
+        <?php do_action( 'sw_before_tbody_end' ); ?>
 
     </tbody>
 
-	<?php do_action( 'wcsw_after_tbody' ); ?>
+	<?php do_action( 'sw_after_tbody' ); ?>
 
 </table>
 
-<?php do_action( 'wcsw_after_table' );
+<?php do_action( 'sw_after_table' );

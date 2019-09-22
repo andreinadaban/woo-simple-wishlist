@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * Defines the internationalization functionality.
@@ -33,7 +33,7 @@ class I18n {
 	 */
 	public function load_plugin_textdomain() {
 
-		load_plugin_textdomain( 'wcsw', false, DIR . 'languages/' );
+		load_plugin_textdomain( 'sw', false, DIR . 'languages/' );
 
 	}
 

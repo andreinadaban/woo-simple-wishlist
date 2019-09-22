@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	$('.wcsw-button-ajax').click(function(e) {
+	$('.sw-button-ajax').click(function(e) {
 
 		e.preventDefault();
 
@@ -21,23 +21,23 @@
 		// This variable stores the function that is meant to run.
 		var fn;
 
-		if ( thisBtn.hasClass('wcsw-button-add') ) {
+		if ( thisBtn.hasClass('sw-button-add') ) {
 
-			parameter = 'wcsw-add';
+			parameter = 'sw-add';
 			fn = add;
 
 		}
 
-		if ( thisBtn.hasClass('wcsw-button-remove') ) {
+		if ( thisBtn.hasClass('sw-button-remove') ) {
 
-			parameter = 'wcsw-remove';
+			parameter = 'sw-remove';
 			fn = remove;
 
 		}
 
-		if ( thisBtn.hasClass('wcsw-button-clear') ) {
+		if ( thisBtn.hasClass('sw-button-clear') ) {
 
-			parameter = 'wcsw-clear';
+			parameter = 'sw-clear';
 			fn = clear;
 
 		}
@@ -49,7 +49,7 @@
 		// Sends the AJAX request.
 		$.ajax({
 			url: ajaxURL,
-			data: 'action=wcsw_ajax&' + parameter + '=' + id + '&nonce-token=' + nonce + '&wcsw-ajax=1',
+			data: 'action=sw_ajax&' + parameter + '=' + id + '&nonce-token=' + nonce + '&sw-ajax=1',
 			success: function(result) {
 
 				// Runs the corresponding function.
@@ -64,7 +64,7 @@
 	function add(btn, id, result) {
 
 		// Replace the "Add to wishlist" button with the "Remove from wishlist" button.
-		btn.siblings($('.wcsw-button-remove')).show();
+		btn.siblings($('.sw-button-remove')).show();
 		btn.hide();
 
 		if ( isSinglePage ) {
@@ -75,7 +75,7 @@
 		}
 
 		// Event.
-		let eventAdd = new CustomEvent('wcsw_add', {
+		let eventAdd = new CustomEvent('sw_add', {
 			detail: {
 				btn: btn,
 				id: id,
@@ -94,7 +94,7 @@
 		if ( isProductPage ) {
 
 			// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
-			btn.siblings($('.wcsw-button-add')).show();
+			btn.siblings($('.sw-button-add')).show();
 			btn.hide();
 
 			if ( isSinglePage ) {
@@ -110,26 +110,26 @@
 		if ( isAccountPage ) {
 
 			// Remove row by ID.
-			$('.wcsw-tr-' + id).remove();
+			$('.sw-tr-' + id).remove();
 
 			// Display a notice.
 			$('#content .col-full > .woocommerce').html(result);
 
 			// If the last product was removed.
-			if ( $('.wcsw-table tbody tr').length < 1 ) {
+			if ( $('.sw-table tbody tr').length < 1 ) {
 
 				// Shows notice.
 				$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
 
 				// Removes table.
-				$('.wcsw-table').remove();
+				$('.sw-table').remove();
 
 			}
 
 		}
 
 		// Event.
-		let eventRemove = new CustomEvent('wcsw_remove', {
+		let eventRemove = new CustomEvent('sw_remove', {
 			detail: {
 				btn: btn,
 				id: id,
@@ -148,12 +148,12 @@
 
 		$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
 
-		$('.wcsw-table').remove();
+		$('.sw-table').remove();
 
 		btn.remove();
 
 		// Event.
-		let eventClear = new CustomEvent('wcsw_clear', {
+		let eventClear = new CustomEvent('sw_clear', {
 			detail: {
 				btn: btn,
 				id: id,

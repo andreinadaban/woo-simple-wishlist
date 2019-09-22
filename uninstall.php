@@ -18,8 +18,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  *
  * @since  1.0.0
  */
-if ( get_option( 'wcsw_version' ) ) {
+if ( get_option( 'sw_version' ) ) {
 
-	delete_option( 'wcsw_version' );
+	delete_option( 'sw_version' );
 
 }

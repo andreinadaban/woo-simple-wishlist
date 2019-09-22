@@ -1,6 +1,6 @@
 <?php
 
-namespace WCSW;
+namespace SW;
 
 /**
  * Plugin Name:    Simple Wishlist for WooCommerce
@@ -11,7 +11,7 @@ namespace WCSW;
  * Author URI:     http://andreinadaban.ro
  * License:        GPL-2.0+
  * License URI:    http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:    wcsw
+ * Text Domain:    sw
  * Domain Path:    /languages
  */
 
