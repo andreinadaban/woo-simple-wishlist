@@ -4,11 +4,11 @@ namespace SW;
 
 /**
  * Plugin Name:    Simple Wishlist for WooCommerce
- * Plugin URI:     https://github.com/andreinadaban/simple-wishlist-woocommerce
+ * Plugin URI:     https://github.com/andreinadaban/simple-wishlist-for-woocommerce
  * Description:    A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
  * Version:        1.0.0
  * Author:         Andrei Nadaban
- * Author URI:     http://andreinadaban.ro
+ * Author URI:     https://andreinadaban.ro
  * License:        GPL-2.0+
  * License URI:    http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:    sw

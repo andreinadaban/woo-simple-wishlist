@@ -224,7 +224,7 @@ class Wishlist {
 		$products = $wishlist_data;
 
 		// Tries to get the custom template.
-		$custom_template = get_template_directory() . '/simple-wishlist-woocommerce/wishlist.php';
+		$custom_template = get_template_directory() . '/simple-wishlist-for-woocommerce/wishlist.php';
 
 		if ( file_exists( $custom_template ) ) {
 
