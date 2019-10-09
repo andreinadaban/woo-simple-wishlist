@@ -1,6 +1,6 @@
 # Simple Wishlist for WooCommerce
 
-A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
+A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and action and filter hooks for easy customization.
 
 ## Features
 
@@ -15,7 +15,9 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 
 ## Usage
 
-Out of the box, the plugin provides an add to wishlist and a remove from wishlist button under each product, on both archive pages and single pages. It also provides a new section under My Account, where the wishlist content is displayed.
+Out of the box, the plugin provides an add to wishlist and a remove from wishlist button under each product, on both archive and single pages. It also provides a new section under My Account, where the wishlist content is displayed.
+
+Additional functionality can be created using the available action and filter hooks, functions or by overriding the default template.
 
 ## Documentation
 
@@ -148,10 +150,6 @@ add_filter( 'sw_save_data', function( $data ) {
         <tr>
             <td><code>\SW\button_add_remove( $product_id );</code></td>
             <td>Displays the add and remove buttons. Pass the product ID or the parent product ID in the case of variable products.</td>
-        </tr>
-        <tr>
-            <td><code>\SW\button_clear();</code></td>
-            <td>Displays the clear wishlist button.</td>
         </tr>
         <tr>
             <td><code>\SW\load_template();</code></td>
