@@ -47,7 +47,7 @@ do_action( 'sw_before_table' );
 
             <tr class="sw-tr-<?php echo $product_id; ?>">
 
-	            <?php do_action( 'sw_before_td_thumb' ); ?>
+	            <?php do_action( 'sw_before_td_thumb', $product_data ); ?>
 
                 <td class="sw-thumb">
 
@@ -67,7 +67,7 @@ do_action( 'sw_before_table' );
 
                 </td>
 
-                <?php do_action( 'sw_after_td_thumb' ); ?>
+                <?php do_action( 'sw_after_td_thumb', $product_data ); ?>
 
                 <td class="sw-title">
 
@@ -87,7 +87,7 @@ do_action( 'sw_before_table' );
 
                 </td>
 
-                <?php do_action( 'sw_after_td_title' ); ?>
+                <?php do_action( 'sw_after_td_title', $product_data ); ?>
 
                 <td class="sw-actions">
 
@@ -95,7 +95,7 @@ do_action( 'sw_before_table' );
 
                 </td>
 
-	            <?php do_action( 'sw_after_td_actions' ); ?>
+	            <?php do_action( 'sw_after_td_actions', $product_data ); ?>
 
             </tr>
 
