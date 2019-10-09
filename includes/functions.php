@@ -30,15 +30,6 @@ function button_add_remove( $product_id = false ) {
 }
 
 /**
- * Shows the Clear wishlist button HTML.
- *
- * @since    1.0.0
- */
-function button_clear() {
-	core()->get_public()->button_clear();
-}
-
-/**
  * Loads the wishlist template.
  *
  * @since    1.0.0
