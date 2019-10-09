@@ -70,7 +70,7 @@
 		if ( isSinglePage ) {
 
 			// Display a notice.
-			$('#content .col-full > .woocommerce').html(result);
+			$('.woocommerce-notices-wrapper').html(result);
 
 		}
 
@@ -100,7 +100,7 @@
 			if ( isSinglePage ) {
 
 				// Display a notice.
-				$('#content .col-full > .woocommerce').html(result);
+				$('.woocommerce-notices-wrapper').html(result);
 
 			}
 
@@ -113,7 +113,7 @@
 			$('.sw-tr-' + id).remove();
 
 			// Display a notice.
-			$('#content .col-full > .woocommerce').html(result);
+			$('.woocommerce-notices-wrapper').html(result);
 
 			// If the last product was removed.
 			if ( $('.sw-table tbody tr').length < 1 ) {
@@ -144,7 +144,7 @@
 	// The code to run when the "Clear wishlist" button is clicked.
 	function clear(btn, id, result) {
 
-		$('#content .col-full > .woocommerce').html(result);
+		$('.woocommerce-notices-wrapper').html(result);
 
 		$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
 
