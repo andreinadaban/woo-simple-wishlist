@@ -80,7 +80,7 @@ class Wishlist {
 
 		$nonce_token = wp_create_nonce( 'sw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
-		$text        = esc_html__( $this->core_config['button_add_label'], 'sw' );
+		$text        = esc_html( $this->core_config['button_add_label'] );
 		$icon        = file_get_contents( $this->core_config['button_add_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
@@ -107,7 +107,7 @@ class Wishlist {
 
 		$nonce_token = wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
-		$text        = esc_html__( $this->core_config['button_remove_label'], 'sw' );
+		$text        = esc_html( $this->core_config['button_remove_label'] );
 		$icon        = file_get_contents( $this->core_config['button_remove_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
@@ -136,7 +136,7 @@ class Wishlist {
 		}
 
 		$nonce_token = wp_create_nonce( 'sw_clear_wishlist' );
-		$text        = esc_html__( $this->core_config['button_clear_label'], 'sw' );
+		$text        = esc_html( $this->core_config['button_clear_label'] );
 		$icon        = file_get_contents( $this->core_config['button_clear_icon'] );
 		$label       = $this->create_label( $icon, $text );
 
@@ -192,7 +192,7 @@ class Wishlist {
 		$items_1 = array_slice( $items, 0, $position, true );
 		$items_2 = array_slice( $items, $position, null, true );
 
-		$items_1[ esc_html__( $this->core_config['endpoint'] ) ] = esc_html__( $this->core_config['menu_name'], 'sw' );
+		$items_1[ esc_html( $this->core_config['endpoint'] ) ] = esc_html( $this->core_config['menu_name'] );
 
 		$items = array_merge( $items_1, $items_2 );
 
@@ -380,8 +380,8 @@ class Wishlist {
 	public function get_empty_wishlist_notice() {
 
 		$url     = wc_get_page_permalink( 'shop' );
-		$label   = esc_html__( $this->core_config['message_empty_label'], 'sw' );
-		$message = esc_html__( $this->core_config['message_empty'], 'sw' );
+		$label   = esc_html( $this->core_config['message_empty_label'] );
+		$message = esc_html( $this->core_config['message_empty'] );
 
 		return sprintf(
 			'<div class="%s"><a class="%s" href="%s">%s</a>%s</div>',
@@ -406,14 +406,14 @@ class Wishlist {
 			'<a href="%s" class="%s">%s</a>%s',
 			wc_get_account_endpoint_url( $this->core_config['endpoint'] ),
 			'button wc-forward',
-			esc_html__( $this->core_config['message_add_view'], 'sw' ),
-			esc_html__( $this->core_config['message_add_success'], 'sw' )
+			esc_html( $this->core_config['message_add_view'] ),
+			esc_html( $this->core_config['message_add_success'] )
 		);
-		$add_error_message      = esc_html__( $this->core_config['message_add_error'], 'sw' );
-		$remove_success_message = esc_html__( $this->core_config['message_remove_success'], 'sw' );
-		$remove_error_message   = esc_html__( $this->core_config['message_remove_error'], 'sw' );
-		$clear_success_message  = esc_html__( $this->core_config['message_clear_success'], 'sw' );
-		$clear_error_message    = esc_html__( $this->core_config['message_clear_error'], 'sw' );
+		$add_error_message      = esc_html( $this->core_config['message_add_error'] );
+		$remove_success_message = esc_html( $this->core_config['message_remove_success'] );
+		$remove_error_message   = esc_html( $this->core_config['message_remove_error'] );
+		$clear_success_message  = esc_html( $this->core_config['message_clear_success'] );
+		$clear_error_message    = esc_html( $this->core_config['message_clear_error'] );
 
 		// Adds a WC notice only if the request was NOT made with AJAX.
 		if ( ! $this->is_get_request( 'sw-ajax' ) ) {
