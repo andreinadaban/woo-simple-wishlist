@@ -1,6 +1,6 @@
 # Simple Wishlist for WooCommerce
 
-A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and action and filter hooks for easy customization.
+A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and hooks for easy customization.
 
 ## Features
 
@@ -32,9 +32,9 @@ Additional functionality can be created using the available action and filter ho
 
 The default template used on the My Account page is located at `templates/wishlist.php`. Similar to WooCommerce templates, you can override it by copying it in your theme directory at `simple-wishlist-for-woocommerce/wishlist.php`.
 
-### Actions
+### Action hooks
 
-The following actions are present in the template used on the My Account page.
+The following action hooks are present in the template used on the My Account page.
 
 ```
 sw_before_table
