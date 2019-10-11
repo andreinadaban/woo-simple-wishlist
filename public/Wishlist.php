@@ -26,12 +26,7 @@ namespace SW;
  * @since    1.0.0
  */
 
-/**
- * If this file is called directly, exit.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * The public wishlist class.
@@ -226,35 +221,35 @@ class Wishlist {
 	 */
 	public function load_template() {
 
-		$wishlist_data = $this->get_data_array();
-
-		// Shows the notice if there are no products in the wishlist...
-		if ( ! $wishlist_data || empty( $wishlist_data ) ) {
-
-			echo $this->get_empty_wishlist_notice();
-
-			// ...and stops here.
-			return;
-
+		// If requested via AJAX.
+		if ( $this->is_get_request( 'sw-ajax' ) ) {
+			ob_start();
 		}
 
 		// This variable is used inside the template.
-		$products = $wishlist_data;
+		$products = $this->get_data_array();
 
-		// Tries to get the custom template.
+		// Loads the selected template.
+		require $this->select_template();
+
+		// Returns the template content if requested via AJAX.
+		if ( $this->is_get_request( 'sw-ajax' ) ) {
+			return ob_get_clean();
+		}
+
+	}
+
+	/**
+	 * Selects the template to be used.
+	 *
+	 * @since     1.0.0
+	 * @access    private
+	 */
+	private function select_template() {
+
 		$custom_template = get_template_directory() . '/simple-wishlist-for-woocommerce/wishlist.php';
 
-		if ( file_exists( $custom_template ) ) {
-
-			// Loads the custom template if one exists.
-			require $custom_template;
-
-		} else {
-
-			// Loads the default template.
-			require DIR . 'templates/wishlist.php';
-
-		}
+		return file_exists( $custom_template ) ? $custom_template : DIR . 'templates/wishlist.php';
 
 	}
 
@@ -438,21 +433,37 @@ class Wishlist {
 
 			// Success.
 			if ( $result ) {
+
 				wc_add_notice( ${$type . '_success_message'}, 'success' );
-				// Failure.
+
+			// Failure.
 			} else {
+
 				wc_add_notice( ${$type . '_error_message'}, 'error' );
+
 			}
 
 		} else {
 
+			$output = array();
+
 			// Success.
 			if ( $result ) {
-				printf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
-				// Failure.
+
+				$output['status'] = (BOOL) $result;
+				$output['notice'] = sprintf( '<div class="woocommerce-message">%s</div>', ${$type . '_success_message'} );
+
+			// Failure.
 			} else {
-				printf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
+
+				$output['status'] = (BOOL) $result;
+				$output['notice'] = sprintf( '<div class="woocommerce-error">%s</div>', ${$type . '_error_message'} );
+
 			}
+
+			$output['template'] = $this->load_template();
+
+			echo json_encode( $output );
 
 			// Prevents other output.
 			exit;

@@ -24,107 +24,118 @@
  * @since    1.0.0
  */
 
-/**
- * If this file is called directly, exit.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-do_action( 'sw_before_table' );
+defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<table class="sw-table">
+<div class="sw-content">
 
-    <thead class="sw-thead">
+    <?php
 
-        <tr>
+    if ( ! $products || empty( $products ) ) {
 
-	        <?php do_action( 'sw_before_th_thumb' ); ?>
+	    echo $this->get_empty_wishlist_notice();
 
-            <th></th>
+    } else {
 
-            <?php do_action( 'sw_after_th_thumb' ); ?>
+	    do_action( 'sw_before_table' );
 
-            <th><?php _e( 'Product', 'sw' ); ?></th>
+    ?>
 
-            <?php do_action( 'sw_after_th_title' ); ?>
+        <table class="sw-table">
 
-            <th></th>
+            <thead class="sw-thead">
 
-        </tr>
+                <tr>
 
-    </thead>
+                    <?php do_action( 'sw_before_th_thumb' ); ?>
 
-    <tbody class="sw-tbody">
+                    <th></th>
 
-        <?php do_action( 'sw_after_tbody_start' ); ?>
+                    <?php do_action( 'sw_after_th_thumb' ); ?>
 
-        <?php foreach ( $products as $product_id => $product_data ) { ?>
+                    <th><?php _e( 'Product', 'sw' ); ?></th>
 
-            <tr class="sw-tr-<?php echo $product_id; ?>">
+                    <?php do_action( 'sw_after_th_title' ); ?>
 
-	            <?php do_action( 'sw_before_td_thumb', $product_data ); ?>
+                    <th></th>
 
-                <td class="sw-thumb">
+                </tr>
 
-	                <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
+            </thead>
 
-                        <a href="<?php echo get_the_permalink( $product_id ); ?>">
+            <tbody class="sw-tbody">
 
-                            <img src="<?php echo get_the_post_thumbnail_url( $product_id, 'woocommerce_gallery_thumbnail' ) ?>" alt="<?php echo get_the_title( $product_id ); ?>">
+                <?php do_action( 'sw_after_tbody_start' ); ?>
 
-                        </a>
+                <?php foreach ( $products as $product_id => $product_data ) { ?>
 
-	                <?php } else { ?>
+                    <tr class="sw-tr-<?php echo $product_id; ?>">
 
-                        <div><img src="<?php echo wc_placeholder_img_src(); ?>" alt=""></div>
+                        <?php do_action( 'sw_before_td_thumb', $product_data ); ?>
 
-	                <?php } ?>
+                        <td class="sw-thumb">
 
-                </td>
+                            <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
-                <?php do_action( 'sw_after_td_thumb', $product_data ); ?>
+                                <a href="<?php echo get_the_permalink( $product_id ); ?>">
 
-                <td class="sw-title">
+                                    <img src="<?php echo get_the_post_thumbnail_url( $product_id, 'woocommerce_gallery_thumbnail' ) ?>" alt="<?php echo get_the_title( $product_id ); ?>">
 
-                    <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
+                                </a>
 
-                        <a href="<?php echo get_the_permalink( $product_id ); ?>">
+                            <?php } else { ?>
 
-                            <?php echo get_the_title( $product_id ); ?>
+                                <div><img src="<?php echo wc_placeholder_img_src(); ?>" alt=""></div>
 
-                        </a>
+                            <?php } ?>
 
-                    <?php } else { ?>
+                        </td>
 
-                        <div><?php echo $product_data['t'] . ' (' . __( 'no longer available', 'sw' ) . ')'; ?></div>
+                        <?php do_action( 'sw_after_td_thumb', $product_data ); ?>
 
-                    <?php } ?>
+                        <td class="sw-title">
 
-                </td>
+                            <?php if ( get_post( $product_id ) && get_post_status( $product_id ) === 'publish' ) { ?>
 
-                <?php do_action( 'sw_after_td_title', $product_data ); ?>
+                                <a href="<?php echo get_the_permalink( $product_id ); ?>">
 
-                <td class="sw-actions">
+                                    <?php echo get_the_title( $product_id ); ?>
 
-                    <a href="?sw-remove=<?php echo $product_id; ?>&nonce-token=<?php echo wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id ) ?>" class="sw-button sw-button-ajax sw-button-remove remove" title="<?php _e( 'Remove from wishlist', 'sw' ); ?>"></a>
+                                </a>
 
-                </td>
+                            <?php } else { ?>
 
-	            <?php do_action( 'sw_after_td_actions', $product_data ); ?>
+                                <div><?php echo $product_data['t'] . ' (' . __( 'no longer available', 'sw' ) . ')'; ?></div>
 
-            </tr>
+                            <?php } ?>
 
-        <?php } ?>
+                        </td>
 
-        <?php do_action( 'sw_before_tbody_end' ); ?>
+                        <?php do_action( 'sw_after_td_title', $product_data ); ?>
 
-    </tbody>
+                        <td class="sw-actions">
 
-	<?php do_action( 'sw_after_tbody' ); ?>
+                            <a href="?sw-remove=<?php echo $product_id; ?>&nonce-token=<?php echo wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id ) ?>" class="sw-button sw-button-ajax sw-button-remove remove" title="<?php _e( 'Remove from wishlist', 'sw' ); ?>"></a>
 
-</table>
+                        </td>
 
-<?php do_action( 'sw_after_table' );
+                        <?php do_action( 'sw_after_td_actions', $product_data ); ?>
+
+                    </tr>
+
+                <?php } ?>
+
+                <?php do_action( 'sw_before_tbody_end' ); ?>
+
+            </tbody>
+
+            <?php do_action( 'sw_after_tbody' ); ?>
+
+        </table>
+
+        <?php do_action( 'sw_after_table' ); ?>
+
+    <?php } ?>
+
+</div>

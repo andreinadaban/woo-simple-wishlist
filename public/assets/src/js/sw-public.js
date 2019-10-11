@@ -20,11 +20,25 @@
 
 	'use strict';
 
-	$('.sw-button-ajax').click(function(e) {
+	$(document).click(function(e) {
+
+		if ( ! $(e.target).hasClass('sw-button-ajax') && ! $(e.target).parent().hasClass('sw-button-ajax') ) {
+			return;
+		}
 
 		e.preventDefault();
 
-		var thisBtn = $(this);
+		var thisBtn;
+
+		if ( $(e.target).hasClass('sw-button-ajax') ) {
+			thisBtn = $(e.target);
+		}
+
+		if ( $(e.target).parent().hasClass('sw-button-ajax') ) {
+			thisBtn = $(e.target).parent();
+		}
+
+		var href = thisBtn.attr('href');
 
 		// The ID of the product.
 		// This is stored inside the "href" attribute of the button, however it needs to be extracted.
@@ -40,35 +54,40 @@
 		var fn;
 
 		if ( thisBtn.hasClass('sw-button-add') ) {
-
 			parameter = 'sw-add';
 			fn = add;
-
 		}
 
 		if ( thisBtn.hasClass('sw-button-remove') ) {
-
 			parameter = 'sw-remove';
 			fn = remove;
-
 		}
 
 		if ( thisBtn.hasClass('sw-button-clear') ) {
-
 			parameter = 'sw-clear';
 			fn = clear;
-
 		}
 
-		// The extracted ID of the product.
-		id    = parseInt(getAllUrlParams(thisBtn.attr('href'))[parameter]);
-		nonce = getAllUrlParams(thisBtn.attr('href'))['nonce-token'];
+		// The ID of the product.
+		id = parseInt(getAllUrlParams(href)[parameter]);
+
+		// The user nonce.
+		nonce = getAllUrlParams(href)['nonce-token'];
 
 		// Sends the AJAX request.
 		$.ajax({
 			url: ajaxURL,
 			data: 'action=sw_ajax&' + parameter + '=' + id + '&nonce-token=' + nonce + '&sw-ajax=1',
 			success: function(result) {
+
+				result = JSON.parse(result);
+
+				var element = $('.sw-content');
+
+				// Updates the template content.
+				if ( element.length > 0 ) {
+					element.replaceWith(result.template);
+				}
 
 				// Runs the corresponding function.
 				fn(thisBtn, id, result);
@@ -81,19 +100,24 @@
 	// The code to run when the "Add to wishlist" button is clicked.
 	function add(btn, id, result) {
 
-		// Replace the "Add to wishlist" button with the "Remove from wishlist" button.
-		btn.siblings($('.sw-button-remove')).show();
-		btn.hide();
+		// If the operation is successful.
+		if ( result.status ) {
+
+			// Replace the "Add to wishlist" button with the "Remove from wishlist" button.
+			btn.siblings($('.sw-button-remove')).show();
+			btn.hide();
+
+		}
 
 		if ( isSinglePage ) {
 
 			// Display a notice.
-			$('.woocommerce-notices-wrapper').html(result);
+			$('.woocommerce-notices-wrapper').html(result.notice);
 
 		}
 
 		// Event.
-		let eventAdd = new CustomEvent('sw_add', {
+		var eventAdd = new CustomEvent('sw_add', {
 			detail: {
 				btn: btn,
 				id: id,
@@ -111,14 +135,19 @@
 		// If on a product page.
 		if ( isProductPage ) {
 
-			// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
-			btn.siblings($('.sw-button-add')).show();
-			btn.hide();
+			// If the operation is successful.
+			if ( result.status ) {
+
+				// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
+				btn.siblings($('.sw-button-add')).show();
+				btn.hide();
+
+			}
 
 			if ( isSinglePage ) {
 
 				// Display a notice.
-				$('.woocommerce-notices-wrapper').html(result);
+				$('.woocommerce-notices-wrapper').html(result.notice);
 
 			}
 
@@ -127,27 +156,13 @@
 		// If on the account page.
 		if ( isAccountPage ) {
 
-			// Remove row by ID.
-			$('.sw-tr-' + id).remove();
-
 			// Display a notice.
-			$('.woocommerce-notices-wrapper').html(result);
-
-			// If the last product was removed.
-			if ( $('.sw-table tbody tr').length < 1 ) {
-
-				// Shows notice.
-				$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
-
-				// Removes table.
-				$('.sw-table').remove();
-
-			}
+			$('.woocommerce-notices-wrapper').html(result.notice);
 
 		}
 
 		// Event.
-		let eventRemove = new CustomEvent('sw_remove', {
+		var eventRemove = new CustomEvent('sw_remove', {
 			detail: {
 				btn: btn,
 				id: id,
@@ -162,16 +177,10 @@
 	// The code to run when the "Clear wishlist" button is clicked.
 	function clear(btn, id, result) {
 
-		$('.woocommerce-notices-wrapper').html(result);
-
-		$('.woocommerce-MyAccount-content').prepend(emptyWishlistNotice);
-
-		$('.sw-table').remove();
-
-		btn.remove();
+		$('.woocommerce-notices-wrapper').html(result.notice);
 
 		// Event.
-		let eventClear = new CustomEvent('sw_clear', {
+		var eventClear = new CustomEvent('sw_clear', {
 			detail: {
 				btn: btn,
 				id: id,
