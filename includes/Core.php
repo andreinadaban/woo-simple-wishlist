@@ -1,19 +1,43 @@
 <?php
 
+/**
+ * Simple Wishlist for WooCommerce
+ * Copyright (C) 2018-2019 Andrei Nadaban
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 namespace SW;
 
 /**
  * The core plugin class.
  *
- * @since    1.0.0
+ * Copyright (C) 2019 Devin Vinson, Josh Eaton, Ulrich Pogson, Brad Vincent
+ *
+ * Modifications Copyright (C) 2018-2019 Andrei Nadaban
+ *
+ * Changed the class and file name, added, removed and updated methods and changed comments.
+ *
+ * @since     1.0.0
+ * @author    Devin Vinson
+ * @author    Josh Eaton
+ * @author    Ulrich Pogson
+ * @author    Brad Vincent
+ * @link      https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  */
 
-/**
- * If this file is called directly, exit.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * The core plugin class.
@@ -47,7 +71,7 @@ class Core {
 	private $config;
 
 	/**
-	 * The loader that's responsible for registering all the hooks.
+	 * The loader that registers all actions and filters.
 	 *
 	 * @since    1.0.0
 	 * @var      object    $loader
@@ -163,24 +187,19 @@ class Core {
 	}
 
 	/**
-	 * Loads the required dependencies.
+	 * Loads the dependencies.
 	 *
 	 * @since     1.0.0
 	 * @access    private
 	 */
 	private function load_dependencies() {
 
-		// The class responsible for orchestrating the actions and filters of the plugin.
 		require_once DIR . 'includes/Loader.php';
-
-		// The class responsible for defining internationalization functionality.
 		require_once DIR . 'includes/I18n.php';
 
-		// The classes responsible for defining all actions that occur in the public side of the site.
 		require_once DIR . 'public/Wishlist.php';
 		require_once DIR . 'public/Assets.php';
 
-		// The class responsible for defining all actions that occur in the admin area.
 		require_once DIR . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
