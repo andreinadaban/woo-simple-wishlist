@@ -22,7 +22,7 @@
 
 	$(document).click(function(e) {
 
-		if ( ! $(e.target).hasClass('sw-button-ajax') && ! $(e.target).parent().hasClass('sw-button-ajax') ) {
+		if ( ! $(e.target).hasClass('sw-button-ajax') && $(e.target).parents('.sw-button-ajax').length < 1 ) {
 			return;
 		}
 
@@ -34,8 +34,8 @@
 			thisBtn = $(e.target);
 		}
 
-		if ( $(e.target).parent().hasClass('sw-button-ajax') ) {
-			thisBtn = $(e.target).parent();
+		if ( $(e.target).parents('.sw-button-ajax').length > 0 ) {
+			thisBtn = $(e.target).parents('.sw-button-ajax');
 		}
 
 		var href = thisBtn.attr('href');
