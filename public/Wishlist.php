@@ -98,9 +98,10 @@ class Wishlist {
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
-			' <a href="?sw-add=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			' <a href="?sw-add=%s&nonce-token=%s" id="sw-button-add-%s" class="%s" style="%s" title="%s">%s</a>',
 			$product_id,
 			$nonce_token,
+			$product_id,
 			'sw-button sw-button-ajax sw-button-add',
 			$style,
 			$text,
@@ -125,9 +126,10 @@ class Wishlist {
 		$label       = $this->create_label( $icon, $text );
 
 		return sprintf(
-			' <a href="?sw-remove=%s&nonce-token=%s" class="%s" style="%s" title="%s">%s</a>',
+			' <a href="?sw-remove=%s&nonce-token=%s" id="sw-button-remove-%s" class="%s" style="%s" title="%s">%s</a>',
 			$product_id,
 			$nonce_token,
+			$product_id,
 			'sw-button sw-button-ajax sw-button-remove',
 			$style,
 			$text,

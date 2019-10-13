@@ -139,8 +139,8 @@
 			if ( result.status ) {
 
 				// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
-				btn.siblings($('.sw-button-add')).show();
-				btn.hide();
+				$('#sw-button-add-' + id).show();
+				$('#sw-button-remove-' + id).hide();
 
 			}
 
@@ -178,6 +178,20 @@
 	function clear(btn, id, result) {
 
 		$('.woocommerce-notices-wrapper').html(result.notice);
+
+		// If on a product page.
+		if ( isProductPage ) {
+
+			// If the operation is successful.
+			if ( result.status ) {
+
+				// Replace the "Remove from wishlist" button with the "Add to wishlist" button.
+				$('.sw-button-add').show();
+				$('.sw-button-remove').hide();
+
+			}
+
+		}
 
 		// Event.
 		var eventClear = new CustomEvent('sw_clear', {
