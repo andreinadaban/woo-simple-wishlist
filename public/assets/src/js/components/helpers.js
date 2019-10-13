@@ -28,12 +28,7 @@ import {clear} from './clear';
 export function getButton(e) {
 
     let $ = jQuery;
-
-    if ( ! $(e.target).hasClass('sw-button-ajax') && $(e.target).parents('.sw-button-ajax').length < 1 ) {
-        return false;
-    }
-
-    let button;
+    let button = false;
 
     if ( $(e.target).hasClass('sw-button-ajax') ) {
         button = $(e.target);
@@ -50,7 +45,7 @@ export function getButton(e) {
 /**
  * Gets the button parameter and decides what function to run when the button is clicked.
  */
-export function getParameterAndFunction(button) {
+export function getAction(button) {
 
     let output = {};
 

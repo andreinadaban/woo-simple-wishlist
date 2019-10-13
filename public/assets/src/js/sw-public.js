@@ -18,7 +18,7 @@
 
 'use strict';
 
-import {getButton, getParameterAndFunction, getURLParameters} from './components/helpers';
+import {getButton, getAction, getURLParameters} from './components/helpers';
 
 (function($) {
 
@@ -33,26 +33,15 @@ import {getButton, getParameterAndFunction, getURLParameters} from './components
 
 		e.preventDefault();
 
-		// The button link that contains the necessary parameters.
-		let href = thisBtn.attr('href');
-
-		// Cache.
-		let parameterAndFunction = getParameterAndFunction(thisBtn);
-		let URLParameters = getURLParameters(href);
-
-		// The parameter name.
-		let parameter = parameterAndFunction.parameter;
-
-		// The function that is meant to run.
-		let fn = parameterAndFunction.fn;
-
-		let productID = parseInt(URLParameters[parameter]);
-		let nonce = URLParameters['nonce-token'];
+		let action     = getAction(thisBtn);
+		let parameters = getURLParameters(thisBtn.attr('href'));
+		let productID  = parseInt(parameters[action.parameter]);
+		let nonce      = parameters['nonce-token'];
 
 		// Sends the AJAX request.
 		$.ajax({
 			url: ajaxURL,
-			data: 'action=sw_ajax&' + parameter + '=' + productID + '&nonce-token=' + nonce + '&sw-ajax=1',
+			data: 'action=sw_ajax&' + action.parameter + '=' + productID + '&nonce-token=' + nonce + '&sw-ajax=1',
 			success: function(result) {
 
 				result = JSON.parse(result);
@@ -65,7 +54,7 @@ import {getButton, getParameterAndFunction, getURLParameters} from './components
 				}
 
 				// Runs the corresponding function.
-				fn(thisBtn, productID, result);
+				action.fn(thisBtn, productID, result);
 
 			}
 		});
