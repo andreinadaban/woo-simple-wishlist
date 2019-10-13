@@ -45,8 +45,8 @@ function run() {
  *
  * @since    1.0.0
  */
-function button_add_remove( $product_id = false ) {
-	core()->get_public()->button_add_remove( $product_id );
+function the_buttons( $product_id = false ) {
+	core()->get_public()->the_buttons( $product_id );
 }
 
 /**
@@ -54,8 +54,8 @@ function button_add_remove( $product_id = false ) {
  *
  * @since    1.0.0
  */
-function load_template() {
-	core()->get_public()->load_template();
+function the_template() {
+	core()->get_public()->the_template();
 }
 
 /**

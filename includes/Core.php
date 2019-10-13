@@ -229,22 +229,22 @@ class Core {
 		}
 
 		if ( $this->config['button_default'] ) {
-			$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'button_add_remove' );
+			$this->loader->add_action( 'woocommerce_after_add_to_cart_button', $this->public, 'the_buttons' );
 		}
 
 		if ( $this->config['button_default'] && $this->config['button_in_archive'] ) {
-			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'button_add_remove', 12 );
+			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'the_buttons', 12 );
 		}
 
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'load_template' );
-		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'add_menu', 10, 1 );
+		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'the_template' );
+		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'menu', 10, 1 );
 
 		if ( $this->config['button_default'] ) {
-			$this->loader->add_action( 'sw_after_table', $this->public, 'button_clear' );
+			$this->loader->add_action( 'sw_after_table', $this->public, 'the_clear_button' );
 		}
 
-		$this->loader->add_action( 'wp_ajax_sw_ajax', $this->public, 'process_ajax_request' );
-		$this->loader->add_action( 'wp_footer', $this->public, 'add_js_variables' );
+		$this->loader->add_action( 'wp_ajax_sw_ajax', $this->public, 'ajax' );
+		$this->loader->add_action( 'wp_footer', $this->public, 'js' );
 
 	}
 

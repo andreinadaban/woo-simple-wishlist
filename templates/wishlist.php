@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
 
     if ( ! $products || empty( $products ) ) {
 
-	    echo $this->get_empty_wishlist_notice();
+	    $this->the_empty_notice();
 
     } else {
 

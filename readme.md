@@ -155,11 +155,11 @@ add_filter( 'sw_save_data', function( $data ) {
     </thead>
     <tbody>
         <tr>
-            <td><code>\SW\button_add_remove( $product_id );</code></td>
+            <td><code>\SW\the_buttons( $product_id );</code></td>
             <td>Displays the add and remove buttons. Pass the product ID or the parent product ID in the case of variable products.</td>
         </tr>
         <tr>
-            <td><code>\SW\load_template();</code></td>
+            <td><code>\SW\the_template();</code></td>
             <td>Loads the default or the custom template.</td>
         </tr>
         <tr>

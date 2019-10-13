@@ -60,7 +60,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function button_add_remove( $product_id = false ) {
+	public function the_buttons( $product_id = false ) {
 
 		if ( ! is_user_logged_in() ) {
 			return;
@@ -76,8 +76,8 @@ class Wishlist {
 
 		printf(
 			'<div class="sw-button-container">%s%s</div>',
-			$this->add_to_wishlist_button( $product_id, $is_in_wishlist ),
-			$this->remove_from_wishlist_button( $product_id, $is_in_wishlist )
+			$this->get_add_button( $product_id, $is_in_wishlist ),
+			$this->get_remove_button( $product_id, $is_in_wishlist )
 		);
 
 	}
@@ -89,13 +89,13 @@ class Wishlist {
 	 * @access    private
 	 * @return    string
 	 */
-	private function add_to_wishlist_button( $product_id, $is_in_wishlist ) {
+	private function get_add_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'sw_add_to_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? 'display: none; ' : '';
 		$text        = esc_html( $this->core_config['button_add_label'] );
 		$icon        = file_get_contents( $this->core_config['button_add_icon'] );
-		$label       = $this->create_label( $icon, $text );
+		$label       = $this->get_label( $icon, $text );
 
 		return sprintf(
 			' <a href="?sw-add=%s&nonce-token=%s" id="sw-button-add-%s" class="%s" style="%s" title="%s">%s</a>',
@@ -117,13 +117,13 @@ class Wishlist {
 	 * @access    private
 	 * @return    string
 	 */
-	private function remove_from_wishlist_button( $product_id, $is_in_wishlist ) {
+	private function get_remove_button( $product_id, $is_in_wishlist ) {
 
 		$nonce_token = wp_create_nonce( 'sw_remove_from_wishlist_' . $product_id );
 		$style       = $is_in_wishlist ? '' : 'display: none; ';
 		$text        = esc_html( $this->core_config['button_remove_label'] );
 		$icon        = file_get_contents( $this->core_config['button_remove_icon'] );
-		$label       = $this->create_label( $icon, $text );
+		$label       = $this->get_label( $icon, $text );
 
 		return sprintf(
 			' <a href="?sw-remove=%s&nonce-token=%s" id="sw-button-remove-%s" class="%s" style="%s" title="%s">%s</a>',
@@ -144,7 +144,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function button_clear() {
+	public function the_clear_button() {
 
 		if ( ! $this->core_config['button_clear'] ) {
 			return;
@@ -153,7 +153,7 @@ class Wishlist {
 		$nonce_token = wp_create_nonce( 'sw_clear_wishlist' );
 		$text        = esc_html( $this->core_config['button_clear_label'] );
 		$icon        = file_get_contents( $this->core_config['button_clear_icon'] );
-		$label       = $this->create_label( $icon, $text );
+		$label       = $this->get_label( $icon, $text );
 
 		printf(
 			' <a href="?sw-clear=1&nonce-token=%s" class="%s" title="%s">%s</a>',
@@ -172,7 +172,7 @@ class Wishlist {
 	 * @access    private
 	 * @return    string
 	 */
-	private function create_label( $icon, $text ) {
+	private function get_label( $icon, $text ) {
 
 		switch ( $this->core_config['button_style'] ) {
 			case 'icon':
@@ -199,9 +199,8 @@ class Wishlist {
 	 * @access    public
 	 * @return    array
 	 */
-	public function add_menu( $items ) {
+	public function menu( $items ) {
 
-		// The menu item position.
 		$position = $this->core_config['menu_position'];
 
 		$items_1 = array_slice( $items, 0, $position, true );
@@ -221,7 +220,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function load_template() {
+	public function the_template() {
 
 		// If requested via AJAX.
 		if ( $this->is_get_request( 'sw-ajax' ) ) {
@@ -293,7 +292,7 @@ class Wishlist {
 		) );
 
 		// Tries to save to the database and shows a notice based on the result.
-		$this->display_notice( 'add', update_user_meta( get_current_user_id(), 'sw_data', json_encode( $wishlist_content ) ) );
+		$this->notice( 'add', update_user_meta( get_current_user_id(), 'sw_data', json_encode( $wishlist_content ) ) );
 
 	}
 
@@ -357,7 +356,7 @@ class Wishlist {
 		}
 
 		// Tries to save to the database and shows a notice based on the result.
-		$this->display_notice( 'remove', $result );
+		$this->notice( 'remove', $result );
 
 	}
 
@@ -381,7 +380,7 @@ class Wishlist {
 		}
 
 		// Tries to save to the database and shows a notice based on the result.
-		$this->display_notice( 'clear', delete_user_meta( get_current_user_id(), 'sw_data' ) );
+		$this->notice( 'clear', delete_user_meta( get_current_user_id(), 'sw_data' ) );
 
 	}
 
@@ -392,7 +391,7 @@ class Wishlist {
 	 * @access    public
 	 * @return    string
 	 */
-	public function get_empty_wishlist_notice() {
+	public function get_empty_notice() {
 
 		$url     = wc_get_page_permalink( 'shop' );
 		$label   = esc_html( $this->core_config['message_empty_label'] );
@@ -410,12 +409,22 @@ class Wishlist {
 	}
 
 	/**
+	 * Displays the empty wishlist notice HTML.
+	 *
+	 * @since     1.0.0
+	 * @access    public
+	 */
+	public function the_empty_notice() {
+		echo $this->get_empty_notice();
+	}
+
+	/**
 	 * Displays the appropriate notice.
 	 *
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function display_notice( $type, $result ) {
+	public function notice( $type, $result ) {
 
 		$add_success_message    = sprintf(
 			'<a href="%s" class="%s">%s</a>%s',
@@ -435,14 +444,10 @@ class Wishlist {
 
 			// Success.
 			if ( $result ) {
-
 				wc_add_notice( ${$type . '_success_message'}, 'success' );
-
 			// Failure.
 			} else {
-
 				wc_add_notice( ${$type . '_error_message'}, 'error' );
-
 			}
 
 		} else {
@@ -463,7 +468,7 @@ class Wishlist {
 
 			}
 
-			$output['template'] = $this->load_template();
+			$output['template'] = $this->the_template();
 
 			echo json_encode( $output );
 
@@ -480,7 +485,7 @@ class Wishlist {
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function add_js_variables() {
+	public function js() {
 
 		if ( ! is_user_logged_in() ) {
 			return;
@@ -540,9 +545,7 @@ EOT;
 	 * @return    array
 	 */
 	public function get_user_data( $user_id ) {
-
 		return json_decode( get_user_meta( $user_id, 'sw_data', true ), true );
-
 	}
 
 	/**
@@ -636,10 +639,8 @@ EOT;
 	 * @since     1.0.0
 	 * @access    public
 	 */
-	public function process_ajax_request() {
-
+	public function ajax() {
 		// No need for any further processing, however this is necessary for the "wp_ajax_" hook.
-
 	}
 
 }
