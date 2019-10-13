@@ -40,7 +40,7 @@ class Admin {
      *
      * @since    1.0.0
 	 */
-	public function check_dependencies() {
+	public function dependencies() {
 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
@@ -59,7 +59,7 @@ class Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_notices() {
+	public function notices() {
 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
