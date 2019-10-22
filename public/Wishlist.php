@@ -493,13 +493,7 @@ class Wishlist {
 
 		$ajax_url = get_admin_url() . 'admin-ajax.php';
 
-		echo <<<EOT
-			<script>
-			
-				var ajaxURL = '{$ajax_url}';
-			
-			</script>
-EOT;
+		echo "<script>var ajaxURL = '{$ajax_url}';</script>";
 
 	}
 
@@ -567,9 +561,7 @@ EOT;
 				$product_ids[] = $id;
 
 				if ( in_array( $product_id, $product_ids ) ) {
-
 					return true;
-
 				}
 
 			}

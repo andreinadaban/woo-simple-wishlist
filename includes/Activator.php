@@ -60,9 +60,7 @@ class Activator {
 
 		// Sets a transient that is used to flush the rewrite rules only once.
 		if ( ! get_transient( 'sw_flush' ) ) {
-
 			set_transient( 'sw_flush', '1', 0 );
-
 		}
 
 	}

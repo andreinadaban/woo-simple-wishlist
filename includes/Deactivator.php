@@ -54,9 +54,7 @@ class Deactivator {
 	public static function deactivate() {
 
 		if ( get_transient( 'sw_flush' ) ) {
-
 			delete_transient( 'sw_flush' );
-
 		}
 
 		flush_rewrite_rules();
