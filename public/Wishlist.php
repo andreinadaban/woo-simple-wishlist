@@ -250,7 +250,7 @@ class Wishlist {
 
 		$custom_template = get_template_directory() . '/simple-wishlist-for-woocommerce/wishlist.php';
 
-		return file_exists( $custom_template ) ? $custom_template : DIR . 'templates/wishlist.php';
+		return file_exists( $custom_template ) ? $custom_template : DIR . 'public/templates/wishlist.php';
 
 	}
 
