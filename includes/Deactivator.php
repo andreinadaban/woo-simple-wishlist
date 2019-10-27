@@ -23,18 +23,7 @@ namespace SW;
 /**
  * The deactivator class.
  *
- * Copyright (C) 2019 Devin Vinson, Josh Eaton, Ulrich Pogson, Brad Vincent
- *
- * Modifications Copyright (C) 2018-2019 Andrei Nadaban
- *
- * Changed the class and file name and comments.
- *
  * @since     1.0.0
- * @author    Devin Vinson
- * @author    Josh Eaton
- * @author    Ulrich Pogson
- * @author    Brad Vincent
- * @link      https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  */
 
 defined( 'ABSPATH' ) || exit;
