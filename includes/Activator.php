@@ -18,19 +18,40 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+namespace SW;
+
 /**
- * Fired when the plugin is uninstalled.
+ * The activator class.
+ *
+ * @since     1.0.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * The activator class.
  *
  * @since    1.0.0
  */
+class Activator {
 
-defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
+	/**
+	 * Runs on plugin activation.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function activate() {
 
-/**
- * Deletes the plugin data from the options table.
- *
- * @since  1.0.0
- */
-if ( get_option( 'sw_version' ) ) {
-	delete_option( 'sw_version' );
+		// If the required plugins are not active, the execution stops here.
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
+		// Sets a transient that is used to flush the rewrite rules only once.
+		if ( ! get_transient( 'sw_flush' ) ) {
+			set_transient( 'sw_flush', '1', 0 );
+		}
+
+	}
+
 }

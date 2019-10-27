@@ -18,19 +18,36 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-/**
- * Fired when the plugin is uninstalled.
- *
- * @since    1.0.0
- */
-
-defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
+namespace SW;
 
 /**
- * Deletes the plugin data from the options table.
+ * The deactivator class.
  *
- * @since  1.0.0
+ * @since     1.0.0
  */
-if ( get_option( 'sw_version' ) ) {
-	delete_option( 'sw_version' );
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * The deactivator class.
+ *
+ * @since     1.0.0
+ */
+class Deactivator {
+
+	/**
+	 * Runs on plugin deactivation.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function deactivate() {
+
+		if ( get_transient( 'sw_flush' ) ) {
+			delete_transient( 'sw_flush' );
+		}
+
+		flush_rewrite_rules();
+
+	}
+
 }

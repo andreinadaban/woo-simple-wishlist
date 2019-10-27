@@ -1,0 +1,50 @@
+msgid "The Simple Wishlist for WooCommerce plugin requires WooCommerce to be installed and active."
+msgstr ""
+
+msgid "Add to wishlist"
+msgstr ""
+
+msgid "Clear wishlist"
+msgstr ""
+
+msgid "Remove from wishlist"
+msgstr ""
+
+msgid "wishlist"
+msgstr ""
+
+msgid "Wishlist"
+msgstr ""
+
+msgid "The product was not added to your wishlist. Please try again."
+msgstr ""
+
+msgid "The product was successfully added to your wishlist."
+msgstr ""
+
+msgid "View wishlist"
+msgstr ""
+
+msgid "There are no products in the wishlist yet."
+msgstr ""
+
+msgid "Go shop"
+msgstr ""
+
+msgid "The wishlist was not cleared. Please try again."
+msgstr ""
+
+msgid "The wishlist was successfully cleared."
+msgstr ""
+
+msgid "The product was not removed from your wishlist. Please try again."
+msgstr ""
+
+msgid "The product was successfully removed from your wishlist."
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "no longer available"
+msgstr ""

@@ -18,19 +18,33 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+namespace SW;
+
 /**
- * Fired when the plugin is uninstalled.
+ * The assets class.
  *
  * @since    1.0.0
  */
 
-defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
- * Deletes the plugin data from the options table.
+ * The assets class.
  *
- * @since  1.0.0
+ * @since    1.0.0
  */
-if ( get_option( 'sw_version' ) ) {
-	delete_option( 'sw_version' );
+class Assets {
+
+	/**
+	 * Registers the JavaScript files for the public area.
+	 *
+	 * @since     1.0.0
+	 * @access    public
+	 */
+	public function enqueue_scripts() {
+
+		wp_enqueue_script( 'sw-public-js', plugin_dir_url( __FILE__ ) . 'assets/dist/js/sw-public.js', array( 'jquery' ), filemtime( DIR . 'public/assets/dist/js/sw-public.js' ), true );
+
+	}
+
 }
