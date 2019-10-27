@@ -132,7 +132,6 @@ class Core {
 		$this->config = $config;
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
@@ -195,15 +194,11 @@ class Core {
 	private function load_dependencies() {
 
 		require_once DIR . 'includes/Loader.php';
-		require_once DIR . 'includes/I18n.php';
-
 		require_once DIR . 'public/Wishlist.php';
 		require_once DIR . 'public/Assets.php';
-
 		require_once DIR . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
-		$this->i18n          = new I18n();
 		$this->public        = new Wishlist( $this->config );
 		$this->public_assets = new Assets();
 		$this->admin         = new Admin();
@@ -273,16 +268,6 @@ class Core {
 			add_option( 'sw_version', $this->version );
 		}
 
-	}
-
-	/**
-	 * Defines the locale for internationalization.
-	 *
-	 * @since     1.0.0
-	 * @access    private
-	 */
-	private function set_locale() {
-		$this->loader->add_action( 'plugins_loaded', $this->i18n, 'load_plugin_textdomain' );
 	}
 
 	/**

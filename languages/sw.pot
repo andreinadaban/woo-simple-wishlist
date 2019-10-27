@@ -1,67 +1,50 @@
-#: admin/Admin.php:66
 msgid "The Simple Wishlist for WooCommerce plugin requires WooCommerce to be installed and active."
 msgstr ""
 
-#: includes/Core.php:159
 msgid "Add to wishlist"
 msgstr ""
 
-#: includes/Core.php:162
 msgid "Clear wishlist"
 msgstr ""
 
-#: includes/Core.php:166
 msgid "Remove from wishlist"
 msgstr ""
 
-#: includes/Core.php:168
 msgid "wishlist"
 msgstr ""
 
-#: includes/Core.php:169
 msgid "Wishlist"
 msgstr ""
 
-#: includes/Core.php:171
 msgid "The product was not added to your wishlist. Please try again."
 msgstr ""
 
-#: includes/Core.php:172
 msgid "The product was successfully added to your wishlist."
 msgstr ""
 
-#: includes/Core.php:173
 msgid "View wishlist"
 msgstr ""
 
-#: includes/Core.php:174
 msgid "There are no products in the wishlist yet."
 msgstr ""
 
-#: includes/Core.php:175
 msgid "Go shop"
 msgstr ""
 
-#: includes/Core.php:176
 msgid "The wishlist was not cleared. Please try again."
 msgstr ""
 
-#: includes/Core.php:177
 msgid "The wishlist was successfully cleared."
 msgstr ""
 
-#: includes/Core.php:178
 msgid "The product was not removed from your wishlist. Please try again."
 msgstr ""
 
-#: includes/Core.php:179
 msgid "The product was successfully removed from your wishlist."
 msgstr ""
 
-#: templates/wishlist.php:57
 msgid "Product"
 msgstr ""
 
-#: templates/wishlist.php:109
 msgid "no longer available"
 msgstr ""

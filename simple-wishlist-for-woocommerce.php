@@ -63,6 +63,11 @@ register_activation_hook( __FILE__, array( __NAMESPACE__ . '\Activator', 'activa
 register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\Deactivator', 'deactivate' ) );
 
 /**
+ * Loads the translations.
+ */
+load_plugin_textdomain( 'sw', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+/**
  * The core plugin class.
  */
 require_once DIR . 'includes/Core.php';

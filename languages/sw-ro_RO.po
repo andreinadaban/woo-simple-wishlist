@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!"
+"=0)))?2:1));\n"
+"Language: ro\n"
+
+msgid ""
+"The Simple Wishlist for WooCommerce plugin requires WooCommerce to be "
+"installed and active."
+msgstr ""
+"Modulul Simple Wishlist for WooCommerce necesită instalarea și "
+"activarea WooCommerce."
+
+msgid "Add to wishlist"
+msgstr "Adaugă în wishlist"
+
+msgid "Clear wishlist"
+msgstr "Curăță wishlist"
+
+msgid "Remove from wishlist"
+msgstr "Șterge din wishlist"
+
+msgid "wishlist"
+msgstr ""
+
+msgid "Wishlist"
+msgstr ""
+
+msgid "The product was not added to your wishlist. Please try again."
+msgstr ""
+"Produsul nu a fost adăugat în wishlist. Vă rugăm să încercați din nou."
+
+msgid "The product was successfully added to your wishlist."
+msgstr "Produsul a fost adăugat în wishlist."
+
+msgid "View wishlist"
+msgstr "Vezi wishlist"
+
+msgid "There are no products in the wishlist yet."
+msgstr "Nu există produse în wishlist."
+
+msgid "Go shop"
+msgstr "Vezi magazin"
+
+msgid "The wishlist was not cleared. Please try again."
+msgstr "Wishlist-ul nu a fost curățat. Vă rugăm să încercați din nou."
+
+msgid "The wishlist was successfully cleared."
+msgstr "Wishlist-ul a fost curățat."
+
+msgid "The product was not removed from your wishlist. Please try again."
+msgstr ""
+"Produsul nu a fost șters din wishlist. Vă rugăm să încercați din nou."
+
+msgid "The product was successfully removed from your wishlist."
+msgstr "Produsul a fost șters din wishlist."
+
+msgid "Product"
+msgstr "Produs"
+
+msgid "no longer available"
+msgstr "nu mai este disponibil"
