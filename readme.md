@@ -20,7 +20,7 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 - PHP 7.3 or greater
 - MySQL 5.6 or greater or MariaDB 10.0 or greater
 
-Tested up to WordPress 5.2.4 and WooCommerce 3.7.1.
+Tested up to WordPress 5.3.2 and WooCommerce 3.8.1.
 
 ## Usage
 
@@ -62,14 +62,14 @@ Use the `sw_config` filter to change the default options. The default options ar
 ```
 array(
     'ajax'                    => true,
-    'button_add_icon'         => DIR . 'public/assets/dist/svg/heart-add.svg',
+    'button_add_icon'         => PLUGIN_DIR_PATH . 'public/assets/dist/svg/heart-add.svg',
     'button_add_label'        => __( 'Add to wishlist', 'sw' ),
     'button_clear'            => true,
-    'button_clear_icon'       => DIR . 'public/assets/dist/svg/clear.svg',
+    'button_clear_icon'       => PLUGIN_DIR_PATH . 'public/assets/dist/svg/clear.svg',
     'button_clear_label'      => __( 'Clear wishlist', 'sw' ),
     'button_default'          => true,
     'button_in_archive'       => true,
-    'button_remove_icon'      => DIR . 'public/assets/dist/svg/heart-remove.svg',
+    'button_remove_icon'      => PLUGIN_DIR_PATH . 'public/assets/dist/svg/heart-remove.svg',
     'button_remove_label'     => __( 'Remove from wishlist', 'sw' ),
     'button_style'            => 'icon_text',
     'endpoint'                => __( 'wishlist', 'sw' ),
