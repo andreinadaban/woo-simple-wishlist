@@ -48,7 +48,7 @@ class Admin {
 				unset( $_GET['activate'] );
 			}
 
-			deactivate_plugins( PLUGIN );
+			deactivate_plugins( PLUGIN_MAIN_FILE );
 
 		}
 

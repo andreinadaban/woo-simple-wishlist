@@ -120,8 +120,8 @@ class Core {
 	 */
 	private function __construct( $config ) {
 
-		if ( defined( 'VERSION' ) ) {
-			$this->version = VERSION;
+		if ( defined( 'PLUGIN_VERSION' ) ) {
+			$this->version = PLUGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -154,14 +154,14 @@ class Core {
 			// Creates the instance with the default options.
 			self::$instance = new Core( apply_filters( 'sw_config', array(
 				'ajax'                    => true,
-				'button_add_icon'         => DIR . 'public/assets/dist/svg/heart-add.svg',
+				'button_add_icon'         => PLUGIN_DIR_PATH . 'public/assets/dist/svg/heart-add.svg',
 				'button_add_label'        => __( 'Add to wishlist', 'sw' ),
 				'button_clear'            => true,
-				'button_clear_icon'       => DIR . 'public/assets/dist/svg/clear.svg',
+				'button_clear_icon'       => PLUGIN_DIR_PATH . 'public/assets/dist/svg/clear.svg',
 				'button_clear_label'      => __( 'Clear wishlist', 'sw' ),
 				'button_default'          => true,
 				'button_in_archive'       => true,
-				'button_remove_icon'      => DIR . 'public/assets/dist/svg/heart-remove.svg',
+				'button_remove_icon'      => PLUGIN_DIR_PATH . 'public/assets/dist/svg/heart-remove.svg',
 				'button_remove_label'     => __( 'Remove from wishlist', 'sw' ),
 				'button_style'            => 'icon_text',
 				'endpoint'                => __( 'wishlist', 'sw' ),
@@ -193,10 +193,10 @@ class Core {
 	 */
 	private function load_dependencies() {
 
-		require_once DIR . 'includes/Loader.php';
-		require_once DIR . 'public/Wishlist.php';
-		require_once DIR . 'public/Assets.php';
-		require_once DIR . 'admin/Admin.php';
+		require_once PLUGIN_DIR_PATH . 'includes/Loader.php';
+		require_once PLUGIN_DIR_PATH . 'public/Wishlist.php';
+		require_once PLUGIN_DIR_PATH . 'public/Assets.php';
+		require_once PLUGIN_DIR_PATH . 'admin/Admin.php';
 
 		$this->loader        = new Loader();
 		$this->public        = new Wishlist( $this->config );

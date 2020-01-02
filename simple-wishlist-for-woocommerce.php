@@ -38,23 +38,23 @@ defined( 'WPINC' ) || exit;
 /**
  * Current plugin version.
  */
-define( __NAMESPACE__ . '\VERSION', '1.0.0' );
+define( __NAMESPACE__ . 'PLUGIN_VERSION', '1.0.0' );
 
 /**
  * Plugin directory.
  */
-define( __NAMESPACE__ . '\DIR', plugin_dir_path( __FILE__ ) );
+define( __NAMESPACE__ . '\PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Plugin main file.
  */
-define( __NAMESPACE__ . '\PLUGIN', plugin_basename( __FILE__ ) );
+define( __NAMESPACE__ . '\PLUGIN_MAIN_FILE', plugin_basename( __FILE__ ) );
 
 /**
  * Loads the Activator and Deactivator classes.
  */
-require_once DIR . 'includes/Activator.php';
-require_once DIR . 'includes/Deactivator.php';
+require_once PLUGIN_DIR_PATH . 'includes/Activator.php';
+require_once PLUGIN_DIR_PATH . 'includes/Deactivator.php';
 
 /**
  * Hooks the Activator and Deactivator methods.
@@ -70,12 +70,12 @@ load_plugin_textdomain( 'sw', false, dirname( plugin_basename( __FILE__ ) ) . '/
 /**
  * The core plugin class.
  */
-require_once DIR . 'includes/Core.php';
+require_once PLUGIN_DIR_PATH . 'includes/Core.php';
 
 /**
  * The functions.
  */
-require_once DIR . 'includes/functions.php';
+require_once PLUGIN_DIR_PATH . 'includes/functions.php';
 
 /**
  * Runs the plugin after theme setup to allow developers to change the config array in the theme's functions.php file.
