@@ -20,7 +20,7 @@ A simple extension for WooCommerce that provides the basic functionality of a wi
 - PHP 7.3 or greater
 - MySQL 5.6 or greater or MariaDB 10.0 or greater
 
-Tested up to WordPress 5.2.4 and WooCommerce 3.7.1.
+Tested up to WordPress 5.3.2 and WooCommerce 3.8.1.
 
 ## Usage
 
