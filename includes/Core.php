@@ -112,7 +112,7 @@ class Core {
 	 */
 	private function __construct( $config ) {
 
-		if ( defined( 'PLUGIN_VERSION' ) ) {
+		if ( defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
 			$this->version = PLUGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -256,8 +256,10 @@ class Core {
 	 */
 	private function set_version() {
 
-		if ( ! get_option( 'sw_version' ) ) {
-			add_option( 'sw_version', $this->version );
+		$option_version = get_option( 'sw_version' );
+
+		if ( ! $option_version || version_compare( $this->version, $option_version ) === 1 ) {
+			update_option( 'sw_version', $this->version, true );
 		}
 
 	}

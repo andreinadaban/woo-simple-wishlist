@@ -38,7 +38,7 @@ defined( 'WPINC' ) || exit;
 /**
  * Current plugin version.
  */
-define( __NAMESPACE__ . 'PLUGIN_VERSION', '1.0.1' );
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.0.1' );
 
 /**
  * Plugin directory.
