@@ -2,7 +2,7 @@
 
 /**
  * Simple Wishlist for WooCommerce
- * Copyright (C) 2018-2019 Andrei Nadaban
+ * Copyright (C) 2018-2020 Andrei Nadaban
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * Plugin Name:    Simple Wishlist for WooCommerce
  * Plugin URI:     https://github.com/andreinadaban/simple-wishlist-for-woocommerce
  * Description:    A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
- * Version:        1.0.1
+ * Version:        1.0.2
  * Author:         Andrei Nadaban
  * Author URI:     https://andreinadaban.ro
  * License:        GPL-3.0+
@@ -38,7 +38,7 @@ defined( 'WPINC' ) || exit;
 /**
  * Current plugin version.
  */
-define( __NAMESPACE__ . 'PLUGIN_VERSION', '1.0.1' );
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.0.2' );
 
 /**
  * Plugin directory.

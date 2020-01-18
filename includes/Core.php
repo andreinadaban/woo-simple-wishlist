@@ -2,7 +2,7 @@
 
 /**
  * Simple Wishlist for WooCommerce
- * Copyright (C) 2018-2019 Andrei Nadaban
+ * Copyright (C) 2018-2020 Andrei Nadaban
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ namespace SW;
  *
  * Copyright (C) 2019 Devin Vinson, Josh Eaton, Ulrich Pogson, Brad Vincent
  *
- * Modifications Copyright (C) 2018-2019 Andrei Nadaban
+ * Modifications Copyright (C) 2018-2020 Andrei Nadaban
  *
  * Changed the class and file name, added, removed and updated methods and changed comments.
  *
@@ -79,14 +79,6 @@ class Core {
 	private $loader;
 
 	/**
-	 * Internationalization.
-	 *
-	 * @since    1.0.0
-	 * @var      object    $i18n
-	 */
-	private $i18n;
-
-	/**
 	 * Public.
 	 *
 	 * @since    1.0.0
@@ -120,7 +112,7 @@ class Core {
 	 */
 	private function __construct( $config ) {
 
-		if ( defined( 'PLUGIN_VERSION' ) ) {
+		if ( defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
 			$this->version = PLUGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -264,8 +256,10 @@ class Core {
 	 */
 	private function set_version() {
 
-		if ( ! get_option( 'sw_version' ) ) {
-			add_option( 'sw_version', $this->version );
+		$option_version = get_option( 'sw_version' );
+
+		if ( ! $option_version || version_compare( $this->version, $option_version ) === 1 ) {
+			update_option( 'sw_version', $this->version, true );
 		}
 
 	}
