@@ -79,14 +79,6 @@ class Core {
 	private $loader;
 
 	/**
-	 * Internationalization.
-	 *
-	 * @since    1.0.0
-	 * @var      object    $i18n
-	 */
-	private $i18n;
-
-	/**
 	 * Public.
 	 *
 	 * @since    1.0.0
