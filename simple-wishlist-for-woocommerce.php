@@ -24,7 +24,7 @@
  * Description:    A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and filters for easy customization.
  * Version:        1.0.2
  * Author:         Andrei Nadaban
- * Author URI:     https://andreinadaban.ro
+ * Author URI:     https://andreinadaban.com
  * License:        GPL-3.0+
  * License URI:    https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:    sw
