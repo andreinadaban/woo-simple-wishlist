@@ -223,7 +223,7 @@ class Core {
 			$this->loader->add_action( 'woocommerce_after_shop_loop_item', $this->public, 'the_buttons', 12 );
 		}
 
-		$this->loader->add_action( 'woocommerce_account_wishlist_endpoint', $this->public, 'the_template' );
+		$this->loader->add_action( 'woocommerce_account_' . $this->config['endpoint'] . '_endpoint', $this->public, 'the_template' );
 		$this->loader->add_filter( 'woocommerce_account_menu_items', $this->public, 'menu', 10, 1 );
 
 		if ( $this->config['button_default'] ) {
