@@ -25,7 +25,7 @@ class Assets {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'sw-public-js', plugin_dir_url( __FILE__ ) . 'assets/dist/js/sw-public.js', array( 'jquery' ), filemtime( PLUGIN_DIR_PATH . 'public/assets/dist/js/sw-public.js' ), true );
+		wp_enqueue_script( 'sw-public', plugin_dir_url( __FILE__ ) . 'assets/dist/js/main.js', array( 'jquery' ), filemtime( PLUGIN_DIR_PATH . 'public/assets/dist/js/main.js' ), true );
 
 	}
 

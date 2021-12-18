@@ -2,7 +2,7 @@ let mix = require('laravel-mix');
 let imagemin = require('imagemin');
 let imageminSvgo = require('imagemin-svgo');
 
-mix.js('public/assets/src/js/sw-public.js', 'public/assets/dist/js')
+mix.js('public/assets/src/js/main.js', 'public/assets/dist/js')
     .browserSync({
         proxy: 'wp.test',
         files: [
