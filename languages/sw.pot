@@ -1,4 +1,4 @@
-msgid "The Simple Wishlist for WooCommerce plugin requires WooCommerce to be installed and active."
+msgid "The Woo Simple Wishlist plugin requires WooCommerce to be installed and active."
 msgstr ""
 
 msgid "Add to wishlist"

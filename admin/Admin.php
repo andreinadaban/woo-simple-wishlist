@@ -45,7 +45,7 @@ class Admin {
 
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
-			$message = __( 'The Simple Wishlist for WooCommerce plugin requires WooCommerce to be installed and active.', 'sw' );
+			$message = __( 'The Woo Simple Wishlist plugin requires WooCommerce to be installed and active.', 'sw' );
 
 			printf( '<div class="error"><p>%s</p></div>', $message );
 

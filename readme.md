@@ -1,4 +1,4 @@
-# Simple Wishlist for WooCommerce
+# Woo Simple Wishlist
 
 A simple extension for WooCommerce that provides the basic functionality of a wishlist and a set of functions and hooks for easy customization.
 
